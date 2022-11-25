@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Proyecto Final:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="993f126c-28a1-42fb-9f01-4b2154c4db7a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proyecto Final.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-core-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-core.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/miglayout-swing.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Control/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Control/PetShop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Pets/Cat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Pets/Dog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Pets/Pet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/UI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2H4FdqUwVt9IcpC4f3UX9QyjTmp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;167&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="UI2.java" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Eismer\IdeaProjects\Proyecto Final\src\UI" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Control.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Control.Main" />
+      <module name="Proyecto Final" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Control.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="993f126c-28a1-42fb-9f01-4b2154c4db7a" name="Changes" comment="" />
+      <created>1667536541110</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667536541110</updated>
+      <workItem from="1667536543079" duration="3027000" />
+      <workItem from="1667618454961" duration="85000" />
+      <workItem from="1667706196912" duration="6205000" />
+      <workItem from="1667808530554" duration="26000" />
+      <workItem from="1668161194289" duration="21000" />
+      <workItem from="1668403241903" duration="1030000" />
+      <workItem from="1668488249921" duration="2180000" />
+      <workItem from="1668573488563" duration="5256000" />
+      <workItem from="1668625754439" duration="8802000" />
+      <workItem from="1668724084096" duration="5831000" />
+      <workItem from="1668878661752" duration="5706000" />
+      <workItem from="1668885536882" duration="6044000" />
+      <workItem from="1668922302227" duration="3892000" />
+      <workItem from="1669020324542" duration="39000" />
+      <workItem from="1669020380677" duration="7000" />
+      <workItem from="1669020690542" duration="140000" />
+      <workItem from="1669020844374" duration="30000" />
+      <workItem from="1669020936381" duration="1417000" />
+      <workItem from="1669076773775" duration="24000" />
+      <workItem from="1669098722762" duration="948000" />
+      <workItem from="1669161855911" duration="11414000" />
+      <workItem from="1669191251492" duration="627000" />
+      <workItem from="1669196014192" duration="570000" />
+      <workItem from="1669353694777" duration="3877000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,253 @@
+package UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import Control.*;
+import Pets.Cat;
+import Pets.Dog;
+
+public class UI {
+    private JPanel MainPanel;
+    private JButton inicioButton;
+    private JButton agregarButton;
+    private JButton venderButton;
+    private JPanel addPet;
+    private JRadioButton perroRadioButton;
+    private JRadioButton gatoRadioButton;
+    private JPanel KindOfPet;
+    private JTextField textFieldDogage;
+    private JTextField textFieldDogcountry;
+    private JTextField textFieldDogColor;
+    private JRadioButton bulldogRadioButton;
+    private JRadioButton dalmataRadioButton;
+    private JRadioButton chowChowRadioButton;
+    private JButton agregarDogButton;
+    private JPanel SelectPet;
+     JPanel addDog;
+    private JButton siguienteButton;
+    private JTextField catEyesColor;
+    private JRadioButton hembraRadioButton;
+    private JRadioButton machoRadioButton;
+    private JCheckBox noCheckBox;
+    private JPanel addCat;
+    private JButton agregarCatButton;
+    private JButton showButton;
+    private JTextField catAge;
+    private JTextField catProcedence;
+    private JTextField catColor;
+    private JButton button1;
+    private JTextField dogCode;
+    private JTextField catCode;
+    private JPanel venderJPanel;
+    private JTextField sellCode;
+    private JButton eliminarButton;
+    private JLabel Saldotext;
+    private JPanel leftPanel;
+    private JComboBox comboBox1;
+    private float Saldo = 0;
+
+    PetShop petShop = new PetShop();
+    public UI(float Saldo){
+        this.Saldo = Saldo;
+    }
+    public UI() {
+
+        KindOfPet.setVisible(false);
+        addCat.setVisible(false);
+        addDog.setVisible(false);
+        venderJPanel.setVisible(false);
+
+        agregarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            KindOfPet.setVisible(true);
+                 JOptionPane.showOptionDialog(null,
+                        KindOfPet,
+                        "Title",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null, new Object[]{},
+                        null);
+
+            }
+        });
+        perroRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gatoRadioButton.setSelected(false);
+            }
+        });
+        gatoRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                perroRadioButton.setSelected(false);
+            }
+        });
+        bulldogRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dalmataRadioButton.setSelected(false);
+                chowChowRadioButton.setSelected(false);
+            }
+        });
+        dalmataRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bulldogRadioButton.setSelected(false);
+                chowChowRadioButton.setSelected(false);
+            }
+        });
+        chowChowRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bulldogRadioButton.setSelected(false);
+                dalmataRadioButton.setSelected(false);
+            }
+        });
+        noCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (noCheckBox.isSelected() == false){
+                    noCheckBox.setText("No");
+                }else noCheckBox.setText("Si");
+
+            }
+        });
+        hembraRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                machoRadioButton.setSelected(false);
+            }
+        });
+        machoRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hembraRadioButton.setSelected(false);
+            }
+        });
+        siguienteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (perroRadioButton.isSelected() == true){
+                    addDog.setVisible(true);
+                    addCat.setVisible(false);
+
+
+                }
+                else if (gatoRadioButton.isSelected() == true){
+                    addDog.setVisible(false);
+                    addCat.setVisible(true);
+                } else if (perroRadioButton.isSelected() == false || gatoRadioButton.isSelected() == false) {
+                    JOptionPane.showMessageDialog(null, "Seleciona que tipo de mascota desea agreagar");
+                }
+            }
+        });
+        agregarDogButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String Code = dogCode.getText();
+                int AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+                String Procedence = textFieldDogcountry.getText();
+                String Color = textFieldDogColor.getText();
+                String Race;
+                if (bulldogRadioButton.isSelected() == true){
+                    Race = bulldogRadioButton.getText();
+                } else if (dalmataRadioButton.isSelected() == true) {
+                    Race = "Dalmata";
+                } else if (chowChowRadioButton.isSelected() == true) {
+                    Race = "Chow-Chow";
+                }else Race = "Sin RA";
+                float Price = 0;
+                if(AgeinMonth <= 24) {
+                    Price = 1000/AgeinMonth;
+                } else if (AgeinMonth >= 25) {
+                    Price = 35;
+                }
+                if (Race == "Chow-Chow"){
+                    Price += 30;
+                } else if (Race == "Dalmata") {
+                    Price += 50;
+                }
+                Saldo += Price;
+                Dog dog = new Dog(AgeinMonth, Procedence, Color,Price , Race, Code);
+                petShop.fillDog(AgeinMonth, Procedence, Color, Price, Race,Code);
+                comboBox1.addItem(dog);
+                Saldotext.setText(String.valueOf(Saldo));
+                petShop.checkCode(Code);
+            }
+        });
+        agregarCatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String Code = catCode.getText();
+                int AgeinMonth = Integer.parseInt(catAge.getText());
+                String Procedence = catProcedence.getText();
+                String Color = catColor.getText();
+                String EyesColor = catEyesColor.getText();
+                String Sex;
+                if (hembraRadioButton.isSelected() == true){
+                    Sex = "Hembra";
+                }else Sex = "Macho";
+                boolean Perdigree = noCheckBox.isSelected();
+                float Price = 0;
+                if(AgeinMonth <= 24) {
+                    Price = 1000/AgeinMonth;
+                } else if (AgeinMonth >= 25) {
+                    Price = 35;
+                }
+                if (Perdigree == true){
+                    Price *= 2;
+                }
+                Saldo += Price;
+                Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code );
+                petShop.fillCat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree,Price, Code);
+                comboBox1.addItem(cat);
+                Saldotext.setText(String.valueOf(Saldo));            }
+        });
+        showButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               petShop.showPets();
+            }
+        });
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textFieldDogColor.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+            }
+        });
+        venderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                venderJPanel.setVisible(true);
+            JOptionPane.showOptionDialog(null,
+                    venderJPanel,
+                    "Vender MAscota",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, new Object[]{},
+                    null);
+
+            }
+        });
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               String Code= sellCode.getText();
+            petShop.sellPet(Code);
+            }
+        });
+    }
+    public void StartInterface(){
+        JFrame window = new JFrame("Control.PetShop");
+        window.setContentPane(new UI().MainPanel);
+        window.pack();
+        window.setBounds(0, 0, 500, 500);
+        window.setVisible(true);
+        window.setMinimumSize(new Dimension(1000,1000));
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+}
