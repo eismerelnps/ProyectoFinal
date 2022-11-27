@@ -38,7 +38,7 @@ public class UI {
     private JTextField catAge;
     private JTextField catProcedence;
     private JTextField catColor;
-    private JButton button1;
+    private JButton countrySearchbutton;
     private JTextField dogCode;
     private JTextField catCode;
     private JPanel venderJPanel;
@@ -47,6 +47,9 @@ public class UI {
     private JLabel Saldotext;
     private JPanel leftPanel;
     private JComboBox comboBox1;
+    private JPanel countrySearchJPanel;
+    private JTextField countrySearchTextField;
+    private JButton searchCountryButton;
     private float Saldo = 0;
 
     PetShop petShop = new PetShop();
@@ -59,6 +62,7 @@ public class UI {
         addCat.setVisible(false);
         addDog.setVisible(false);
         venderJPanel.setVisible(false);
+        countrySearchJPanel.setVisible(false);
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
@@ -187,7 +191,7 @@ public class UI {
                 Saldotext.setText(String.valueOf(Saldo));
 
             }catch (NumberFormatException exception){
-                    JOptionPane.showMessageDialog(null, "Proporcione la edad solo en números");
+                    JOptionPane.showMessageDialog(null,"Ingrese la edad solo en números", "Error", 0);
                 }
             }
         });
@@ -233,10 +237,19 @@ public class UI {
                petShop.showPets();
             }
         });
-        button1.addActionListener(new ActionListener() {
+        countrySearchbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            //   petShop.checkCode();
+                countrySearchJPanel.setVisible(true);
+                JOptionPane.showOptionDialog(null,
+                        countrySearchJPanel,
+                        "Cantidad por país",
+                        -1,
+                        3,
+                        null, new Object[]{},
+                        3);
+
+
             }
         });
         venderButton.addActionListener(new ActionListener() {
@@ -258,6 +271,18 @@ public class UI {
             public void actionPerformed(ActionEvent e) {
                String Code= sellCode.getText();
             petShop.sellPet(Code);
+            }
+        });
+        searchCountryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (countrySearchTextField.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null,
+                            "Escriba el nombre de un país para poder buscar",
+                            "Alerta",
+                            2);
+                }else
+                petShop.countrySearch(countrySearchTextField.getText());
             }
         });
     }

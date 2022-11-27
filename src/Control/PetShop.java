@@ -20,7 +20,6 @@ public class PetShop {
 
         }
     }
-
     public void sellPet(String Code) {
 
         for (int i = 0; i < pets.size(); i++) {
@@ -31,16 +30,24 @@ public class PetShop {
         }
     }
     public void fillCat(int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, float Price, String Code){
-
-        Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code );
-        pets.add(cat);
-    }
+        Cat cat = null;
+        if(pets.size() >= 1) {
+            for (int i = 0; i < pets.size(); i++) {
+                if (pets.get(i).getCode().equals(Code)) {
+                    System.out.println("Encontrado");
+                    JOptionPane.showMessageDialog(null, "Ya existe una mascota con el mismo codigo, por favor cambielo");
+                } else
+                    System.out.println("No enco");
+                cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
+                pets.add(cat);
+            }
+        }}
     public void fillDog(int AgeinMonth,String Procedence, String Color, float Price, String Race, String Code){
         Dog dog = null;
         if(pets.size() >= 1) {
             for (int i = 0; i < pets.size(); i++) {
                 if (pets.get(i).getCode().equals(Code)) {
-                    System.out.println("ENcontrado");
+                    System.out.println("Encontrado");
                     JOptionPane.showMessageDialog(null, "Ya existe una mascota con el mismo codigo, por favor cambielo");
                 } else
                     System.out.println("No enco");
@@ -49,5 +56,23 @@ public class PetShop {
             }
         }
 
+    }
+    public void countrySearch(String Country){
+        int count = 0;
+        for (int i = 0; i < pets.size(); i ++){
+            if(pets.get(i).getProcedence().equals(Country)){
+                count += 1;
+            }
+        }
+        if (count == 0){
+            JOptionPane.showMessageDialog(null,
+                    "No hay mascotas procedentes de "+Country,
+                    "Informacion",
+                    1 );
+        }else
+        JOptionPane.showMessageDialog(null,
+                "Hay "+count+" mascotas procedentes de "+Country,
+                "Informacion",
+                1 );
     }
 }
