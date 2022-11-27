@@ -148,42 +148,58 @@ public class UI {
         agregarDogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
                 String Code = dogCode.getText();
-                int AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+                float Price = 0;
+                int AgeinMonth = 0;
+
+                    AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+
+                    if(AgeinMonth <= 24) {
+                        Price = 1000/AgeinMonth;
+                    } else if (AgeinMonth >= 25) {
+                        Price = 35;
+                    }
+
+
                 String Procedence = textFieldDogcountry.getText();
                 String Color = textFieldDogColor.getText();
                 String Race;
-                if (bulldogRadioButton.isSelected() == true){
-                    Race = bulldogRadioButton.getText();
-                } else if (dalmataRadioButton.isSelected() == true) {
-                    Race = "Dalmata";
-                } else if (chowChowRadioButton.isSelected() == true) {
-                    Race = "Chow-Chow";
-                }else Race = "Sin RA";
-                float Price = 0;
-                if(AgeinMonth <= 24) {
-                    Price = 1000/AgeinMonth;
-                } else if (AgeinMonth >= 25) {
-                    Price = 35;
-                }
+
+                    if (bulldogRadioButton.isSelected() == true){
+                        Race = bulldogRadioButton.getText();
+                    } else if (dalmataRadioButton.isSelected() == true) {
+                        Race = "Dalmata";
+                    } else if (chowChowRadioButton.isSelected() == true) {
+                        Race = "Chow-Chow";
+                    }else Race = "Sin RA";
                 if (Race == "Chow-Chow"){
                     Price += 30;
                 } else if (Race == "Dalmata") {
                     Price += 50;
                 }
+
                 Saldo += Price;
+               // petShop.checkDogCode(AgeinMonth, Procedence, Color, Price, Race, Code);
                 Dog dog = new Dog(AgeinMonth, Procedence, Color,Price , Race, Code);
                 petShop.fillDog(AgeinMonth, Procedence, Color, Price, Race,Code);
                 comboBox1.addItem(dog);
                 Saldotext.setText(String.valueOf(Saldo));
-                petShop.checkCode(Code);
+
+            }catch (NumberFormatException exception){
+                    JOptionPane.showMessageDialog(null, "Proporcione la edad solo en números");
+                }
             }
         });
         agregarCatButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
                 String Code = catCode.getText();
-                int AgeinMonth = Integer.parseInt(catAge.getText());
+                int AgeinMonth = 0;
+
+                    AgeinMonth = Integer.parseInt(catAge.getText());
+
                 String Procedence = catProcedence.getText();
                 String Color = catColor.getText();
                 String EyesColor = catEyesColor.getText();
@@ -205,7 +221,11 @@ public class UI {
                 Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code );
                 petShop.fillCat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree,Price, Code);
                 comboBox1.addItem(cat);
-                Saldotext.setText(String.valueOf(Saldo));            }
+                Saldotext.setText(String.valueOf(Saldo));
+                }catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(null,"Ingrese la edad solo en números", "Error", 0);
+                }
+            }
         });
         showButton.addActionListener(new ActionListener() {
             @Override
@@ -216,7 +236,7 @@ public class UI {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textFieldDogColor.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+            //   petShop.checkCode();
             }
         });
         venderButton.addActionListener(new ActionListener() {
