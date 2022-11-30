@@ -34,7 +34,7 @@ public class UI {
     private JCheckBox noCheckBox;
     private JPanel addCat;
     private JButton agregarCatButton;
-    private JButton showButton;
+    private JButton priceSearchButton;
     private JTextField catAge;
     private JTextField catProcedence;
     private JTextField catColor;
@@ -231,11 +231,12 @@ public class UI {
                 }
             }
         });
-        showButton.addActionListener(new ActionListener() {
+        priceSearchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                petShop.showPets();
             }
+
         });
         countrySearchbutton.addActionListener(new ActionListener() {
             @Override
@@ -290,9 +291,9 @@ public class UI {
         JFrame window = new JFrame("Control.PetShop");
         window.setContentPane(new UI().MainPanel);
         window.pack();
-        window.setBounds(0, 0, 500, 500);
+        window.setBounds(0, 0, 700, 250);
         window.setVisible(true);
-        window.setMinimumSize(new Dimension(1000,1000));
+        window.setMinimumSize(new Dimension(250,250));
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
