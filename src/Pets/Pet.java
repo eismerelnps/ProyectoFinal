@@ -1,7 +1,10 @@
 package Pets;
 
-import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Pet {
     private int AgeinMonth;
     private String Procedence;
@@ -15,26 +18,6 @@ public class Pet {
         this.Color = Color;
         this.Price = Price;
         this.Code = Code;
-    }
-
-    public String getProcedence() {
-        return Procedence;
-    }
-
-    public String getColor() {
-        return Color;
-    }
-
-    public int getAgeinMonth() {
-        return AgeinMonth;
-    }
-
-    public float getPrice() {
-        return Price;
-    }
-
-    public String getCode() {
-        return Code;
     }
 
     @Override

@@ -27,13 +27,13 @@ public class Cat extends Pet {
 
     @Override
     public String toString() {
-        return "\nGato: "+
-                "\nCode: "+getCode()+
-                "\nEdad: "+getAgeinMonth()+" meses "+
-                "\nProcedencia: "+getProcedence()+
-                "\nColor de Ojos:"+getEyesColor()+
-                "\nSexo: "+getSex()+
-                "\nPerdigree: "+isPerdigree()+
-                "\nPrecio: "+getPrice()+"$";
+        return "\nGato: " +
+                "\nCode: " + getCode() +
+                "\nEdad: " + getAgeinMonth() + " meses " +
+                "\nProcedencia: " + getProcedence() +
+                "\nColor de Ojos:" + getEyesColor() +
+                "\nSexo: " + getSex() +
+                "\nPerdigree: " + isPerdigree() +
+                "\nPrecio: " + getPrice() + "$";
     }
 }
