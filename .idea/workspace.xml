@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="Proyecto Final:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="993f126c-28a1-42fb-9f01-4b2154c4db7a" name="Changes" comment="1">
+    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Proyecto_Final_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/MigLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proyecto Final.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto Final.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Control/PetShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Control/PetShop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pets/Pet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pets/Pet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
     </list>
@@ -19,148 +18,63 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2H4FdqUwVt9IcpC4f3UX9QyjTmp" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2IOCXKV6vhdOJU7kcEJtf9XGRs5" />
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "167",
-    "WebServerToolWindowFactoryState": "false",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
-    ]
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="UI2.java" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Eismer\IdeaProjects\Proyecto Final\src\UI" />
-    </key>
-  </component>
+}</component>
   <component name="RunManager">
-    <configuration name="Control.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Control.Main" />
       <module name="Proyecto Final" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Control.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Control.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="993f126c-28a1-42fb-9f01-4b2154c4db7a" name="Changes" comment="" />
-      <created>1667536541110</created>
+      <changelist id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="" />
+      <created>1670043288608</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1667536541110</updated>
-      <workItem from="1667536543079" duration="3027000" />
-      <workItem from="1667618454961" duration="85000" />
-      <workItem from="1667706196912" duration="6205000" />
-      <workItem from="1667808530554" duration="26000" />
-      <workItem from="1668161194289" duration="21000" />
-      <workItem from="1668403241903" duration="1030000" />
-      <workItem from="1668488249921" duration="2180000" />
-      <workItem from="1668573488563" duration="5256000" />
-      <workItem from="1668625754439" duration="8802000" />
-      <workItem from="1668724084096" duration="5831000" />
-      <workItem from="1668878661752" duration="5706000" />
-      <workItem from="1668885536882" duration="6044000" />
-      <workItem from="1668922302227" duration="3892000" />
-      <workItem from="1669020324542" duration="39000" />
-      <workItem from="1669020380677" duration="7000" />
-      <workItem from="1669020690542" duration="140000" />
-      <workItem from="1669020844374" duration="30000" />
-      <workItem from="1669020936381" duration="1417000" />
-      <workItem from="1669076773775" duration="24000" />
-      <workItem from="1669098722762" duration="948000" />
-      <workItem from="1669161855911" duration="11414000" />
-      <workItem from="1669191251492" duration="627000" />
-      <workItem from="1669196014192" duration="570000" />
-      <workItem from="1669353694777" duration="4119000" />
-      <workItem from="1669491067349" duration="5430000" />
-      <workItem from="1669500002125" duration="1010000" />
-      <workItem from="1669523277019" duration="7669000" />
-      <workItem from="1669620815990" duration="1005000" />
-      <workItem from="1669752678496" duration="4835000" />
-      <workItem from="1669828049455" duration="1678000" />
+      <updated>1670043288608</updated>
+      <workItem from="1670043292616" duration="1429000" />
+      <workItem from="1670045321579" duration="470000" />
     </task>
-    <task id="LOCAL-00001" summary="Reorganixado">
-      <created>1669367992336</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1669367992336</updated>
-    </task>
-    <task id="LOCAL-00002" summary="1">
-      <created>1669526691081</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1669526691081</updated>
-    </task>
-    <task id="LOCAL-00003" summary="1">
-      <created>1669529799943</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1669529799943</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Reorganixado" />
-    <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>

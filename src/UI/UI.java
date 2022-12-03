@@ -52,6 +52,7 @@ public class UI {
     private JTextField countrySearchTextField;
     private JButton searchCountryButton;
     private JButton generarButton;
+    private JButton button1;
     private float Saldo = 0;
 
     PetShop petShop = new PetShop();
@@ -160,6 +161,9 @@ public class UI {
                     float Price = 0;
                     int AgeinMonth = 0;
                     AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+                    if(AgeinMonth == 0){
+                        AgeinMonth = 1;
+                    }
                     if (AgeinMonth <= 24) {
                         Price = 1000 / AgeinMonth;
                     } else if (AgeinMonth >= 25) {
@@ -231,6 +235,9 @@ public class UI {
                     int AgeinMonth = 0;
 
                     AgeinMonth = Integer.parseInt(catAge.getText());
+                    if (AgeinMonth == 0){
+                        AgeinMonth = 1;
+                    }
 
                     String Procedence = catProcedence.getText();
                     String Color = catColor.getText();
@@ -317,10 +324,19 @@ public class UI {
         generarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textFieldDogcountry.setText(generCountry.randomgenerCountry().toString());
-                textFieldDogColor.setText(generateColor.randomgenerCountry().toString());
-                textFieldDogage.setText(String.valueOf((int) (Math.random() * 13)));
-                generateCode();
+                if(perroRadioButton.isSelected() == true){
+                    textFieldDogcountry.setText(generCountry.randomgenerCountry().toString());
+                    textFieldDogColor.setText(generateColor.randomgenerateColor().toString());
+                    textFieldDogage.setText(String.valueOf((int) (Math.random() * 13)));
+                    generateCode();
+
+                }else if(gatoRadioButton.isSelected() == true){
+                    catProcedence.setText(generCountry.randomgenerCountry().toString());
+                    catColor.setText(generateColor.randomgenerateColor().toString());
+                   catAge.setText(String.valueOf((int) (Math.random() * 13)));
+                   catEyesColor.setText(generateEyesColor.randomgenerateEyesColor().toString());
+                    generateCode();
+                }
             }
 
         });
@@ -328,6 +344,11 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 petShop.showPets();
+            }
+        });
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
             }
         });
     }
@@ -360,7 +381,16 @@ public class UI {
         private static final Random PRNG = new Random();
         private static final generateColor[] directions = values();
 
-        public static generateColor randomgenerCountry() {
+        public static generateColor randomgenerateColor() {
+            return directions[PRNG.nextInt(directions.length)];
+        }
+    }
+    public enum generateEyesColor{//para generar un color de ojos random
+        Verde, Negro, Amarillo, Marron, Gris, Oro, Bicolor;
+        private static final Random PRNG = new Random();
+        private static final generateEyesColor[] directions = values();
+
+        public static generateEyesColor randomgenerateEyesColor() {
             return directions[PRNG.nextInt(directions.length)];
         }
     }
@@ -371,5 +401,7 @@ public class UI {
             n = n.concat(String.valueOf((int) (Math.random() * 12)));
         }
         dogCode.setText(n);
+        catCode.setText(n);
     }
+
 }
