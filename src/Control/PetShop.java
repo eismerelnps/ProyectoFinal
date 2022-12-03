@@ -22,7 +22,7 @@ import javax.swing.*;
 
 public class PetShop {
 
-    ArrayList<Pet> pets = new ArrayList<Pet>();
+    public static ArrayList<Pet> pets = new ArrayList<Pet>();
 
     public void showPets() {
         for (Pet show : pets) {
@@ -32,45 +32,76 @@ public class PetShop {
     }
 
     public void sellPet(String Code) {
-
         for (int i = 0; i < pets.size(); i++) {
-            if (pets.get(i).equals(Code)) {
+            if (pets.get(i).getCode().equals(Code)) {
                 pets.remove(pets.get(i));
                 JOptionPane.showMessageDialog(null, "Se ha vendido exitosamente la mascota");
+                break;
             } else JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este codigo");
+            break;
         }
     }
 
     public void fillCat(int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, float Price, String Code) {
-        Cat cat = null;
-        if (pets.size() >= 1) {
-            for (int i = 0; i < pets.size(); i++) {
-                if (pets.get(i).getCode().equals(Code)) {
-                    System.out.println("Encontrado");
-                    JOptionPane.showMessageDialog(null, "Ya existe una mascota con el mismo codigo, por favor cambielo");
-                } else
-                    System.out.println("No enco");
-                cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
-                pets.add(cat);
+        boolean pass = true;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getCode().equals(Code)) {
+                pass = false;
             }
+        }
+        if (pass == true) {
+            Cat cat  = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
+            pets.add(cat);
+            JOptionPane.showMessageDialog(null,
+                    "Agregado con exito",
+                    "Alerta",
+                    2);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ya existe una mascota con el código: " + Code + ", cambielo",
+                    "Alerta",
+                    2);
         }
     }
 
-    public void fillDog(int AgeinMonth, String Procedence, String Color, float Price, String Race, String Coder) {
-        // Dog dog = null;
-        // if(pets.size() >= 1) {
-        //  for (int i = 0; i < pets.size(); i++) {
-        //    if (pets.get(i).getProcedence().equals(Coder)) {
-        //      System.out.println("Encontrado");
-        //          JOptionPane.showMessageDialog(null, "Ya existe una mascota con el mismo codigo, por favor cambielo");
-        //    } else
-        System.out.println("No enco");
-        Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Coder);
-        pets.add(dog);
-    }
-    //}
+    public void fillDog(int AgeinMonth, String Procedence, String Color, String Race, String Coder) {
+        boolean pass = true;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getCode().equals(Coder)) {
+                pass = false;
+            }
+        }
+        if (pass == true) {
+            float Price = 0;
+            if (AgeinMonth == 0) {
+                AgeinMonth = 1;
+            }
+            if (AgeinMonth <= 24) {
+                Price = 1000 / AgeinMonth;
+            } else if (AgeinMonth >= 25) {
+                Price = 35;
+            }
+            if (Race == "Chow-Chow") {
+                Price += 30;
+            } else if (Race == "Dalmata") {
+                Price += 50;
+            }
+            Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Coder);
+            pets.add(dog);
 
-    //  }
+            JOptionPane.showMessageDialog(null,
+                    "Agregado con exito",
+                    "Alerta",
+                    2);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ya existe una mascota con el código: " + Coder + ", cambielo",
+                    "Alerta",
+                    2);
+        }
+    }
+
+
     public void countrySearch(String Country) {
         int count = 0;
         for (int i = 0; i < pets.size(); i++) {
@@ -90,14 +121,52 @@ public class PetShop {
                     1);
     }
 
-    public void priceSearch(String Country) {
-        int index;
-        for (Pet search : pets) {
-            if (search.getProcedence().equals(Country)) {
-                index = pets.indexOf(search);
+    public void priceSearch(String sCode) {
+        int index = 0;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getCode().equals(sCode)) {
+                index = pets.indexOf(pets.get(i));
             }
         }
+        System.out.println(index);
+        System.out.println(pets.size());
+        if (index > 0) {
+            JOptionPane.showMessageDialog(null,
+                    "La mascota tiene un precio de: " + pets.get(index).getPrice() + "$",
+                    "Alerta",
+                    2);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "No se ha encotrado una mascota con el codigo: " + sCode,
+                    "Alerta",
+                    2);
+        }
     }
+
+    public void checkCode(String sCode) {//para saber si ya existe una mascota en el arrayList con el mismo codigo
+        boolean pass = true;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getCode().equals(sCode)) {
+                pass = false;
+            }
+        }
+        if (pass == true) {
+            JOptionPane.showMessageDialog(null,
+                    "Agregado con exito",
+                    "Alerta",
+                    2);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ya existe una mascota con el código: " + sCode + ", cambielo",
+                    "Alerta",
+                    2);
+        }
+
+
+
+        System.out.println("size: "+pets.size());
+}
+
 
     public void CreateDataBase() {
         Connection connection = null;
