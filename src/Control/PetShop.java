@@ -1,6 +1,7 @@
 package Control;
 
 import java.io.*;
+import java.nio.charset.CoderMalfunctionError;
 import java.util.ArrayList;
 
 import Pets.Cat;
@@ -32,15 +33,24 @@ public class PetShop {
     }
 
     public void sellPet(String Code) {
+        boolean pass = false;
+        int index = 0;
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Code)) {
-                pets.remove(pets.get(i));
-                JOptionPane.showMessageDialog(null, "Se ha vendido exitosamente la mascota");
-                break;
-            } else JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este codigo");
-            break;
+                pass = true;
+                index = pets.indexOf(pets.get(i));
+            }
         }
+            if (pass == true){
+                pets.remove(pets.get(index));
+                JOptionPane.showMessageDialog(null, "Se ha vendido exitosamente la mascota");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este codigo");
+            }
+
+
     }
+
 
     public void fillCat(int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, float Price, String Code) {
         boolean pass = true;
@@ -166,8 +176,38 @@ public class PetShop {
 
         System.out.println("size: "+pets.size());
 }
+    public void olderPet() {
+        int age = 0;
+        int index = 0;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getAgeinMonth() > age) {
+                age = pets.get(i).getAgeinMonth();
+                index = pets.indexOf(pets.get(i));
+            }
+        }
+        JOptionPane.showMessageDialog(null,
+                pets.get(index).toString(),
+                "Mascota de mayor edad",
+                1);
+    }
+    public void predominantColor() {
+        int count = 0;
+        String[] colors = new String[pets.size()];
+        for (int i = 0; i < pets.size(); i++) {
+            colors[i] = pets.get(i).getColor();
+            System.out.println(colors[i]);
+        }
+        for (int i = 0; i < pets.size(); i++) {
+            for (int j = 0; j < pets.size(); j++) {
+                if (colors[i] == colors[j]) {
+                    count++;
+                    System.out.println(count);
+                    count =0;
+                }
+            }
+        }
 
-
+    }
     public void CreateDataBase() {
         Connection connection = null;
         String sURL = "jdbc:mysql://localhost:3306/petShop";

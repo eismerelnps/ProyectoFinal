@@ -8,7 +8,6 @@ import java.util.Random;
 
 import Control.*;
 import Pets.Cat;
-import Pets.Dog;
 
 public class UI {
     private JPanel MainPanel;
@@ -57,6 +56,8 @@ public class UI {
     private JButton searchPriceButton;
     private JTextField searchPriceText;
     private JPanel searchPriceJPanel;
+    private JButton buscarMayorButton;
+    private JButton colorMenosPredominanteButton;
     private float Saldo = 0;
 
     PetShop petShop = new PetShop();
@@ -342,6 +343,7 @@ public class UI {
                    catAge.setText(String.valueOf((int) (Math.random() * 13)));
                    catEyesColor.setText(generateEyesColor.randomgenerateEyesColor().toString());
                     generateCode();
+                    generateRace();
 
                 }
             }
@@ -373,12 +375,24 @@ public class UI {
                 petShop.priceSearch(searchPriceText.getText());
             }
         });
+        buscarMayorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                petShop.olderPet();
+            }
+        });
+        colorMenosPredominanteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                petShop.predominantColor();
+            }
+        });
     }
     public void StartInterface() {
         JFrame window = new JFrame("Control.PetShop");
         window.setContentPane(new UI().MainPanel);
         window.pack();
-        window.setBounds(0, 0, 700, 250);
+        window.setBounds(0, 0, 1000, 350);
         window.setVisible(true);
         window.setMinimumSize(new Dimension(250, 250));
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -424,19 +438,33 @@ public class UI {
     public void generateRace(){
         int Option;
        Option = (int) (Math.random() * 3);
-        if (Option == 0){
-            bulldogRadioButton.setSelected(true);
-            dalmataRadioButton.setSelected(false);
-            chowChowRadioButton.setSelected(false);
-        } else if (Option == 1) {
-            bulldogRadioButton.setSelected(false);
-            dalmataRadioButton.setSelected(true);
-            chowChowRadioButton.setSelected(false);
-        }else if (Option == 2) {
-            bulldogRadioButton.setSelected(false);
-            dalmataRadioButton.setSelected(false);
-            chowChowRadioButton.setSelected(true);
-        }
+       if (perroRadioButton.isSelected() == true){
+           if (Option == 0){
+               bulldogRadioButton.setSelected(true);
+               dalmataRadioButton.setSelected(false);
+               chowChowRadioButton.setSelected(false);
+           } else if (Option == 1) {
+               bulldogRadioButton.setSelected(false);
+               dalmataRadioButton.setSelected(true);
+               chowChowRadioButton.setSelected(false);
+           }else if (Option == 2) {
+               bulldogRadioButton.setSelected(false);
+               dalmataRadioButton.setSelected(false);
+               chowChowRadioButton.setSelected(true);
+           }
+       }
+       if (gatoRadioButton.isSelected() == true){
+           if (Option == 0){
+               hembraRadioButton.setSelected(true);
+               machoRadioButton.setSelected(false);
+               noCheckBox.setSelected(true);
+           } else if (Option == 1) {
+               hembraRadioButton.setSelected(false);
+               machoRadioButton.setSelected(true);
+               noCheckBox.setSelected(false);
+           }else if (Option == 2) {
+               noCheckBox.setSelected(true);
+           }
+       }
     }
-
 }
