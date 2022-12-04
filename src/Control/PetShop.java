@@ -234,15 +234,8 @@ public class PetShop {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             if (entry.getValue() == numeroVeces) {
                 System.out.println(entry.getKey() + " " + entry.getValue());
-
-
             }
         }
-
-
-
-
-       /* System.out.println("El color menos repetido es " + colorMenosRepetido + " y se repite " + numeroVeces + " veces");*/
 
     }
     public void CreateDataBase() {
