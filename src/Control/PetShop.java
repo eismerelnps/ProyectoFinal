@@ -215,7 +215,7 @@ public class PetShop {
         }
         //recorrer el hashmap
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
+            //System.out.println(entry.getKey() + " " + entry.getValue());
         }
         //buscar el color menos repetido
         String colorMenosRepetido = "";
@@ -229,8 +229,20 @@ public class PetShop {
                 numeroVeces = entry.getValue();
             }
         }
-        //imprimir el color menos repetido
-        System.out.println("El color menos repetido es " + colorMenosRepetido + " y se repite " + numeroVeces + " veces");
+
+        //imprimir todos los color que se repiten = numeroVeces
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == numeroVeces) {
+                System.out.println(entry.getKey() + " " + entry.getValue());
+
+
+            }
+        }
+
+
+
+
+       /* System.out.println("El color menos repetido es " + colorMenosRepetido + " y se repite " + numeroVeces + " veces");*/
 
     }
     public void CreateDataBase() {
