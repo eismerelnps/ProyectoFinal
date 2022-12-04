@@ -2,9 +2,11 @@ package Pets;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Pet {
     private int AgeinMonth;
     private String Procedence;
@@ -20,13 +22,5 @@ public class Pet {
         this.Code = Code;
     }
 
-    @Override
-    public String toString() {
-        return "\nPets.Pet:" +
-                "\nCode: " + getCode() +
-                "\nAgeinMonth: " + getAgeinMonth() +
-                "\nProcedence: " + getProcedence() +
-                "\nColor: " + getColor() +
-                "\nPrice: " + getPrice() + "$";
-    }
+
 }

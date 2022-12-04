@@ -89,6 +89,9 @@ public class UI {
                         JOptionPane.INFORMATION_MESSAGE,
                         null, new Object[]{},
                         null);
+                //cerrar JOptionPane
+
+
 
             }
         });

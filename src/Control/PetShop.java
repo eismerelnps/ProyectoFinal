@@ -15,12 +15,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.*;
-import java.util.Collections;
 
 @Getter
 @Setter
@@ -195,6 +193,7 @@ public class PetShop {
                 1);
     }
     public void lessPredominantColor() {
+        int count = 0;
         String[] array = new String[pets.size()];
         for (int i = 0; i < pets.size(); i++) {
             array[i] = pets.get(i).getColor();
@@ -231,68 +230,9 @@ public class PetShop {
             }
         }
         //imprimir el color menos repetido
-        JOptionPane.showMessageDialog(null,
-                "El color menos repetido es " + colorMenosRepetido + " y se repite " + numeroVeces + " veces",
-                "Color menos repetido",
-                1);
-
         System.out.println("El color menos repetido es " + colorMenosRepetido + " y se repite " + numeroVeces + " veces");
 
     }
-    public void alfaOrder(){
-        String[] Countries = new String[pets.size()];
-        for (int i = 0; i < pets.size(); i++) {
-            if (pets.get(i).getProcedence().equals(Countries[i])){
-
-            }else {
-                Countries[i] = pets.get(i).getProcedence();
-            }
-            System.out.println(Countries[i]);
-        }}
-    public static int compareStrings(String word1, String word2)
-            {
-                for(int i = 0; i < Math.min(word1.length(), word2.length()); i++)
-                {
-                    if((int)word1.charAt(i) != (int)word2.charAt(i))//comparing unicode values
-                        return (int)word1.charAt(i) - (int)word2.charAt(i);
-                }
-                if(word1.length() != word2.length())//smaller word is occurs at the beginning of the larger word
-                    return word1.length() - word2.length();
-                else
-                    return 0;
-            }
-            public static String[] stringArraySort(String[] words)
-            {
-                for(int i = 0; i < words.length - 1; i++)
-                {
-                    for(int j = i+1; j < words.length; j++)
-                    {
-                        if(compareStrings(words[i], words[j]) > 0)//words[i] is greater than words[j]
-                        {
-                            String temp = words[i];
-                            words[i] = words[j];
-                            words[j] = temp;
-                        }
-                    }
-                }
-                return words;
-            }
-            public static void sortArray() {
-                String[] arrToSort = new String[pets.size()];
-                for (int i = 0; i < pets.size(); i++) {
-                    arrToSort[i] = pets.get(i).getProcedence();
-                    System.out.println(arrToSort[i]);
-                    }
-                String[] sortedArr = stringArraySort(arrToSort);
-                for(int i = 0; i < sortedArr.length; i++){
-                    System.out.print(sortedArr[i] + " ");
-                 }
-            }
-
-
-
-
-
     public void CreateDataBase() {
         Connection connection = null;
         String sURL = "jdbc:mysql://localhost:3306/petShop";
