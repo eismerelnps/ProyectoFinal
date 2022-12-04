@@ -168,67 +168,70 @@ public class UI {
         agregarDogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    String Code = dogCode.getText();
-
-                    int AgeinMonth = Integer.parseInt(textFieldDogage.getText());
-
-                    String Procedence = textFieldDogcountry.getText();
-                    String Color = textFieldDogColor.getText();
-                    String Race = null;
-
-                    if (bulldogRadioButton.isSelected() == true) {
-                        Race = bulldogRadioButton.getText();
-                    } else if (dalmataRadioButton.isSelected() == true) {
-                        Race = "Dalmata";
-                    } else if (chowChowRadioButton.isSelected() == true) {
-                        Race = "Chow-Chow";
-                    } else JOptionPane.showMessageDialog(null,
-                            "Por favor selecciona la raza primero",
-                            "Informacion",
-                            1);
-
-
-                    if (Code == null) {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca el codigo primero",
-                                "Informacion",
-                                1);
-                    }
+                int AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+                if (AgeinMonth == 0) {
                     if (AgeinMonth == 0) {
                         JOptionPane.showMessageDialog(null,
                                 "Por favor introduzca un edad mayor que 0",
                                 "Informacion",
                                 1);
+                    } else {
                     }
-                    if (Procedence == null) {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca la procedencia primero",
-                                "Informacion",
-                                1);
-                    }
-                    if (Color == null) {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca el color primero",
-                                "Informacion",
-                                1);
-                    }
-                    if (Race == null) {
-                        JOptionPane.showMessageDialog(null,
+                    try {
+                        String Code = dogCode.getText();
+
+
+                        String Procedence = textFieldDogcountry.getText();
+                        String Color = textFieldDogColor.getText();
+                        String Race = null;
+
+                        if (bulldogRadioButton.isSelected() == true) {
+                            Race = bulldogRadioButton.getText();
+                        } else if (dalmataRadioButton.isSelected() == true) {
+                            Race = "Dalmata";
+                        } else if (chowChowRadioButton.isSelected() == true) {
+                            Race = "Chow-Chow";
+                        } else JOptionPane.showMessageDialog(null,
                                 "Por favor selecciona la raza primero",
                                 "Informacion",
                                 1);
-                    } else {
-                       // Saldo += Price;
-                        float Price = 0;
-                      //  Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Code);
-                        petShop.fillDog(AgeinMonth, Procedence, Color, Race, Code);
-                        //comboBox1.addItem(dog);
-                        Saldotext.setText(String.valueOf(Saldo));
-                        // petShop.checkCode(Code);
+
+
+                        if (Code == null) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca el codigo primero",
+                                    "Informacion",
+                                    1);
+                        }
+                        if (Procedence == null) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca la procedencia primero",
+                                    "Informacion",
+                                    1);
+                        }
+                        if (Color == null) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca el color primero",
+                                    "Informacion",
+                                    1);
+                        }
+                        if (Race == null) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor selecciona la raza primero",
+                                    "Informacion",
+                                    1);
+                        } else {
+                            // Saldo += Price;
+                            float Price = 0;
+                            //  Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Code);
+                            petShop.fillDog(AgeinMonth, Procedence, Color, Race, Code);
+                            //comboBox1.addItem(dog);
+                            Saldotext.setText(String.valueOf(Saldo));
+                            // petShop.checkCode(Code);
+                        }
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                     }
-                } catch (NumberFormatException exception) {
-                    JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                 }
             }
         });
