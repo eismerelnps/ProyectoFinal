@@ -1,6 +1,7 @@
 package Control;
 
 import java.io.*;
+import java.nio.charset.CoderMalfunctionError;
 import java.util.ArrayList;
 
 import Pets.Cat;
@@ -14,6 +15,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -22,7 +25,7 @@ import javax.swing.*;
 
 public class PetShop {
 
-    ArrayList<Pet> pets = new ArrayList<Pet>();
+    public static ArrayList<Pet> pets = new ArrayList<Pet>();
 
     public void showPets() {
         for (Pet show : pets) {
@@ -32,45 +35,85 @@ public class PetShop {
     }
 
     public void sellPet(String Code) {
-
+        boolean pass = false;
+        int index = 0;
         for (int i = 0; i < pets.size(); i++) {
-            if (pets.get(i).equals(Code)) {
-                pets.remove(pets.get(i));
-                JOptionPane.showMessageDialog(null, "Se ha vendido exitosamente la mascota");
-            } else JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este codigo");
-        }
-    }
-
-    public void fillCat(int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, float Price, String Code) {
-        Cat cat = null;
-        if (pets.size() >= 1) {
-            for (int i = 0; i < pets.size(); i++) {
-                if (pets.get(i).getCode().equals(Code)) {
-                    System.out.println("Encontrado");
-                    JOptionPane.showMessageDialog(null, "Ya existe una mascota con el mismo codigo, por favor cambielo");
-                } else
-                    System.out.println("No enco");
-                cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
-                pets.add(cat);
+            if (pets.get(i).getCode().equals(Code)) {
+                pass = true;
+                index = pets.indexOf(pets.get(i));
             }
         }
+            if (pass == true){
+                pets.remove(pets.get(index));
+                JOptionPane.showMessageDialog(null, "Se ha vendido exitosamente la mascota");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este codigo");
+            }
+
+
     }
 
-    public void fillDog(int AgeinMonth, String Procedence, String Color, float Price, String Race, String Coder) {
-        // Dog dog = null;
-        // if(pets.size() >= 1) {
-        //  for (int i = 0; i < pets.size(); i++) {
-        //    if (pets.get(i).getProcedence().equals(Coder)) {
-        //      System.out.println("Encontrado");
-        //          JOptionPane.showMessageDialog(null, "Ya existe una mascota con el mismo codigo, por favor cambielo");
-        //    } else
-        System.out.println("No enco");
-        Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Coder);
-        pets.add(dog);
-    }
-    //}
 
-    //  }
+    public void fillCat(int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, float Price, String Code) {
+        boolean pass = true;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getCode().equals(Code)) {
+                pass = false;
+            }
+        }
+        if (pass == true) {
+            Cat cat  = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
+            pets.add(cat);
+            JOptionPane.showMessageDialog(null,
+                    "Agregado con exito",
+                    "Alerta",
+                    2);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ya existe una mascota con el código: " + Code + ", cambielo",
+                    "Alerta",
+                    2);
+        }
+    }
+
+    public void fillDog(int AgeinMonth, String Procedence, String Color, String Race, String Coder) {
+        boolean pass = true;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getCode().equals(Coder)) {
+                pass = false;
+            }
+        }
+        if (pass == true) {
+            float Price = 0;
+            if (AgeinMonth == 0) {
+                AgeinMonth = 1;
+            }
+            if (AgeinMonth <= 24) {
+                Price = 1000 / AgeinMonth;
+            } else if (AgeinMonth >= 25) {
+                Price = 35;
+            }
+            if (Race == "Chow-Chow") {
+                Price += 30;
+            } else if (Race == "Dalmata") {
+                Price += 50;
+            }
+            Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Coder);
+            pets.add(dog);
+
+            JOptionPane.showMessageDialog(null,
+                    "Agregado con exito",
+                    "Alerta",
+                    2);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ya existe una mascota con el código: " + Coder + ", cambielo",
+                    "Alerta",
+                    2);
+        }
+    }
+
+
     public void countrySearch(String Country) {
         int count = 0;
         for (int i = 0; i < pets.size(); i++) {
@@ -90,15 +133,106 @@ public class PetShop {
                     1);
     }
 
-    public void priceSearch(String Country) {
-        int index;
-        for (Pet search : pets) {
-            if (search.getProcedence().equals(Country)) {
-                index = pets.indexOf(search);
+    public void priceSearch(String sCode) {
+        int index = 0;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getCode().equals(sCode)) {
+                index = pets.indexOf(pets.get(i));
             }
+        }
+        System.out.println(index);
+        System.out.println(pets.size());
+        if (index > 0) {
+            JOptionPane.showMessageDialog(null,
+                    "La mascota tiene un precio de: " + pets.get(index).getPrice() + "$",
+                    "Alerta",
+                    2);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "No se ha encotrado una mascota con el codigo: " + sCode,
+                    "Alerta",
+                    2);
         }
     }
 
+    public void checkCode(String sCode) {//para saber si ya existe una mascota en el arrayList con el mismo codigo
+        boolean pass = true;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getCode().equals(sCode)) {
+                pass = false;
+            }
+        }
+        if (pass == true) {
+            JOptionPane.showMessageDialog(null,
+                    "Agregado con exito",
+                    "Alerta",
+                    2);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ya existe una mascota con el código: " + sCode + ", cambielo",
+                    "Alerta",
+                    2);
+        }
+
+
+
+        System.out.println("size: "+pets.size());
+}
+    public void olderPet() {
+        int age = 0;
+        int index = 0;
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getAgeinMonth() > age) {
+                age = pets.get(i).getAgeinMonth();
+                index = pets.indexOf(pets.get(i));
+            }
+        }
+        JOptionPane.showMessageDialog(null,
+                pets.get(index).toString(),
+                "Mascota de mayor edad",
+                1);
+    }
+    public void lessPredominantColor() {
+        int count = 0;
+        String[] array = new String[pets.size()];
+        for (int i = 0; i < pets.size(); i++) {
+            array[i] = pets.get(i).getColor();
+        }
+        //buscar el color menos repetido hashmap
+        //crear un hashmap
+        HashMap<String, Integer> map = new HashMap<>();
+        //recorrer el array
+        for (int i = 0; i < array.length; i++) {
+            //si el color no esta en el hashmap
+            if (!map.containsKey(array[i])) {
+                //añadirlo al hashmap
+                map.put(array[i], 1);
+            } else {
+                //si esta en el hashmap
+                //sumarle 1
+                map.put(array[i], map.get(array[i]) + 1);
+            }
+        }
+        //recorrer el hashmap
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+        //buscar el color menos repetido
+        String colorMenosRepetido = "";
+        int numeroVeces = 1000;
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            //si el numero de veces que se repite es menor que el numero de veces que se repite el color menos repetido
+            if (entry.getValue() < numeroVeces) {
+                //guardar el color menos repetido
+                colorMenosRepetido = entry.getKey();
+                //guardar el numero de veces que se repite
+                numeroVeces = entry.getValue();
+            }
+        }
+        //imprimir el color menos repetido
+        System.out.println("El color menos repetido es " + colorMenosRepetido + " y se repite " + numeroVeces + " veces");
+
+    }
     public void CreateDataBase() {
         Connection connection = null;
         String sURL = "jdbc:mysql://localhost:3306/petShop";

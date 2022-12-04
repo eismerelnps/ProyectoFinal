@@ -8,7 +8,6 @@ import java.util.Random;
 
 import Control.*;
 import Pets.Cat;
-import Pets.Dog;
 
 public class UI {
     private JPanel MainPanel;
@@ -52,6 +51,14 @@ public class UI {
     private JTextField countrySearchTextField;
     private JButton searchCountryButton;
     private JButton generarButton;
+    private JButton button1;
+    private JButton button2;
+    private JButton searchPriceButton;
+    private JTextField searchPriceText;
+    private JPanel searchPriceJPanel;
+    private JButton buscarMayorButton;
+    private JButton colorMenosPredominanteButton;
+    private JComboBox colorsComboBox;
     private float Saldo = 0;
 
     PetShop petShop = new PetShop();
@@ -67,6 +74,8 @@ public class UI {
         addDog.setVisible(false);
         venderJPanel.setVisible(false);
         countrySearchJPanel.setVisible(false);
+        searchPriceJPanel.setVisible(false);
+        fillComboBox();
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
@@ -157,14 +166,9 @@ public class UI {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String Code = dogCode.getText();
-                    float Price = 0;
-                    int AgeinMonth = 0;
-                    AgeinMonth = Integer.parseInt(textFieldDogage.getText());
-                    if (AgeinMonth <= 24) {
-                        Price = 1000 / AgeinMonth;
-                    } else if (AgeinMonth >= 25) {
-                        Price = 35;
-                    }
+
+                    int AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+
                     String Procedence = textFieldDogcountry.getText();
                     String Color = textFieldDogColor.getText();
                     String Race = null;
@@ -179,48 +183,49 @@ public class UI {
                             "Por favor selecciona la raza primero",
                             "Informacion",
                             1);
-                    if (Race == "Chow-Chow") {
-                        Price += 30;
-                    } else if (Race == "Dalmata") {
-                        Price += 50;
-                    }
+
+
                     if (Code == null) {
                         JOptionPane.showMessageDialog(null,
-                                "Por favor selecciona la raza primero",
+                                "Por favor introduzca el codigo primero",
                                 "Informacion",
                                 1);
-                    } else if (AgeinMonth == 0) {
+                    }
+                    if (AgeinMonth == 0) {
                         JOptionPane.showMessageDialog(null,
                                 "Por favor introduzca la edad primero",
                                 "Informacion",
                                 1);
-                    } else if (Procedence == null) {
+                    }
+                    if (Procedence == null) {
                         JOptionPane.showMessageDialog(null,
                                 "Por favor introduzca la procedencia primero",
                                 "Informacion",
                                 1);
-                    } else if (Color == null) {
+                    }
+                    if (Color == null) {
                         JOptionPane.showMessageDialog(null,
                                 "Por favor introduzca el color primero",
                                 "Informacion",
                                 1);
-                    } else if (Race == null) {
+                    }
+                    if (Race == null) {
                         JOptionPane.showMessageDialog(null,
                                 "Por favor selecciona la raza primero",
                                 "Informacion",
                                 1);
                     } else {
-                        Saldo += Price;
-                        // petShop.checkDogCode(AgeinMonth, Procedence, Color, Price, Race, Code);
-                        Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Code);
-                        petShop.fillDog(AgeinMonth, Procedence, Color, Price, Race, Code);
-                        comboBox1.addItem(dog);
+                       // Saldo += Price;
+                        float Price = 0;
+                      //  Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Code);
+                        petShop.fillDog(AgeinMonth, Procedence, Color, Race, Code);
+                        //comboBox1.addItem(dog);
                         Saldotext.setText(String.valueOf(Saldo));
+                        // petShop.checkCode(Code);
                     }
                 } catch (NumberFormatException exception) {
                     JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                 }
-                petShop.showPets();
             }
         });
         agregarCatButton.addActionListener(new ActionListener() {
@@ -231,6 +236,9 @@ public class UI {
                     int AgeinMonth = 0;
 
                     AgeinMonth = Integer.parseInt(catAge.getText());
+                    if (AgeinMonth == 0){
+                        AgeinMonth = 1;
+                    }
 
                     String Procedence = catProcedence.getText();
                     String Color = catColor.getText();
@@ -262,7 +270,14 @@ public class UI {
         priceSearchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                petShop.priceSearch("qwerty");
+                searchPriceJPanel.setVisible(true);
+                JOptionPane.showOptionDialog(null,
+                        searchPriceJPanel,
+                        "Cantidad por país",
+                        -1,
+                        3,
+                        null, new Object[]{},
+                        3);
             }
 
         });
@@ -317,10 +332,22 @@ public class UI {
         generarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textFieldDogcountry.setText(generCountry.randomgenerCountry().toString());
-                textFieldDogColor.setText(generateColor.randomgenerCountry().toString());
-                textFieldDogage.setText(String.valueOf((int) (Math.random() * 13)));
-                generateCode();
+                if(perroRadioButton.isSelected() == true){
+                    textFieldDogcountry.setText(generCountry.randomgenerCountry().toString());
+                    textFieldDogColor.setText(generateColor.randomgenerateColor().toString());
+                    textFieldDogage.setText(String.valueOf((int) (Math.random() * 13)));
+                    generateCode();
+                    generateRace();
+
+                }else if(gatoRadioButton.isSelected() == true){
+                    catProcedence.setText(generCountry.randomgenerCountry().toString());
+                    catColor.setText(generateColor.randomgenerateColor().toString());
+                   catAge.setText(String.valueOf((int) (Math.random() * 13)));
+                   catEyesColor.setText(generateEyesColor.randomgenerateEyesColor().toString());
+                    generateCode();
+                    generateRace();
+
+                }
             }
 
         });
@@ -330,16 +357,44 @@ public class UI {
                 petShop.showPets();
             }
         });
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                petShop.showPets();
+
+
+            }
+        });
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                petShop.checkCode(dogCode.getText());
+            }
+        });
+        searchPriceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                petShop.priceSearch(searchPriceText.getText());
+            }
+        });
+        buscarMayorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                petShop.olderPet();
+            }
+        });
+        colorMenosPredominanteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                petShop.lessPredominantColor();
+            }
+        });
     }
-
-    //generar edad meses
-    int edad = (int) (Math.random() * 12);
-
     public void StartInterface() {
         JFrame window = new JFrame("Control.PetShop");
         window.setContentPane(new UI().MainPanel);
         window.pack();
-        window.setBounds(0, 0, 700, 250);
+        window.setBounds(0, 0, 1000, 350);
         window.setVisible(true);
         window.setMinimumSize(new Dimension(250, 250));
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -353,14 +408,23 @@ public class UI {
         public static generCountry randomgenerCountry() {
             return directions[PRNG.nextInt(directions.length)];
         }
-    }
+    }//generar paises random
 
     public enum generateColor {//para generar un pais random
         Blanco, Negro, Amarillo, Marron, Gris, Oro;
         private static final Random PRNG = new Random();
         private static final generateColor[] directions = values();
 
-        public static generateColor randomgenerCountry() {
+        public static generateColor randomgenerateColor() {
+            return directions[PRNG.nextInt(directions.length)];
+        }
+    }
+    public enum generateEyesColor{//para generar un color de ojos random
+        Verde, Negro, Amarillo, Marron, Gris, Oro, Bicolor;
+        private static final Random PRNG = new Random();
+        private static final generateEyesColor[] directions = values();
+
+        public static generateEyesColor randomgenerateEyesColor() {
             return directions[PRNG.nextInt(directions.length)];
         }
     }
@@ -371,5 +435,42 @@ public class UI {
             n = n.concat(String.valueOf((int) (Math.random() * 12)));
         }
         dogCode.setText(n);
+        catCode.setText(n);
+    }//generar un codigo random
+    public void generateRace(){
+        int Option;
+       Option = (int) (Math.random() * 3);
+       if (perroRadioButton.isSelected() == true){
+           if (Option == 0){
+               bulldogRadioButton.setSelected(true);
+               dalmataRadioButton.setSelected(false);
+               chowChowRadioButton.setSelected(false);
+           } else if (Option == 1) {
+               bulldogRadioButton.setSelected(false);
+               dalmataRadioButton.setSelected(true);
+               chowChowRadioButton.setSelected(false);
+           }else if (Option == 2) {
+               bulldogRadioButton.setSelected(false);
+               dalmataRadioButton.setSelected(false);
+               chowChowRadioButton.setSelected(true);
+           }
+       }
+       if (gatoRadioButton.isSelected() == true){
+           if (Option == 0){
+               hembraRadioButton.setSelected(true);
+               machoRadioButton.setSelected(false);
+               noCheckBox.setSelected(true);
+           } else if (Option == 1) {
+               hembraRadioButton.setSelected(false);
+               machoRadioButton.setSelected(true);
+               noCheckBox.setSelected(false);
+           }else if (Option == 2) {
+               noCheckBox.setSelected(true);
+           }
+       }
+    }
+    public void fillComboBox(){
+        String colors [] = {"Blanco", "Negro", "Amarillo", "Marron", "Gris", "Oro"};
+        colorsComboBox = new JComboBox<>(colors);
     }
 }
