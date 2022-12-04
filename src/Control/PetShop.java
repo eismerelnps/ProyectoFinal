@@ -216,7 +216,7 @@ public class PetShop {
         }
         //recorrer el hashmap
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.print(entry.getKey() + " " + entry.getValue()+",");
+            System.out.print(entry.getKey() + " " + entry.getValue() + ",");
         }
         //buscar el color menos repetido
         String colorMenosRepetido = "";
@@ -240,17 +240,21 @@ public class PetShop {
             }
 
         }
-        //imprimir el array
-        System.out.print("\n{");
-        for (int i = 0; i < colores.length; i++) {
-
-            System.out.print(colores[i]+", ");
+        // mostrar un showOptionDialog con el array limpio de nulls
+        String[] coloresLimpio = new String[count];
+        for (int i = 0; i < coloresLimpio.length; i++) {
+            if (colores[i] != null) {
+                coloresLimpio[i] = colores[i];
+            }
         }
-        System.out.println("}");
-        // mostrar el array limpio de nulls
-
-
-
+        int option = JOptionPane.showOptionDialog(null,
+                "El color menos repetido es: ",
+                "Color menos repetido",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                coloresLimpio,
+                coloresLimpio[0]);
     }
 
     public void alfaOrder() {
@@ -300,6 +304,7 @@ public class PetShop {
         for (int i = 0; i < sortedArr.length; i++) {
             System.out.print(sortedArr[i] + " ");
         }
+
     }
 
     public void CreateDataBase() {
