@@ -58,6 +58,7 @@ public class UI {
     private JPanel searchPriceJPanel;
     private JButton buscarMayorButton;
     private JButton colorMenosPredominanteButton;
+    private JButton listadoAlfabeticoButton;
     private JComboBox colorsComboBox;
     private float Saldo = 0;
 
@@ -193,7 +194,7 @@ public class UI {
                     }
                     if (AgeinMonth == 0) {
                         JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca la edad primero",
+                                "Por favor introduzca un edad mayor que 0",
                                 "Informacion",
                                 1);
                     }
@@ -332,17 +333,21 @@ public class UI {
         generarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int age = (int) (Math.random() * 13);
+                if (age == 0){
+                    age = 1;
+                }
                 if(perroRadioButton.isSelected() == true){
                     textFieldDogcountry.setText(generCountry.randomgenerCountry().toString());
                     textFieldDogColor.setText(generateColor.randomgenerateColor().toString());
-                    textFieldDogage.setText(String.valueOf((int) (Math.random() * 13)));
+                    textFieldDogage.setText(String.valueOf(age));
                     generateCode();
                     generateRace();
 
                 }else if(gatoRadioButton.isSelected() == true){
                     catProcedence.setText(generCountry.randomgenerCountry().toString());
                     catColor.setText(generateColor.randomgenerateColor().toString());
-                   catAge.setText(String.valueOf((int) (Math.random() * 13)));
+                   catAge.setText(String.valueOf(age));
                    catEyesColor.setText(generateEyesColor.randomgenerateEyesColor().toString());
                     generateCode();
                     generateRace();
@@ -387,6 +392,12 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 petShop.lessPredominantColor();
+            }
+        });
+        listadoAlfabeticoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                petShop.sortArray();
             }
         });
     }
