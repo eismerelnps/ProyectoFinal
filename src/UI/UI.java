@@ -58,6 +58,7 @@ public class UI {
     private JPanel searchPriceJPanel;
     private JButton buscarMayorButton;
     private JButton colorMenosPredominanteButton;
+    private JComboBox colorsComboBox;
     private float Saldo = 0;
 
     PetShop petShop = new PetShop();
@@ -74,6 +75,7 @@ public class UI {
         venderJPanel.setVisible(false);
         countrySearchJPanel.setVisible(false);
         searchPriceJPanel.setVisible(false);
+        fillComboBox();
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
@@ -384,7 +386,7 @@ public class UI {
         colorMenosPredominanteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                petShop.predominantColor();
+                petShop.lessPredominantColor();
             }
         });
     }
@@ -466,5 +468,9 @@ public class UI {
                noCheckBox.setSelected(true);
            }
        }
+    }
+    public void fillComboBox(){
+        String colors [] = {"Blanco", "Negro", "Amarillo", "Marron", "Gris", "Oro"};
+        colorsComboBox = new JComboBox<>(colors);
     }
 }

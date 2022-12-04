@@ -261,14 +261,6 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="bd491" class="javax.swing.JTextField" binding="textFieldDogColor">
-                <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties/>
-              </component>
               <component id="e7470" class="javax.swing.JRadioButton" binding="dalmataRadioButton" default-binding="true">
                 <constraints>
                   <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -292,6 +284,14 @@
                 <properties>
                   <text value="Codigo"/>
                 </properties>
+              </component>
+              <component id="2b78d" class="javax.swing.JTextField" binding="textFieldDogColor">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
               </component>
             </children>
           </grid>

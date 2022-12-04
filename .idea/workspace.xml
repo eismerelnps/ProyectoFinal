@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="3">
+    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Control/PetShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Control/PetShop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pets/Dog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pets/Dog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
     </list>
@@ -67,7 +66,8 @@
       <workItem from="1670043292616" duration="1429000" />
       <workItem from="1670045321579" duration="5048000" />
       <workItem from="1670052651544" duration="12500000" />
-      <workItem from="1670117013741" duration="3384000" />
+      <workItem from="1670117013741" duration="4111000" />
+      <workItem from="1670183111195" duration="730000" />
     </task>
     <task id="LOCAL-00001" summary="3">
       <created>1670045988627</created>
@@ -83,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670106392552</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="4">
+      <created>1670123384567</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670123384567</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,6 +109,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="3" />
-    <option name="LAST_COMMIT_MESSAGE" value="3" />
+    <MESSAGE value="4" />
+    <option name="LAST_COMMIT_MESSAGE" value="4" />
   </component>
 </project>

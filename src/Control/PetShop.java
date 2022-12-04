@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -190,22 +192,45 @@ public class PetShop {
                 "Mascota de mayor edad",
                 1);
     }
-    public void predominantColor() {
+    public void lessPredominantColor() {
         int count = 0;
-        String[] colors = new String[pets.size()];
+        String[] array = new String[pets.size()];
         for (int i = 0; i < pets.size(); i++) {
-            colors[i] = pets.get(i).getColor();
-            System.out.println(colors[i]);
+            array[i] = pets.get(i).getColor();
         }
-        for (int i = 0; i < pets.size(); i++) {
-            for (int j = 0; j < pets.size(); j++) {
-                if (colors[i] == colors[j]) {
-                    count++;
-                    System.out.println(count);
-                    count =0;
-                }
+        //buscar el color menos repetido hashmap
+        //crear un hashmap
+        HashMap<String, Integer> map = new HashMap<>();
+        //recorrer el array
+        for (int i = 0; i < array.length; i++) {
+            //si el color no esta en el hashmap
+            if (!map.containsKey(array[i])) {
+                //añadirlo al hashmap
+                map.put(array[i], 1);
+            } else {
+                //si esta en el hashmap
+                //sumarle 1
+                map.put(array[i], map.get(array[i]) + 1);
             }
         }
+        //recorrer el hashmap
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+        //buscar el color menos repetido
+        String colorMenosRepetido = "";
+        int numeroVeces = 1000;
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            //si el numero de veces que se repite es menor que el numero de veces que se repite el color menos repetido
+            if (entry.getValue() < numeroVeces) {
+                //guardar el color menos repetido
+                colorMenosRepetido = entry.getKey();
+                //guardar el numero de veces que se repite
+                numeroVeces = entry.getValue();
+            }
+        }
+        //imprimir el color menos repetido
+        System.out.println("El color menos repetido es " + colorMenosRepetido + " y se repite " + numeroVeces + " veces");
 
     }
     public void CreateDataBase() {
