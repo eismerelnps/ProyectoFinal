@@ -1,31 +1,26 @@
 package Control;
 
-import java.io.*;
-import java.nio.charset.CoderMalfunctionError;
-import java.util.ArrayList;
-
 import Pets.Cat;
 import Pets.Dog;
 import Pets.Pet;
-import UI.UI;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.*;
 
 @Getter
 @Setter
 
 public class PetShop {
 
-    public static ArrayList<Pet> pets = new ArrayList<Pet>();
+    public static ArrayList<Pet> pets = new ArrayList<>();
 
     public void showPets() {
         for (Pet show : pets) {
@@ -43,7 +38,7 @@ public class PetShop {
                 index = pets.indexOf(pets.get(i));
             }
         }
-        if (pass == true) {
+        if (pass) {
             pets.remove(pets.get(index));
             JOptionPane.showMessageDialog(null, "Se ha vendido exitosamente la mascota");
         } else {
@@ -59,9 +54,10 @@ public class PetShop {
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Code)) {
                 pass = false;
+                break;
             }
         }
-        if (pass == true) {
+        if (pass) {
             Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
             pets.add(cat);
             JOptionPane.showMessageDialog(null,
@@ -81,9 +77,10 @@ public class PetShop {
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Coder)) {
                 pass = false;
+                break;
             }
         }
-        if (pass == true) {
+        if (pass) {
             float Price = 0;
             if (AgeinMonth == 0) {
                 AgeinMonth = 1;
@@ -93,9 +90,9 @@ public class PetShop {
             } else if (AgeinMonth >= 25) {
                 Price = 35;
             }
-            if (Race == "Chow-Chow") {
+            if (Race.equals("Chow-Chow")) {
                 Price += 30;
-            } else if (Race == "Dalmata") {
+            } else if (Race.equals("Dalmata")) {
                 Price += 50;
             }
             Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Coder);
@@ -160,9 +157,10 @@ public class PetShop {
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(sCode)) {
                 pass = false;
+                break;
             }
         }
-        if (pass == true) {
+        if (pass) {
             JOptionPane.showMessageDialog(null,
                     "Agregado con exito",
                     "Alerta",
@@ -215,18 +213,11 @@ public class PetShop {
                 map.put(array[i], map.get(array[i]) + 1);
             }
         }
-        //recorrer el hashmap
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.print(entry.getKey() + " " + entry.getValue() + ",");
-        }
         //buscar el color menos repetido
-        String colorMenosRepetido = "";
-        int numeroVeces = 1000;
+        int numeroVeces = map.get(array[0]);
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             //si el numero de veces que se repite es menor que el numero de veces que se repite el color menos repetido
             if (entry.getValue() < numeroVeces) {
-                //guardar el color menos repetido
-                colorMenosRepetido = entry.getKey();
                 //guardar el numero de veces que se repite
                 numeroVeces = entry.getValue();
             }
@@ -248,7 +239,7 @@ public class PetShop {
                 coloresLimpio[i] = colores[i];
             }
         }
-        int option = JOptionPane.showOptionDialog(null,
+        JOptionPane.showOptionDialog(null,
                 "El color menos repetido es: ",
                 "Color menos repetido",
                 JOptionPane.DEFAULT_OPTION,
