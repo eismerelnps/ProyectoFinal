@@ -194,6 +194,7 @@ public class PetShop {
     }
 
     public void lessPredominantColor() {
+        ///
         int count = 0;
         String[] array = new String[pets.size()];
         for (int i = 0; i < pets.size(); i++) {
