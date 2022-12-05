@@ -258,6 +258,7 @@ public class PetShop {
                 coloresLimpio[0]);
     }
 
+
     public void alfaOrder() {
         String[] Countries = new String[pets.size()];
         for (int i = 0; i < pets.size(); i++) {
@@ -305,7 +306,6 @@ public class PetShop {
         for (int i = 0; i < sortedArr.length; i++) {
             System.out.print(sortedArr[i] + " ");
         }
-
     }
 
     public void CreateDataBase() {

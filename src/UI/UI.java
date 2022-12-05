@@ -168,18 +168,9 @@ public class UI {
         agregarDogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int AgeinMonth = Integer.parseInt(textFieldDogage.getText());
-                if (AgeinMonth == 0) {
-                    if (AgeinMonth == 0) {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca un edad mayor que 0",
-                                "Informacion",
-                                1);
-                    } else {
-                    }
-                    try {
+                        try {
                         String Code = dogCode.getText();
-
+                        int AgeinMonth = Integer.parseInt(textFieldDogage.getText());
 
                         String Procedence = textFieldDogcountry.getText();
                         String Color = textFieldDogColor.getText();
@@ -232,7 +223,6 @@ public class UI {
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                     }
-                }
             }
         });
         agregarCatButton.addActionListener(new ActionListener() {
