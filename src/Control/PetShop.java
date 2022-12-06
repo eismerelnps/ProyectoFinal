@@ -54,12 +54,21 @@ public class PetShop {
     }
 
 
-    public void fillCat(int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, float Price, String Code) {
+    public void fillCat(int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, String Code) {
         boolean pass = true;
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Code)) {
                 pass = false;
             }
+        }
+        float Price = 0;
+        if (AgeinMonth <= 24) {
+            Price = 1000 / AgeinMonth;
+        } else if (AgeinMonth >= 25) {
+            Price = 35;
+        }
+        if (Perdigree == true) {
+            Price *= 2;
         }
         if (pass == true) {
             Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);

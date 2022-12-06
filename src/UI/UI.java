@@ -159,7 +159,10 @@ public class UI {
                     addDog.setVisible(false);
                     addCat.setVisible(true);
                 } else if (perroRadioButton.isSelected() == false || gatoRadioButton.isSelected() == false) {
-                    JOptionPane.showMessageDialog(null, "Seleciona que tipo de mascota desea agregar");
+                    JOptionPane.showMessageDialog(null,
+                            "Por favor selecciona el tipo de mascota primero",
+                            "Alerta",
+                            2);
                 }
             }
         });
@@ -172,6 +175,23 @@ public class UI {
                 String Procedence = null;
                 int AgeinMonth = 0;
                 boolean pass = true;
+                if (bulldogRadioButton.isSelected() == true) {
+                    Race = bulldogRadioButton.getText();
+                    pass = true;
+                } else if (dalmataRadioButton.isSelected() == true) {
+                    Race = "Dalmata";
+                    pass = true;
+                } else if (chowChowRadioButton.isSelected() == true) {
+                    Race = "Chow-Chow";
+                    pass = true;
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Por favor selecciona la raza primero",
+                            "Informacion",
+                            1);
+                    pass = false;
+                }
+
                 try {
                             if (dogCode.getText().isEmpty()){
                                 JOptionPane.showMessageDialog(null,
@@ -179,59 +199,34 @@ public class UI {
                                         "Informacion",
                                         1);
                                 pass = false;
-                            }else {
-                                Code = dogCode.getText();
-                                pass = true;
-                            }
-
-                            if (textFieldDogage.getText().isEmpty()){
+                            }else if (textFieldDogage.getText().isEmpty()){
                                 JOptionPane.showMessageDialog(null,
                                         "Por favor introduzca la edad primero",
                                         "Informacion",
                                         1);
                                 pass = false;
-                            }else {
-                                AgeinMonth = Integer.parseInt(textFieldDogage.getText());
-                                pass = true;
-                            }
-                            if (textFieldDogcountry.getText().isEmpty() || textFieldDogcountry.getText().matches("\\p{Alpha}+")) {
+                                //appling regular expresions to determinate if string contains numbers or any symbol different that characters
+                            }else if (textFieldDogcountry.getText().isEmpty() || !textFieldDogcountry.getText().matches("\\p{Alpha}+")) {
                                 JOptionPane.showMessageDialog(null,
                                         "Por favor introduzca un país válido",
                                         "Alerta",
                                         2);
                                 pass = false;
-                            }else {
-                                    Procedence = textFieldDogcountry.getText();
-                                    pass = true;
-                            }
-                            
-                            if (textFieldDogColor.getText().isEmpty()) {
+                            }else if (textFieldDogColor.getText().isEmpty() || !textFieldDogColor.getText().matches("\\p{Alpha}+")) {
                                 JOptionPane.showMessageDialog(null,
-                                        "Por favor introduzca el color primero",
-                                        "Informacion",
+                                        "Por favor introduzca un color válido",
+                                        "Alerta",
                                         1);
                                 pass = false;
                             } else {
+                                Code = dogCode.getText();
+                                AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+                                Procedence = textFieldDogcountry.getText();
                                 Color = textFieldDogColor.getText();
                                 pass = true;
                             }
 
-                        if (bulldogRadioButton.isSelected() == true) {
-                            Race = bulldogRadioButton.getText();
-                            pass = true;
-                        } else if (dalmataRadioButton.isSelected() == true) {
-                            Race = "Dalmata";
-                            pass = true;
-                        } else if (chowChowRadioButton.isSelected() == true) {
-                            Race = "Chow-Chow";
-                            pass = true;
-                        } else {
-                            JOptionPane.showMessageDialog(null,
-                                    "Por favor selecciona la raza primero",
-                                    "Informacion",
-                                    1);
-                            pass = false;
-                        }
+
 
                         if (pass == true){
                             // Saldo += Price;
@@ -253,37 +248,75 @@ public class UI {
         agregarCatButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int AgeinMonth = 0;
+                String Code = null;
+                String Procedence = null;
+                String Color = null;
+                boolean pass = false;
+                String EyesColor = null;
+                String Sex =  null;
+                boolean Perdigree = false;
                 try {
-                    String Code = catCode.getText();
-                    int AgeinMonth = 0;
-
-                    AgeinMonth = Integer.parseInt(catAge.getText());
-                    if (AgeinMonth == 0){
-                        AgeinMonth = 1;
+                    if (catCode.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null,
+                                "Por favor introduzca el código primero",
+                                "Alerta",
+                                1);
+                        pass = false;
+                    }else if (catAge.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null,
+                                "Por favor introduzca la edad primero",
+                                "Alerta",
+                                1);
+                        pass = false;
+                    } else if (catProcedence.getText().isEmpty() || !catProcedence.getText().matches("\\p{Alpha}+")) {
+                        JOptionPane.showMessageDialog(null,
+                                "Por favor introduzca un páis válido",
+                                "Alerta",
+                                1);
+                        pass = false;
+                    } else if (catColor.getText().isEmpty() || !catColor.getText().matches("\\p{Alpha}+")) {
+                        JOptionPane.showMessageDialog(null,
+                                "Por favor introduzca un color válido",
+                                "Alerta",
+                                1);
+                        pass = false;
+                    } else if (catEyesColor.getText().isEmpty() || !catEyesColor.getText().matches("\\p{Alpha}+")) {
+                        JOptionPane.showMessageDialog(null,
+                                "Por favor introduzca un color de ojos válido",
+                                "Alerta",
+                                1);
+                    }else if (hembraRadioButton.isSelected() == false && machoRadioButton.isSelected() == false){
+                        JOptionPane.showMessageDialog(null,
+                                "Por favor selecciona el sexo del gato",
+                                "Alerta",
+                                1);
+                    }else {
+                        if (hembraRadioButton.isSelected() == true) {
+                            Sex = "Hembra";
+                        } else Sex = "Macho";
+                        Perdigree = noCheckBox.isSelected();
+                        pass = true;
                     }
 
-                    String Procedence = catProcedence.getText();
-                    String Color = catColor.getText();
-                    String EyesColor = catEyesColor.getText();
-                    String Sex;
-                    if (hembraRadioButton.isSelected() == true) {
-                        Sex = "Hembra";
-                    } else Sex = "Macho";
-                    boolean Perdigree = noCheckBox.isSelected();
-                    float Price = 0;
-                    if (AgeinMonth <= 24) {
-                        Price = 1000 / AgeinMonth;
-                    } else if (AgeinMonth >= 25) {
-                        Price = 35;
+
+                    if(pass == true){
+                        Code = catCode.getText();
+                        AgeinMonth = Integer.parseInt(catAge.getText());
+                        if (AgeinMonth == 0){
+                            AgeinMonth = 1;
+                        }
+                        Procedence = catProcedence.getText();
+                        Color = catColor.getText();
+                        EyesColor = catEyesColor.getText();
+
+                        //Saldo += Price;
+                        //Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
+                        petShop.fillCat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
+                        //comboBox1.addItem(cat);
+                        Saldotext.setText(String.valueOf(Saldo));
                     }
-                    if (Perdigree == true) {
-                        Price *= 2;
-                    }
-                    Saldo += Price;
-                    Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
-                    petShop.fillCat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
-                    comboBox1.addItem(cat);
-                    Saldotext.setText(String.valueOf(Saldo));
+
                 } catch (NumberFormatException exception) {
                     JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                 }
@@ -497,6 +530,8 @@ public class UI {
                machoRadioButton.setSelected(true);
                noCheckBox.setSelected(false);
            }else if (Option == 2) {
+               hembraRadioButton.setSelected(true);
+               machoRadioButton.setSelected(false);
                noCheckBox.setSelected(true);
            }
        }

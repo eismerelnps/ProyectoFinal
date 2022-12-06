@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="Fixed:">
+    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="Fixed:&#10;when I'm tryining add new dog and I let some empty, the program wont add this dog">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Control/PetShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Control/PetShop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +68,7 @@
       <workItem from="1670052651544" duration="12500000" />
       <workItem from="1670117013741" duration="4111000" />
       <workItem from="1670183111195" duration="7991000" />
-      <workItem from="1670212832218" duration="9006000" />
+      <workItem from="1670212832218" duration="11667000" />
     </task>
     <task id="LOCAL-00001" summary="3">
       <created>1670045988627</created>
@@ -125,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670213160102</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixed:&#10;when I'm tryining add new dog and I let some empty, the program wont add this dog">
+      <created>1670315981592</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1670315981592</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +157,7 @@
     <MESSAGE value="Fixed:&#10;Alfa Order&#10;Age when is 0 on UI" />
     <MESSAGE value="Fixed:&#10;Ageinmoth when == 0" />
     <MESSAGE value="Fixed:" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed:" />
+    <MESSAGE value="Fixed:&#10;when I'm tryining add new dog and I let some empty, the program wont add this dog" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed:&#10;when I'm tryining add new dog and I let some empty, the program wont add this dog" />
   </component>
 </project>
