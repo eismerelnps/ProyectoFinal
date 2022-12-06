@@ -59,7 +59,6 @@ public class UI {
     private JButton buscarMayorButton;
     private JButton colorMenosPredominanteButton;
     private JButton listadoAlfabeticoButton;
-    private JComboBox colorsComboBox;
     private float Saldo = 0;
 
     PetShop petShop = new PetShop();
@@ -76,7 +75,6 @@ public class UI {
         venderJPanel.setVisible(false);
         countrySearchJPanel.setVisible(false);
         searchPriceJPanel.setVisible(false);
-        fillComboBox();
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
@@ -84,9 +82,9 @@ public class UI {
                 KindOfPet.setVisible(true);
                 JOptionPane.showOptionDialog(null,
                         KindOfPet,
-                        "Title",
+                        "Agregar mascota",
                         JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
+                        -1,
                         null, new Object[]{},
                         null);
                 //cerrar JOptionPane
@@ -161,57 +159,81 @@ public class UI {
                     addDog.setVisible(false);
                     addCat.setVisible(true);
                 } else if (perroRadioButton.isSelected() == false || gatoRadioButton.isSelected() == false) {
-                    JOptionPane.showMessageDialog(null, "Seleciona que tipo de mascota desea agreagar");
+                    JOptionPane.showMessageDialog(null, "Seleciona que tipo de mascota desea agregar");
                 }
             }
         });
         agregarDogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                        try {
-                        String Code = dogCode.getText();
-                        int AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+                String Color = null;
+                String Race = null;
+                String Code = null;
+                String Procedence = null;
+                int AgeinMonth = 0;
+                boolean pass = true;
+                try {
+                            if (dogCode.getText().isEmpty()){
+                                JOptionPane.showMessageDialog(null,
+                                        "Por favor introduzca el codigo primero",
+                                        "Informacion",
+                                        1);
+                                pass = false;
+                            }else {
+                                Code = dogCode.getText();
+                                pass = true;
+                            }
 
-                        String Procedence = textFieldDogcountry.getText();
-                        String Color = textFieldDogColor.getText();
-                        String Race = null;
+                            if (textFieldDogage.getText().isEmpty()){
+                                JOptionPane.showMessageDialog(null,
+                                        "Por favor introduzca la edad primero",
+                                        "Informacion",
+                                        1);
+                                pass = false;
+                            }else {
+                                AgeinMonth = Integer.parseInt(textFieldDogage.getText());
+                                pass = true;
+                            }
+                            if (textFieldDogcountry.getText().isEmpty() || textFieldDogcountry.getText().matches("\\p{Alpha}+")) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Por favor introduzca un país válido",
+                                        "Alerta",
+                                        2);
+                                pass = false;
+                            }else {
+                                    Procedence = textFieldDogcountry.getText();
+                                    pass = true;
+                            }
+                            
+                            if (textFieldDogColor.getText().isEmpty()) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Por favor introduzca el color primero",
+                                        "Informacion",
+                                        1);
+                                pass = false;
+                            } else {
+                                Color = textFieldDogColor.getText();
+                                pass = true;
+                            }
 
                         if (bulldogRadioButton.isSelected() == true) {
                             Race = bulldogRadioButton.getText();
+                            pass = true;
                         } else if (dalmataRadioButton.isSelected() == true) {
                             Race = "Dalmata";
+                            pass = true;
                         } else if (chowChowRadioButton.isSelected() == true) {
                             Race = "Chow-Chow";
-                        } else JOptionPane.showMessageDialog(null,
-                                "Por favor selecciona la raza primero",
-                                "Informacion",
-                                1);
-
-
-                        if (Code == null) {
-                            JOptionPane.showMessageDialog(null,
-                                    "Por favor introduzca el codigo primero",
-                                    "Informacion",
-                                    1);
-                        }
-                        if (Procedence == null) {
-                            JOptionPane.showMessageDialog(null,
-                                    "Por favor introduzca la procedencia primero",
-                                    "Informacion",
-                                    1);
-                        }
-                        if (Color == null) {
-                            JOptionPane.showMessageDialog(null,
-                                    "Por favor introduzca el color primero",
-                                    "Informacion",
-                                    1);
-                        }
-                        if (Race == null) {
+                            pass = true;
+                        } else {
                             JOptionPane.showMessageDialog(null,
                                     "Por favor selecciona la raza primero",
                                     "Informacion",
                                     1);
-                        } else {
+                            pass = false;
+                        }
+
+                        if (pass == true){
                             // Saldo += Price;
                             float Price = 0;
                             //  Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Code);
@@ -220,9 +242,12 @@ public class UI {
                             Saldotext.setText(String.valueOf(Saldo));
                             // petShop.checkCode(Code);
                         }
+
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                     }
+                System.out.println(pass+Code+AgeinMonth+Procedence+Color+Race);
+                // "//d+" "\p{Alpha}+"
             }
         });
         agregarCatButton.addActionListener(new ActionListener() {
@@ -401,7 +426,7 @@ public class UI {
         JFrame window = new JFrame("Control.PetShop");
         window.setContentPane(new UI().MainPanel);
         window.pack();
-        window.setBounds(0, 0, 1000, 350);
+        window.setBounds(0, 0, 1000, 450);
         window.setVisible(true);
         window.setMinimumSize(new Dimension(250, 250));
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -475,9 +500,5 @@ public class UI {
                noCheckBox.setSelected(true);
            }
        }
-    }
-    public void fillComboBox(){
-        String colors [] = {"Blanco", "Negro", "Amarillo", "Marron", "Gris", "Oro"};
-        colorsComboBox = new JComboBox<>(colors);
     }
 }
