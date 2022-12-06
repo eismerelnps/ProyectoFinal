@@ -1,13 +1,15 @@
 package UI;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import Control.*;
-import Pets.Cat;
 
 public class UI {
     private JPanel MainPanel;
@@ -59,6 +61,8 @@ public class UI {
     private JButton buscarMayorButton;
     private JButton colorMenosPredominanteButton;
     private JButton listadoAlfabeticoButton;
+    private JRadioButton oscuroRadioButton;
+    private JRadioButton claroRadioButton;
     private float Saldo = 0;
 
     PetShop petShop = new PetShop();
@@ -153,17 +157,21 @@ public class UI {
                 if (perroRadioButton.isSelected() == true) {
                     addDog.setVisible(true);
                     addCat.setVisible(false);
-
+                    JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(KindOfPet));
+                    dialog.dispose();
 
                 } else if (gatoRadioButton.isSelected() == true) {
                     addDog.setVisible(false);
                     addCat.setVisible(true);
+                    JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(KindOfPet));
+                    dialog.dispose();
                 } else if (perroRadioButton.isSelected() == false || gatoRadioButton.isSelected() == false) {
                     JOptionPane.showMessageDialog(null,
                             "Por favor selecciona el tipo de mascota primero",
                             "Alerta",
                             2);
                 }
+
             }
         });
         agregarDogButton.addActionListener(new ActionListener() {
@@ -357,7 +365,7 @@ public class UI {
                 venderJPanel.setVisible(true);
                 JOptionPane.showOptionDialog(null,
                         venderJPanel,
-                        "Vender MAscota",
+                        "Vender Mascota",
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.INFORMATION_MESSAGE,
                         null, new Object[]{},
@@ -427,13 +435,15 @@ public class UI {
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                petShop.checkCode(dogCode.getText());
+
             }
         });
         searchPriceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 petShop.priceSearch(searchPriceText.getText());
+                JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(searchPriceJPanel));
+                dialog.dispose();
             }
         });
         buscarMayorButton.addActionListener(new ActionListener() {
@@ -454,6 +464,30 @@ public class UI {
                 petShop.sortArray();
             }
         });
+        oscuroRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claroRadioButton.setSelected(false);
+                Mode("DARK");
+            }
+        });
+        claroRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                oscuroRadioButton.setSelected(false);
+                Mode("LIGHT");
+            }
+        });
+        sellCode.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyChar() == '\n'){
+                    String Code = sellCode.getText();
+                    petShop.sellPet(Code);
+                }
+            }
+        });
     }
     public void StartInterface() {
         JFrame window = new JFrame("Control.PetShop");
@@ -462,6 +496,7 @@ public class UI {
         window.setBounds(0, 0, 1000, 450);
         window.setVisible(true);
         window.setMinimumSize(new Dimension(250, 250));
+        window.setBackground(Color.darkGray);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
@@ -535,5 +570,24 @@ public class UI {
                noCheckBox.setSelected(true);
            }
        }
+    }
+    public void Mode(String Mode){
+        if(Mode == "DARK"){
+            MainPanel.setBackground(Color.LIGHT_GRAY);
+            leftPanel.setBackground(Color.DARK_GRAY);
+            addPet.setBackground(Color.gray);
+            addDog.setBackground(Color.DARK_GRAY);
+            addCat.setBackground(Color.DARK_GRAY);
+            LineBorder lineBorder1 = new LineBorder(Color.BLUE, 1, true);
+            inicioButton.setBorder(lineBorder1);
+
+        }
+        if (Mode == "LIGHT"){
+            MainPanel.setBackground(Color.LIGHT_GRAY);
+            leftPanel.setBackground(Color.WHITE);
+            addPet.setBackground(Color.WHITE);
+            addDog.setBackground(Color.WHITE);
+            addCat.setBackground(Color.WHITE);
+        }
     }
 }

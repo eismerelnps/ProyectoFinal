@@ -37,6 +37,7 @@ public class PetShop {
     public void sellPet(String Code) {
         boolean pass = false;
         int index = 0;
+        int option = 2;// I started var option at 2 cause when I started it ar 0 the if of the sellin\canceling toke some value and got executed
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Code)) {
                 pass = true;
@@ -44,12 +45,28 @@ public class PetShop {
             }
         }
         if (pass == true) {
-            pets.remove(pets.get(index));
-            JOptionPane.showMessageDialog(null, "Se ha vendido exitosamente la mascota");
+            option = JOptionPane.showConfirmDialog(null,
+                    "¿Está seguro que decea vender la mascota?",
+                    "Vender mascota",
+                    0,
+                    1,
+                    null);
         } else {
-            JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este codigo");
+            JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este código");
         }
-
+        if(option == 0){
+            float selling = pets.get(index).getPrice();
+            pets.remove(pets.get(index));
+            JOptionPane.showMessageDialog(null,
+                    "Se ha vendido la mascota por un precio de: "+selling,
+                    "Vendido",
+                    1);
+        }else if(option == 1) {//I put the else if cause with de only else: if the condition option == 0 wasnt true then else will execute
+            JOptionPane.showMessageDialog(null,
+                    "Se ha cancelado la venta",
+                    "Cancelado",
+                    1);
+        }
 
     }
 
