@@ -104,13 +104,13 @@ public class PetShop {
 
     public void fillDog(int AgeinMonth, String Procedence, String Color, String Race, String Coder) {
         boolean pass = true;
+        float Price = 0;
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Coder)) {
                 pass = false;
             }
         }
         if (pass == true) {
-            float Price = 0;
             if (AgeinMonth == 0) {
                 AgeinMonth = 1;
             }
@@ -332,6 +332,35 @@ public class PetShop {
         for (int i = 0; i < sortedArr.length; i++) {
             System.out.print(sortedArr[i] + " ");
         }
+    }
+    public  void createTXT(){
+        FileWriter fileWriter = null;
+        float saldo = 0;
+        for (int i = 0; i < pets.size(); i++) {
+            saldo += pets.get(i).getPrice();
+        }
+        FileWriter flwriter = null;
+        try {//además de la ruta del archivo recibe un parámetro de tipo boolean, que le indican que se va añadir más registros
+            flwriter = new FileWriter("C:\\PetShop\\saldo.txt", false);
+            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+                bfwriter.write(String.valueOf(saldo));
+            bfwriter.close();
+            System.out.println("Saldo modificado");
+
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (flwriter != null) {
+                try {
+                    flwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println("Saldo "+ saldo);
     }
 
     public void CreateDataBase() {

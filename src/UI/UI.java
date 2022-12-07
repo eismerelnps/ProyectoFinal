@@ -237,13 +237,8 @@ public class UI {
 
 
                         if (pass == true){
-                            // Saldo += Price;
                             float Price = 0;
-                            //  Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Code);
                             petShop.fillDog(AgeinMonth, Procedence, Color, Race, Code);
-                            //comboBox1.addItem(dog);
-                            Saldotext.setText(String.valueOf(Saldo));
-                            // petShop.checkCode(Code);
                         }
 
                     } catch (NumberFormatException exception) {
@@ -318,11 +313,7 @@ public class UI {
                         Color = catColor.getText();
                         EyesColor = catEyesColor.getText();
 
-                        //Saldo += Price;
-                        //Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
                         petShop.fillCat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
-                        //comboBox1.addItem(cat);
-                        Saldotext.setText(String.valueOf(Saldo));
                     }
 
                 } catch (NumberFormatException exception) {
@@ -435,7 +426,7 @@ public class UI {
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                petShop.createTXT();
             }
         });
         searchPriceButton.addActionListener(new ActionListener() {
@@ -578,8 +569,11 @@ public class UI {
             addPet.setBackground(Color.gray);
             addDog.setBackground(Color.DARK_GRAY);
             addCat.setBackground(Color.DARK_GRAY);
-            LineBorder lineBorder1 = new LineBorder(Color.BLUE, 1, true);
+            LineBorder lineBorder1 = new LineBorder(Color.WHITE, 1, true );
             inicioButton.setBorder(lineBorder1);
+            inicioButton.setBackground(Color.BLACK);
+            inicioButton.setForeground(Color.WHITE);
+
 
         }
         if (Mode == "LIGHT"){
