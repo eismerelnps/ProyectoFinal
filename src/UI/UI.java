@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
 import java.util.Random;
+import java.util.Scanner;
 
 import Control.*;
 
@@ -48,12 +50,11 @@ public class UI {
     private JButton eliminarButton;
     private JLabel Saldotext;
     private JPanel leftPanel;
-    private JComboBox comboBox1;
     private JPanel countrySearchJPanel;
     private JTextField countrySearchTextField;
     private JButton searchCountryButton;
     private JButton generarButton;
-    private JButton button1;
+    private JButton showArraybutton;
     private JButton button2;
     private JButton searchPriceButton;
     private JTextField searchPriceText;
@@ -63,7 +64,18 @@ public class UI {
     private JButton listadoAlfabeticoButton;
     private JRadioButton oscuroRadioButton;
     private JRadioButton claroRadioButton;
+    private JButton button3;
+    private JComboBox comboBox1;
+    private JComboBox comboBox2;
+    private JList list1;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JButton button4;
     private float Saldo = 0;
+    float h = 0;
+    float s = 0;
+    float b = 0;
 
     PetShop petShop = new PetShop();
 
@@ -79,6 +91,11 @@ public class UI {
         venderJPanel.setVisible(false);
         countrySearchJPanel.setVisible(false);
         searchPriceJPanel.setVisible(false);
+        readTXT();
+        countryList();
+
+
+        Saldotext.setText(String.valueOf(Saldo));
 
         agregarButton.addActionListener(new ActionListener() {
             @Override
@@ -86,12 +103,12 @@ public class UI {
                 KindOfPet.setVisible(true);
                 JOptionPane.showOptionDialog(null,
                         KindOfPet,
-                        "Agregar mascota",
+                        "",
                         JOptionPane.DEFAULT_OPTION,
                         -1,
                         null, new Object[]{},
                         null);
-                //cerrar JOptionPane
+
 
 
 
@@ -195,7 +212,7 @@ public class UI {
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "Por favor selecciona la raza primero",
-                            "Informacion",
+                            "",
                             1);
                     pass = false;
                 }
@@ -204,32 +221,32 @@ public class UI {
                             if (dogCode.getText().isEmpty()){
                                 JOptionPane.showMessageDialog(null,
                                         "Por favor introduzca el codigo primero",
-                                        "Informacion",
+                                        "",
                                         1);
                                 pass = false;
                             }else if (textFieldDogage.getText().isEmpty()){
                                 JOptionPane.showMessageDialog(null,
                                         "Por favor introduzca la edad primero",
-                                        "Informacion",
+                                        "",
                                         1);
                                 pass = false;
                                 //appling regular expresions to determinate if string contains numbers or any symbol different that characters
-                            }else if (textFieldDogcountry.getText().isEmpty() || !textFieldDogcountry.getText().matches("\\p{Alpha}+")) {
-                                JOptionPane.showMessageDialog(null,
-                                        "Por favor introduzca un país válido",
-                                        "Alerta",
-                                        2);
-                                pass = false;
                             }else if (textFieldDogColor.getText().isEmpty() || !textFieldDogColor.getText().matches("\\p{Alpha}+")) {
                                 JOptionPane.showMessageDialog(null,
                                         "Por favor introduzca un color válido",
-                                        "Alerta",
+                                        "",
+                                        1);
+                                pass = false;
+                            } else if (comboBox1.getSelectedIndex() == 0 ) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Por favor seleccione un país",
+                                        "",
                                         1);
                                 pass = false;
                             } else {
                                 Code = dogCode.getText();
                                 AgeinMonth = Integer.parseInt(textFieldDogage.getText());
-                                Procedence = textFieldDogcountry.getText();
+                                Procedence = String.valueOf(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
                                 Color = textFieldDogColor.getText();
                                 pass = true;
                             }
@@ -246,6 +263,7 @@ public class UI {
                     }
                 System.out.println(pass+Code+AgeinMonth+Procedence+Color+Race);
                 // "//d+" "\p{Alpha}+"
+                readTXT();
             }
         });
         agregarCatButton.addActionListener(new ActionListener() {
@@ -272,10 +290,10 @@ public class UI {
                                 "Alerta",
                                 1);
                         pass = false;
-                    } else if (catProcedence.getText().isEmpty() || !catProcedence.getText().matches("\\p{Alpha}+")) {
+                    } else if (comboBox2.getSelectedIndex() == 0 ) {
                         JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca un páis válido",
-                                "Alerta",
+                                "Por favor seleccione un país",
+                                "",
                                 1);
                         pass = false;
                     } else if (catColor.getText().isEmpty() || !catColor.getText().matches("\\p{Alpha}+")) {
@@ -309,7 +327,7 @@ public class UI {
                         if (AgeinMonth == 0){
                             AgeinMonth = 1;
                         }
-                        Procedence = catProcedence.getText();
+                        Procedence = String.valueOf(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
                         Color = catColor.getText();
                         EyesColor = catEyesColor.getText();
 
@@ -319,6 +337,7 @@ public class UI {
                 } catch (NumberFormatException exception) {
                     JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                 }
+                readTXT();
             }
         });
         priceSearchButton.addActionListener(new ActionListener() {
@@ -327,7 +346,7 @@ public class UI {
                 searchPriceJPanel.setVisible(true);
                 JOptionPane.showOptionDialog(null,
                         searchPriceJPanel,
-                        "Cantidad por país",
+                        "Saber precio",
                         -1,
                         3,
                         null, new Object[]{},
@@ -367,8 +386,16 @@ public class UI {
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String Code = sellCode.getText();
-                petShop.sellPet(Code);
+                if (sellCode.getText().isEmpty() == true){
+                    JOptionPane.showMessageDialog(null,
+                            "Por favor introduzca un código primero",
+                            "",
+                            0,
+                            null);
+                }else{
+                    String Code = sellCode.getText();
+                    petShop.sellPet(Code);
+                }
             }
         });
         searchCountryButton.addActionListener(new ActionListener() {
@@ -377,7 +404,7 @@ public class UI {
                 if (countrySearchTextField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null,
                             "Escriba el nombre de un país para poder buscar",
-                            "Alerta",
+                            "",
                             2);
                 } else
                     petShop.countrySearch(countrySearchTextField.getText());
@@ -386,26 +413,7 @@ public class UI {
         generarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int age = (int) (Math.random() * 13);
-                if (age == 0){
-                    age = 1;
-                }
-                if(perroRadioButton.isSelected() == true){
-                    textFieldDogcountry.setText(generCountry.randomgenerCountry().toString());
-                    textFieldDogColor.setText(generateColor.randomgenerateColor().toString());
-                    textFieldDogage.setText(String.valueOf(age));
-                    generateCode();
-                    generateRace();
-
-                }else if(gatoRadioButton.isSelected() == true){
-                    catProcedence.setText(generCountry.randomgenerCountry().toString());
-                    catColor.setText(generateColor.randomgenerateColor().toString());
-                   catAge.setText(String.valueOf(age));
-                   catEyesColor.setText(generateEyesColor.randomgenerateEyesColor().toString());
-                    generateCode();
-                    generateRace();
-
-                }
+                randomgenerate();
             }
 
         });
@@ -415,7 +423,7 @@ public class UI {
                 petShop.showPets();
             }
         });
-        button1.addActionListener(new ActionListener() {
+        showArraybutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 petShop.showPets();
@@ -427,14 +435,23 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 petShop.createTXT();
+
             }
         });
         searchPriceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                petShop.priceSearch(searchPriceText.getText());
-                JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(searchPriceJPanel));
-                dialog.dispose();
+                if (sellCode.getText().isEmpty() == true) {
+                    JOptionPane.showMessageDialog(null,
+                            "Por favor introduzca un código primero",
+                            "",
+                            0,
+                            null);
+                } else {
+                    petShop.priceSearch(searchPriceText.getText());
+                    JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(searchPriceJPanel));
+                    dialog.dispose();
+                }
             }
         });
         buscarMayorButton.addActionListener(new ActionListener() {
@@ -476,6 +493,55 @@ public class UI {
                 if (e.getKeyChar() == '\n'){
                     String Code = sellCode.getText();
                     petShop.sellPet(Code);
+                }
+            }
+        });
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                readTXT();
+                System.out.println(comboBox1.getSelectedIndex());
+                System.out.println(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
+            }
+        });
+
+        searchPriceText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyChar() == '\n'){
+                    String Code = sellCode.getText();
+                    petShop.priceSearch(searchPriceText.getText());
+                }
+            }
+        });
+        countrySearchTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyChar() == '\n'){
+                    String Code = sellCode.getText();
+                    petShop.countrySearch(countrySearchTextField.getText());
+                }
+            }
+        });
+        addDog.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyChar() == 'g'){
+                    String Code = sellCode.getText();
+                    randomgenerate();
+                }
+            }
+        });
+        addCat.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyChar() == 'g'){
+                    String Code = sellCode.getText();
+                    randomgenerate();
                 }
             }
         });
@@ -571,17 +637,86 @@ public class UI {
             addCat.setBackground(Color.DARK_GRAY);
             LineBorder lineBorder1 = new LineBorder(Color.WHITE, 1, true );
             inicioButton.setBorder(lineBorder1);
-            inicioButton.setBackground(Color.BLACK);
-            inicioButton.setForeground(Color.WHITE);
+            inicioButton.setForeground(Color.getHSBColor(48,79,254));
+            showArraybutton.setOpaque(true);
+            showArraybutton.setBackground(Color.getHSBColor(14,86,100));
+
 
 
         }
         if (Mode == "LIGHT"){
+            LineBorder lineBorder1 = new LineBorder(Color.BLUE, 1, true );
             MainPanel.setBackground(Color.LIGHT_GRAY);
             leftPanel.setBackground(Color.WHITE);
             addPet.setBackground(Color.WHITE);
             addDog.setBackground(Color.WHITE);
             addCat.setBackground(Color.WHITE);
+            inicioButton.setForeground(Color.getHSBColor(230, 81, 99));
+            inicioButton.setBorder(lineBorder1);
+            agregarButton.setBackground(Color.getHSBColor(230, 81, 99));
+            agregarButton.setBorderPainted(true);
+            agregarButton.setBorder(lineBorder1);
+            venderButton.setBackground(Color.getHSBColor(230, 81, 99));
+            venderButton.setBorderPainted(true);
+            venderButton.setBorder(lineBorder1);
+            priceSearchButton.setBackground(Color.getHSBColor(230, 81, 99));
+            countrySearchbutton.setBackground(Color.getHSBColor(230, 81, 99));
+            showArraybutton.setOpaque(true);
+            showArraybutton.setBackground(Color.getHSBColor(230,81,99));
         }
+    }
+    public void readTXT(){
+        BufferedReader bufferedReader = null;
+        File file = null;
+        String linea = null;
+        Scanner scanner;
+        try {
+            file = new File("C:\\PetShop\\saldo.txt");
+            //se pasa el flujo al objeto scanner
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                // el objeto scanner lee linea a linea desde el archivo
+                linea = scanner.nextLine();
+                Scanner delimitar = new Scanner(linea);
+                //se usa una expresión regular
+                //que valida que antes o despues de una coma (,) exista cualquier cosa
+                //parte la cadena recibida cada vez que encuentre una coma
+                delimitar.useDelimiter("\\s*,\\s*");
+                Saldotext.setText(delimitar.next());
+            }
+            //se cierra el ojeto scanner
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void randomgenerate() {
+        int age = (int) (Math.random() * 13);
+        int countries = (int) (Math.random() * 195);
+        if (age == 0){
+            age = 1;
+        }
+        if(perroRadioButton.isSelected() == true){
+            textFieldDogColor.setText(generateColor.randomgenerateColor().toString());
+            textFieldDogage.setText(String.valueOf(age));
+            generateCode();
+            generateRace();
+            comboBox1.setSelectedIndex(countries);
+
+        }else if(gatoRadioButton.isSelected() == true){
+            catColor.setText(generateColor.randomgenerateColor().toString());
+            catAge.setText(String.valueOf(age));
+            catEyesColor.setText(generateEyesColor.randomgenerateEyesColor().toString());
+            generateCode();
+            generateRace();
+            comboBox2.setSelectedIndex(countries);
+
+        }
+    }
+    public void countryList(){
+        String listado[] = {"Seleccione un país", "Afganistán","Albania","Alemania","Andorra","Angola","Antigua y Barbuda","Arabia Saudita","Argelia","Argentina","Armenia","Australia","Austria","Azerbaiyán","Bahamas","Bangladés","Barbados","Baréin","Bélgica","Belice","Benín","Bielorrusia","Birmania","Bolivia","Bosnia y Herzegovina","Botsuana","Brasil","Brunéi","Bulgaria","Burkina Faso","Burundi","Bután","Cabo Verde","Camboya","Camerún","Canadá","Catar","Chad","Chile","China","Chipre","Ciudad del Vaticano","Colombia","Comoras","Corea del Norte","Corea del Sur","Costa de Marfil","Costa Rica","Croacia","Cuba","Dinamarca","Dominica","Ecuador","Egipto","El Salvador","Emiratos Árabes Unidos","Eritrea","Eslovaquia","Eslovenia","España","Estados Unidos","Estonia","Etiopía","Filipinas","Finlandia","Fiyi","Francia","Gabón","Gambia","Georgia","Ghana","Granada","Grecia","Guatemala","Guyana","Guinea","Guinea ecuatorial","Guinea-Bisáu","Haití","Honduras","Hungría","India","Indonesia","Irak","Irán","Irlanda","Islandia","Islas Marshall","Islas Salomón","Israel","Italia","Jamaica","Japón","Jordania","Kazajistán","Kenia","Kirguistán","Kiribati","Kuwait","Laos","Lesoto","Letonia","Líbano","Liberia","Libia","Liechtenstein","Lituania","Luxemburgo","Madagascar","Malasia","Malaui","Maldivas","Malí","Malta","Marruecos","Mauricio","Mauritania","México","Micronesia","Moldavia","Mónaco","Mongolia","Montenegro","Mozambique","Namibia","Nauru","Nepal","Nicaragua","Níger","Nigeria","Noruega","Nueva Zelanda","Omán","Países Bajos","Pakistán","Palaos","Palestina","Panamá","Papúa Nueva Guinea","Paraguay","Perú","Polonia","Portugal","Reino Unido","República Centroafricana","República Checa","República de Macedonia","República del Congo","República Democrática del Congo","República Dominicana","República Sudafricana","Ruanda","Rumanía","Rusia","Samoa","San Cristóbal y Nieves","San Marino","San Vicente y las Granadinas","Santa Lucía","Santo Tomé y Príncipe","Senegal","Serbia","Seychelles","Sierra Leona","Singapur","Siria","Somalia","Sri Lanka","Suazilandia","Sudán","Sudán del Sur","Suecia","Suiza","Surinam","Tailandia","Tanzania","Tayikistán","Timor Oriental","Togo","Tonga","Trinidad y Tobago","Túnez","Turkmenistán","Turquía","Tuvalu","Ucrania","Uganda","Uruguay","Uzbekistán","Vanuatu","Venezuela","Vietnam","Yemen","Yibuti","Zambia","Zimbabue"};
+        comboBox1.setModel(new DefaultComboBoxModel(listado));
+       comboBox2.setModel(new DefaultComboBoxModel(listado));
     }
 }

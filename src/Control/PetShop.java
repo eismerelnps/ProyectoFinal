@@ -35,9 +35,22 @@ public class PetShop {
     }
 
     public void sellPet(String Code) {
+        int option = 0;
+        if (pets.size() == 0) {
+            option = JOptionPane.showConfirmDialog(null,
+                    "No hay ninguna mascota aún." +
+                            "¿Desea agregar una nueva?",
+                    "",
+                    0,
+                    1,
+                    null);
+        }
+        if (option == 0) {
+            System.out.println("Add pet");
+        }
         boolean pass = false;
         int index = 0;
-        int option = 2;// I started var option at 2 cause when I started it ar 0 the if of the sellin\canceling toke some value and got executed
+        int option1 = 2;// I started var option at 2 cause when I started it ar 0 the if of the sellin\canceling toke some value and got executed
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Code)) {
                 pass = true;
@@ -45,7 +58,7 @@ public class PetShop {
             }
         }
         if (pass == true) {
-            option = JOptionPane.showConfirmDialog(null,
+            option1 = JOptionPane.showConfirmDialog(null,
                     "¿Está seguro que decea vender la mascota?",
                     "Vender mascota",
                     0,
@@ -54,14 +67,14 @@ public class PetShop {
         } else {
             JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este código");
         }
-        if(option == 0){
+        if (option1 == 0) {
             float selling = pets.get(index).getPrice();
             pets.remove(pets.get(index));
             JOptionPane.showMessageDialog(null,
-                    "Se ha vendido la mascota por un precio de: "+selling,
+                    "Se ha vendido la mascota por un precio de: " + selling,
                     "Vendido",
                     1);
-        }else if(option == 1) {//I put the else if cause with de only else: if the condition option == 0 wasnt true then else will execute
+        } else if (option1 == 1) {//I put the else if cause with de only else: if the condition option == 0 wasnt true then else will execute
             JOptionPane.showMessageDialog(null,
                     "Se ha cancelado la venta",
                     "Cancelado",
@@ -100,6 +113,7 @@ public class PetShop {
                     "Alerta",
                     2);
         }
+        createTXT();
     }
 
     public void fillDog(int AgeinMonth, String Procedence, String Color, String Race, String Coder) {
@@ -137,6 +151,7 @@ public class PetShop {
                     "Alerta",
                     2);
         }
+        createTXT();
     }
 
 
@@ -207,82 +222,105 @@ public class PetShop {
     public void olderPet() {
         int age = 0;
         int index = 0;
-        for (int i = 0; i < pets.size(); i++) {
-            if (pets.get(i).getAgeinMonth() > age) {
-                age = pets.get(i).getAgeinMonth();
-                index = pets.indexOf(pets.get(i));
-            }
+        if (pets.size() == 0) {
+            JOptionPane.showMessageDialog(null,
+                    "No hay ninguna mascota aún",
+                    "",
+                    1);
         }
-        JOptionPane.showMessageDialog(null,
-                pets.get(index).toString(),
-                "Mascota de mayor edad",
-                1);
+        if (pets.size() > 0) {
+            for (int i = 0; i < pets.size(); i++) {
+                if (pets.get(i).getAgeinMonth() > age) {
+                    age = pets.get(i).getAgeinMonth();
+                    index = pets.indexOf(pets.get(i));
+                }
+            }
+            JOptionPane.showMessageDialog(null,
+                    pets.get(index).toString(),
+                    "Mascota de mayor edad",
+                    1);
+        }
+
+
     }
 
     public void lessPredominantColor() {
-        ///
-        int count = 0;
-        String[] array = new String[pets.size()];
-        for (int i = 0; i < pets.size(); i++) {
-            array[i] = pets.get(i).getColor();
-        }
-        //buscar el color menos repetido hashmap
-        //crear un hashmap
-        HashMap<String, Integer> map = new HashMap<>();
-        //recorrer el array
-        for (int i = 0; i < array.length; i++) {
-            //si el color no esta en el hashmap
-            if (!map.containsKey(array[i])) {
-                //añadirlo al hashmap
-                map.put(array[i], 1);
-            } else {
-                //si esta en el hashmap
-                //sumarle 1
-                map.put(array[i], map.get(array[i]) + 1);
+        boolean pass;
+        if (pets.size() == 0) {
+            pass = false;
+        } else
+            pass = true;
+        if (pass == false) {
+            JOptionPane.showMessageDialog(null,
+                    "No hay ninguna mascota aún",
+                    "",
+                    1);
+        } else {
+            int count = 0;
+            String[] array = new String[pets.size()];
+            for (int i = 0; i < pets.size(); i++) {
+                array[i] = pets.get(i).getColor();
             }
-        }
-        //recorrer el hashmap
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.print(entry.getKey() + " " + entry.getValue() + ",");
-        }
-        //buscar el color menos repetido
-        String colorMenosRepetido = "";
-        int numeroVeces = 1000;
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            //si el numero de veces que se repite es menor que el numero de veces que se repite el color menos repetido
-            if (entry.getValue() < numeroVeces) {
-                //guardar el color menos repetido
-                colorMenosRepetido = entry.getKey();
-                //guardar el numero de veces que se repite
-                numeroVeces = entry.getValue();
+            //buscar el color menos repetido hashmap
+            //crear un hashmap
+            HashMap<String, Integer> map = new HashMap<>();
+            //recorrer el array
+            for (int i = 0; i < array.length; i++) {
+                //si el color no esta en el hashmap
+                if (!map.containsKey(array[i])) {
+                    //añadirlo al hashmap
+                    map.put(array[i], 1);
+                } else {
+                    //si esta en el hashmap
+                    //sumarle 1
+                    map.put(array[i], map.get(array[i]) + 1);
+                }
             }
+            //recorrer el hashmap
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                System.out.print(entry.getKey() + " " + entry.getValue() + ",");
+            }
+            //buscar el color menos repetido
+            String colorMenosRepetido = "";
+            int numeroVeces = 1000;
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                //si el numero de veces que se repite es menor que el numero de veces que se repite el color menos repetido
+                if (entry.getValue() < numeroVeces) {
+                    //guardar el color menos repetido
+                    colorMenosRepetido = entry.getKey();
+                    //guardar el numero de veces que se repite
+                    numeroVeces = entry.getValue();
+                }
+            }
+
+            //guardar en un array todos los color que se repiten = numeroVeces
+            String[] colores = new String[map.size()];
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                if (entry.getValue() == numeroVeces) {
+                    colores[count] = entry.getKey();
+                    count++;
+                }
+
+            }
+            // mostrar un showOptionDialog con el array limpio de nulls
+            String[] coloresLimpio = new String[count];
+            for (int i = 0; i < coloresLimpio.length; i++) {
+                if (colores[i] != null) {
+                    coloresLimpio[i] = colores[i];
+                }
+            }
+            int option = JOptionPane.showOptionDialog(null,
+                    "El color menos repetido es: ",
+                    "Color menos repetido",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    coloresLimpio,
+                    coloresLimpio[0]);
         }
 
-        //guardar en un array todos los color que se repiten = numeroVeces
-        String[] colores = new String[map.size()];
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if (entry.getValue() == numeroVeces) {
-                colores[count] = entry.getKey();
-                count++;
-            }
-
-        }
-        // mostrar un showOptionDialog con el array limpio de nulls
-        String[] coloresLimpio = new String[count];
-        for (int i = 0; i < coloresLimpio.length; i++) {
-            if (colores[i] != null) {
-                coloresLimpio[i] = colores[i];
-            }
-        }
-        int option = JOptionPane.showOptionDialog(null,
-                "El color menos repetido es: ",
-                "Color menos repetido",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                coloresLimpio,
-                coloresLimpio[0]);
     }
+
 
 
     public void alfaOrder() {
@@ -326,11 +364,18 @@ public class PetShop {
         String[] arrToSort = new String[pets.size()];
         for (int i = 0; i < pets.size(); i++) {
             arrToSort[i] = pets.get(i).getProcedence();
-            System.out.println(arrToSort[i]);
         }
         String[] sortedArr = stringArraySort(arrToSort);
-        for (int i = 0; i < sortedArr.length; i++) {
-            System.out.print(sortedArr[i] + " ");
+        if (sortedArr.length == 0){
+            JOptionPane.showMessageDialog(null,
+                    "Por favor añada una nueva mascota",
+                    "No hay ningún país aún",
+                    1);
+        } else{
+            JOptionPane.showMessageDialog(null,
+                    sortedArr,
+                    "Listado alfabético: ",
+                    2);
         }
     }
     public  void createTXT(){

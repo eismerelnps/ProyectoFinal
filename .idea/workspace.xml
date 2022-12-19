@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="Fixed:&#10;working on light/dark theme">
+    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="Fixed:&#10;working on light/dark theme&#10;writing and reading txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Control/PetShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Control/PetShop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/UI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,19 +24,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Control.Main" />
@@ -69,7 +70,17 @@
       <workItem from="1670052651544" duration="12500000" />
       <workItem from="1670117013741" duration="4111000" />
       <workItem from="1670183111195" duration="7991000" />
-      <workItem from="1670212832218" duration="20538000" />
+      <workItem from="1670212832218" duration="20722000" />
+      <workItem from="1670399546313" duration="3152000" />
+      <workItem from="1670454448710" duration="2051000" />
+      <workItem from="1670536372341" duration="3592000" />
+      <workItem from="1670561129931" duration="9224000" />
+      <workItem from="1670788704305" duration="1196000" />
+      <workItem from="1671147294131" duration="4642000" />
+      <workItem from="1671226152408" duration="2329000" />
+      <workItem from="1671254214034" duration="1058000" />
+      <workItem from="1671338418988" duration="343000" />
+      <workItem from="1671424394897" duration="8154000" />
     </task>
     <task id="LOCAL-00001" summary="3">
       <created>1670045988627</created>
@@ -148,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670323914603</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Fixed:&#10;working on light/dark theme&#10;writing and reading txt">
+      <created>1670392127527</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1670392127527</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +193,7 @@
     <MESSAGE value="Fixed:&#10;when I'm tryining add new dog and I let some empty, the program wont add this dog" />
     <MESSAGE value="Fixed:&#10;all bugs that can happend whe I try add a new pet such as do as cats" />
     <MESSAGE value="Fixed:&#10;working on light/dark theme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed:&#10;working on light/dark theme" />
+    <MESSAGE value="Fixed:&#10;working on light/dark theme&#10;writing and reading txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed:&#10;working on light/dark theme&#10;writing and reading txt" />
   </component>
 </project>
