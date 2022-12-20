@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="Fixed:&#10;working on light/dark theme&#10;writing and reading txt">
+    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;src/Control/PetShop.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Control/PetShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Control/PetShop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pets/Cat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pets/Cat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
     </list>
@@ -24,19 +25,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Control.Main" />
@@ -80,7 +83,8 @@
       <workItem from="1671226152408" duration="2329000" />
       <workItem from="1671254214034" duration="1058000" />
       <workItem from="1671338418988" duration="343000" />
-      <workItem from="1671424394897" duration="8154000" />
+      <workItem from="1671424394897" duration="8564000" />
+      <workItem from="1671500476522" duration="13760000" />
     </task>
     <task id="LOCAL-00001" summary="3">
       <created>1670045988627</created>
@@ -166,7 +170,21 @@
       <option name="project" value="LOCAL" />
       <updated>1670392127527</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed:&#10;working on light/dark theme&#10;writing and reading txt&#10;edited option of setting the procedence now it can only be set with a combobox">
+      <created>1671493656189</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1671493656189</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;src/Control/PetShop.java">
+      <created>1671493751187</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1671493751187</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +212,8 @@
     <MESSAGE value="Fixed:&#10;all bugs that can happend whe I try add a new pet such as do as cats" />
     <MESSAGE value="Fixed:&#10;working on light/dark theme" />
     <MESSAGE value="Fixed:&#10;working on light/dark theme&#10;writing and reading txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed:&#10;working on light/dark theme&#10;writing and reading txt" />
+    <MESSAGE value="Fixed:&#10;working on light/dark theme&#10;writing and reading txt&#10;edited option of setting the procedence now it can only be set with a combobox" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;src/Control/PetShop.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;src/Control/PetShop.java" />
   </component>
 </project>

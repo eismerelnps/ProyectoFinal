@@ -19,16 +19,15 @@ public class UI {
     private JButton agregarButton;
     private JButton venderButton;
     private JPanel addPet;
-    private JRadioButton perroRadioButton;
-    private JRadioButton gatoRadioButton;
+    private JRadioButton dogRadioButton;
+    private JRadioButton catRadioButton;
     private JPanel KindOfPet;
-    private JTextField textFieldDogage;
-    private JTextField textFieldDogcountry;
+    private JTextField ageTextField;
     private JTextField textFieldDogColor;
     private JRadioButton bulldogRadioButton;
     private JRadioButton dalmataRadioButton;
     private JRadioButton chowChowRadioButton;
-    private JButton agregarDogButton;
+    private JButton addPetButton;
     private JPanel SelectPet;
     JPanel addDog;
     private JButton siguienteButton;
@@ -43,11 +42,11 @@ public class UI {
     private JTextField catProcedence;
     private JTextField catColor;
     private JButton countrySearchbutton;
-    private JTextField dogCode;
+    private JTextField codeTextField;
     private JTextField catCode;
     private JPanel venderJPanel;
     private JTextField sellCode;
-    private JButton eliminarButton;
+    private JButton sellButton;
     private JLabel Saldotext;
     private JPanel leftPanel;
     private JPanel countrySearchJPanel;
@@ -65,8 +64,25 @@ public class UI {
     private JRadioButton oscuroRadioButton;
     private JRadioButton claroRadioButton;
     private JButton button3;
-    private JComboBox comboBox1;
+    private JComboBox procedenceComboBox;
     private JComboBox comboBox2;
+    private JComboBox ColorComboBox;
+    private JComboBox EyesColorComboBox;
+    private JPanel raceJPanel;
+    private JLabel saldoText;
+    private JLabel USD;
+    private JLabel text1;
+    private JLabel codeText;
+    private JLabel ageText;
+    private JLabel countryText;
+    private JLabel colorText;
+    private JLabel raceText;
+    private JLabel eyescolorText;
+    private JLabel sexText;
+    private JLabel perdigreeText;
+    private JLabel text2;
+    private JLabel text3;
+    private JLabel text4;
     private JList list1;
     private JTextField textField1;
     private JTextField textField2;
@@ -101,6 +117,9 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 KindOfPet.setVisible(true);
+                UIManager UI=new UIManager();
+                UI.put("OptionPane.background",new Color(60,63,65));
+                UI.put("Panel.background",new Color(60,63,65));
                 JOptionPane.showOptionDialog(null,
                         KindOfPet,
                         "",
@@ -114,16 +133,16 @@ public class UI {
 
             }
         });
-        perroRadioButton.addActionListener(new ActionListener() {
+        dogRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gatoRadioButton.setSelected(false);
+                catRadioButton.setSelected(false);
             }
         });
-        gatoRadioButton.addActionListener(new ActionListener() {
+        catRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                perroRadioButton.setSelected(false);
+                dogRadioButton.setSelected(false);
             }
         });
         bulldogRadioButton.addActionListener(new ActionListener() {
@@ -171,18 +190,20 @@ public class UI {
         siguienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (perroRadioButton.isSelected() == true) {
+                if (dogRadioButton.isSelected() == true) {
                     addDog.setVisible(true);
+                    raceJPanel.setVisible(true);
                     addCat.setVisible(false);
                     JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(KindOfPet));
                     dialog.dispose();
 
-                } else if (gatoRadioButton.isSelected() == true) {
-                    addDog.setVisible(false);
+                } else if (catRadioButton.isSelected() == true) {
+                    addDog.setVisible(true);
                     addCat.setVisible(true);
+                    raceJPanel.setVisible(false);
                     JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(KindOfPet));
                     dialog.dispose();
-                } else if (perroRadioButton.isSelected() == false || gatoRadioButton.isSelected() == false) {
+                } else if (dogRadioButton.isSelected() == false || catRadioButton.isSelected() == false) {
                     JOptionPane.showMessageDialog(null,
                             "Por favor selecciona el tipo de mascota primero",
                             "Alerta",
@@ -191,65 +212,137 @@ public class UI {
 
             }
         });
-        agregarDogButton.addActionListener(new ActionListener() {
+        addPetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String Color = null;
-                String Race = null;
-                String Code = null;
-                String Procedence = null;
-                int AgeinMonth = 0;
-                boolean pass = true;
-                if (bulldogRadioButton.isSelected() == true) {
-                    Race = bulldogRadioButton.getText();
-                    pass = true;
-                } else if (dalmataRadioButton.isSelected() == true) {
-                    Race = "Dalmata";
-                    pass = true;
-                } else if (chowChowRadioButton.isSelected() == true) {
-                    Race = "Chow-Chow";
-                    pass = true;
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Por favor selecciona la raza primero",
-                            "",
-                            1);
-                    pass = false;
-                }
+                if (catRadioButton.isSelected() == true){
+                    int AgeinMonth = 0;
+                    String Code = null;
+                    String Procedence = null;
+                    String Color = null;
+                    boolean pass = false;
+                    String EyesColor = null;
+                    String Sex =  null;
+                    boolean Perdigree = false;
+                    try {
+                        if (codeTextField.getText().isEmpty()){
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca el código primero",
+                                    "Alerta",
+                                    1);
+                            pass = false;
+                        }else if (ageTextField.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca la edad primero",
+                                    "Alerta",
+                                    1);
+                            pass = false;
+                        } else if (procedenceComboBox.getSelectedIndex() == 0 ) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor seleccione un país",
+                                    "",
+                                    1);
+                            pass = false;
+                        } else if (ColorComboBox.getSelectedIndex() == 0) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor seleccione un color",
+                                    "",
+                                    1);
+                            pass = false;
+                        } else if (EyesColorComboBox.getSelectedIndex() == 0) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor seleccione color de ojos",
+                                    "",
+                                    1);
+                        }else if (hembraRadioButton.isSelected() == false && machoRadioButton.isSelected() == false){
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor selecciona el sexo del gato",
+                                    "Alerta",
+                                    1);
+                        }else {
+                            if (hembraRadioButton.isSelected() == true) {
+                                Sex = "Hembra";
+                            } else Sex = "Macho";
+                            Perdigree = noCheckBox.isSelected();
+                            pass = true;
+                        }
 
-                try {
-                            if (dogCode.getText().isEmpty()){
-                                JOptionPane.showMessageDialog(null,
-                                        "Por favor introduzca el codigo primero",
-                                        "",
-                                        1);
-                                pass = false;
-                            }else if (textFieldDogage.getText().isEmpty()){
-                                JOptionPane.showMessageDialog(null,
-                                        "Por favor introduzca la edad primero",
-                                        "",
-                                        1);
-                                pass = false;
-                                //appling regular expresions to determinate if string contains numbers or any symbol different that characters
-                            }else if (textFieldDogColor.getText().isEmpty() || !textFieldDogColor.getText().matches("\\p{Alpha}+")) {
-                                JOptionPane.showMessageDialog(null,
-                                        "Por favor introduzca un color válido",
-                                        "",
-                                        1);
-                                pass = false;
-                            } else if (comboBox1.getSelectedIndex() == 0 ) {
-                                JOptionPane.showMessageDialog(null,
-                                        "Por favor seleccione un país",
-                                        "",
-                                        1);
-                                pass = false;
-                            } else {
-                                Code = dogCode.getText();
-                                AgeinMonth = Integer.parseInt(textFieldDogage.getText());
-                                Procedence = String.valueOf(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
-                                Color = textFieldDogColor.getText();
-                                pass = true;
+
+                        if(pass == true){
+                            Code = codeTextField.getText();
+                            AgeinMonth = Integer.parseInt(ageTextField.getText());
+                            if (AgeinMonth == 0){
+                                AgeinMonth = 1;
                             }
+                            Procedence = String.valueOf(procedenceComboBox.getItemAt(procedenceComboBox.getSelectedIndex()));
+                            Color = String.valueOf(ColorComboBox.getItemAt(procedenceComboBox.getSelectedIndex()));
+                            EyesColor = String.valueOf(EyesColorComboBox.getItemAt(EyesColorComboBox.getSelectedIndex()));
+
+                            petShop.fillCat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
+                        }
+
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
+                    }
+                    readTXT();
+                }
+                if (dogRadioButton.isSelected() == true){
+                    String Color = null;
+                    String Race = null;
+                    String Code = null;
+                    String Procedence = null;
+                    int AgeinMonth = 0;
+                    boolean pass = true;
+                    if (bulldogRadioButton.isSelected() == true) {
+                        Race = bulldogRadioButton.getText();
+                        pass = true;
+                    } else if (dalmataRadioButton.isSelected() == true) {
+                        Race = "Dalmata";
+                        pass = true;
+                    } else if (chowChowRadioButton.isSelected() == true) {
+                        Race = "Chow-Chow";
+                        pass = true;
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "Por favor selecciona la raza primero",
+                                "",
+                                1);
+                        pass = false;
+                    }
+
+                    try {
+                        if (codeTextField.getText().isEmpty()){
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca el codigo primero",
+                                    "",
+                                    1);
+                            pass = false;
+                        }else if (ageTextField.getText().isEmpty()){
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca la edad primero",
+                                    "",
+                                    1);
+                            pass = false;
+                            //appling regular expresions to determinate if string contains numbers or any symbol different that characters
+                        }else if (ColorComboBox.getSelectedIndex() == 0) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor seleccione un color",
+                                    "",
+                                    1);
+                            pass = false;
+                        } else if (procedenceComboBox.getSelectedIndex() == 0 ) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor seleccione un país",
+                                    "",
+                                    1);
+                            pass = false;
+                        } else {
+                            Code = codeTextField.getText();
+                            AgeinMonth = Integer.parseInt(ageTextField.getText());
+                            Procedence = String.valueOf(procedenceComboBox.getItemAt(procedenceComboBox.getSelectedIndex()));
+                            Color = String.valueOf(ColorComboBox.getItemAt(ColorComboBox.getSelectedIndex()));
+                            pass = true;
+                        }
 
 
 
@@ -261,83 +354,10 @@ public class UI {
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                     }
-                System.out.println(pass+Code+AgeinMonth+Procedence+Color+Race);
-                // "//d+" "\p{Alpha}+"
-                readTXT();
-            }
-        });
-        agregarCatButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int AgeinMonth = 0;
-                String Code = null;
-                String Procedence = null;
-                String Color = null;
-                boolean pass = false;
-                String EyesColor = null;
-                String Sex =  null;
-                boolean Perdigree = false;
-                try {
-                    if (catCode.getText().isEmpty()){
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca el código primero",
-                                "Alerta",
-                                1);
-                        pass = false;
-                    }else if (catAge.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca la edad primero",
-                                "Alerta",
-                                1);
-                        pass = false;
-                    } else if (comboBox2.getSelectedIndex() == 0 ) {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor seleccione un país",
-                                "",
-                                1);
-                        pass = false;
-                    } else if (catColor.getText().isEmpty() || !catColor.getText().matches("\\p{Alpha}+")) {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca un color válido",
-                                "Alerta",
-                                1);
-                        pass = false;
-                    } else if (catEyesColor.getText().isEmpty() || !catEyesColor.getText().matches("\\p{Alpha}+")) {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor introduzca un color de ojos válido",
-                                "Alerta",
-                                1);
-                    }else if (hembraRadioButton.isSelected() == false && machoRadioButton.isSelected() == false){
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor selecciona el sexo del gato",
-                                "Alerta",
-                                1);
-                    }else {
-                        if (hembraRadioButton.isSelected() == true) {
-                            Sex = "Hembra";
-                        } else Sex = "Macho";
-                        Perdigree = noCheckBox.isSelected();
-                        pass = true;
-                    }
-
-
-                    if(pass == true){
-                        Code = catCode.getText();
-                        AgeinMonth = Integer.parseInt(catAge.getText());
-                        if (AgeinMonth == 0){
-                            AgeinMonth = 1;
-                        }
-                        Procedence = String.valueOf(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
-                        Color = catColor.getText();
-                        EyesColor = catEyesColor.getText();
-
-                        petShop.fillCat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
-                    }
-
-                } catch (NumberFormatException exception) {
-                    JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
+                    System.out.println(pass+Code+AgeinMonth+Procedence+Color+Race);
+                    readTXT();
                 }
-                readTXT();
+
             }
         });
         priceSearchButton.addActionListener(new ActionListener() {
@@ -383,7 +403,7 @@ public class UI {
 
             }
         });
-        eliminarButton.addActionListener(new ActionListener() {
+        sellButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (sellCode.getText().isEmpty() == true){
@@ -500,8 +520,11 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 readTXT();
-                System.out.println(comboBox1.getSelectedIndex());
-                System.out.println(comboBox1.getItemAt(comboBox1.getSelectedIndex()));
+                UIManager UI=new UIManager();
+                UI.put("OptionPane.background",new Color(255,0,0));
+                UI.put("Panel.background",new Color(255,0,0));
+                JOptionPane.showMessageDialog(null,"Text","SetColor",JOptionPane.INFORMATION_MESSAGE);
+
             }
         });
 
@@ -591,13 +614,12 @@ public class UI {
         for (int i = 0; i < 6; i++) {
             n = n.concat(String.valueOf((int) (Math.random() * 12)));
         }
-        dogCode.setText(n);
-        catCode.setText(n);
+        codeTextField.setText(n);
     }//generar un codigo random
     public void generateRace(){
         int Option;
        Option = (int) (Math.random() * 3);
-       if (perroRadioButton.isSelected() == true){
+       if (dogRadioButton.isSelected() == true){
            if (Option == 0){
                bulldogRadioButton.setSelected(true);
                dalmataRadioButton.setSelected(false);
@@ -612,7 +634,7 @@ public class UI {
                chowChowRadioButton.setSelected(true);
            }
        }
-       if (gatoRadioButton.isSelected() == true){
+       if (catRadioButton.isSelected() == true){
            if (Option == 0){
                hembraRadioButton.setSelected(true);
                machoRadioButton.setSelected(false);
@@ -629,23 +651,133 @@ public class UI {
        }
     }
     public void Mode(String Mode){
+        Color pBlue = new Color(48,79,254);
+        Color dark = new Color(60,63,65);
+        Color lightBlack = new Color(39,42,44);
+        Color white = new Color(255, 255, 255);
+
         if(Mode == "DARK"){
-            MainPanel.setBackground(Color.LIGHT_GRAY);
-            leftPanel.setBackground(Color.DARK_GRAY);
-            addPet.setBackground(Color.gray);
-            addDog.setBackground(Color.DARK_GRAY);
-            addCat.setBackground(Color.DARK_GRAY);
-            LineBorder lineBorder1 = new LineBorder(Color.WHITE, 1, true );
-            inicioButton.setBorder(lineBorder1);
-            inicioButton.setForeground(Color.getHSBColor(48,79,254));
-            showArraybutton.setOpaque(true);
-            showArraybutton.setBackground(Color.getHSBColor(14,86,100));
+            MainPanel.setBackground(dark);
+            leftPanel.setBackground(dark);
+            addPet.setBackground(dark);
+            addDog.setBackground(dark);
+            addCat.setBackground(dark);
+            raceJPanel.setBackground(dark);
+            hembraRadioButton.setBackground(dark);
+            machoRadioButton.setBackground(dark);
+            chowChowRadioButton.setBackground(dark);
+            dalmataRadioButton.setBackground(dark);
+            bulldogRadioButton.setBackground(dark);
+            oscuroRadioButton.setBackground(dark);
+            claroRadioButton.setBackground(dark);
+            KindOfPet.setBackground(dark);
+            venderJPanel.setBackground(dark);
+            searchPriceJPanel.setBackground(dark);
+            countrySearchJPanel.setBackground(dark);
+            dogRadioButton.setBackground(dark);
+            catRadioButton.setBackground(dark);
+
+
+            //all backgrounds
+            inicioButton.setBackground(lightBlack);
+            agregarButton.setBackground(lightBlack);
+            venderButton.setBackground(lightBlack);
+            priceSearchButton.setBackground(lightBlack);
+            countrySearchbutton.setBackground(lightBlack);
+            buscarMayorButton.setBackground(lightBlack);
+            showArraybutton.setBackground(lightBlack);
+            colorMenosPredominanteButton.setBackground(lightBlack);
+            listadoAlfabeticoButton.setBackground(lightBlack);
+            sellButton.setBackground(lightBlack);
+            searchPriceButton.setBackground(lightBlack);
+            searchCountryButton.setBackground(lightBlack);
+
+
+            siguienteButton.setBackground(lightBlack);
+            generarButton.setBackground(lightBlack);
+            addPetButton.setBackground(lightBlack);
+            codeTextField.setBackground(lightBlack);
+            procedenceComboBox.setBackground(lightBlack);
+            ageTextField.setBackground(lightBlack);
+            ColorComboBox.setBackground(lightBlack);
+            EyesColorComboBox.setBackground(lightBlack);
+            noCheckBox.setBackground(lightBlack);
+            sellCode.setBackground(lightBlack);
+            searchPriceText.setBackground(lightBlack);
+            countrySearchTextField.setBackground(lightBlack);
+
+
+
+
+
+            //all buttons
+            inicioButton.setForeground(white);
+            agregarButton.setForeground(white);
+            venderButton.setForeground(white);
+            priceSearchButton.setForeground(white);
+            countrySearchbutton.setForeground(white);
+            buscarMayorButton.setForeground(white);
+            showArraybutton.setForeground(white);
+            colorMenosPredominanteButton.setForeground(white);
+            listadoAlfabeticoButton.setForeground(white);
+            generarButton.setForeground(white);
+            addPetButton.setForeground(white);
+            saldoText.setForeground(white);
+            Saldotext.setForeground(white);
+            USD.setForeground(white);
+            text1.setForeground(white);
+            text2.setForeground(white);
+            text3.setForeground(white);
+            text4.setForeground(white);
+            codeText.setForeground(white);
+            ageText.setForeground(white);
+            countryText.setForeground(white);
+            colorText.setForeground(white);
+            raceText.setForeground(white);
+            eyescolorText.setForeground(white);
+            perdigreeText.setForeground(white);
+            sexText.setForeground(white);
+            dogRadioButton.setForeground(white);
+            catRadioButton.setForeground(white);
+            siguienteButton.setForeground(white);
+            hembraRadioButton.setForeground(white);
+            machoRadioButton.setForeground(white);
+            chowChowRadioButton.setForeground(white);
+            dalmataRadioButton.setForeground(white);
+            bulldogRadioButton.setForeground(white);
+            codeTextField.setForeground(white);
+            ageTextField.setForeground(white);
+            procedenceComboBox.setForeground(white);
+            ColorComboBox.setForeground(white);
+            EyesColorComboBox.setForeground(white);
+            noCheckBox.setForeground(white);
+            oscuroRadioButton.setForeground(white);
+            claroRadioButton.setForeground(white);
+
+            sellCode.setForeground(white);
+            searchPriceText.setForeground(white);
+            countrySearchTextField.setForeground(white);
+            sellButton.setForeground(white);
+            searchPriceButton.setForeground(white);
+            searchCountryButton.setForeground(white);
+
 
 
 
         }
         if (Mode == "LIGHT"){
             LineBorder lineBorder1 = new LineBorder(Color.BLUE, 1, true );
+
+            inicioButton.setForeground(pBlue);
+            agregarButton.setForeground(pBlue);
+            venderButton.setForeground(pBlue);
+            priceSearchButton.setForeground(pBlue);
+            countrySearchbutton.setForeground(pBlue);
+            buscarMayorButton.setForeground(pBlue);
+            showArraybutton.setForeground(pBlue);
+            colorMenosPredominanteButton.setForeground(pBlue);
+            listadoAlfabeticoButton.setForeground(pBlue);
+
             MainPanel.setBackground(Color.LIGHT_GRAY);
             leftPanel.setBackground(Color.WHITE);
             addPet.setBackground(Color.WHITE);
@@ -693,30 +825,34 @@ public class UI {
 
     public void randomgenerate() {
         int age = (int) (Math.random() * 13);
-        int countries = (int) (Math.random() * 195);
+        int countries = (int) (Math.random() * 194);
+        int colors = (int) (Math.random() * 6);
+        int eyesColor = (int) (Math.random() * 5);
         if (age == 0){
             age = 1;
         }
-        if(perroRadioButton.isSelected() == true){
-            textFieldDogColor.setText(generateColor.randomgenerateColor().toString());
-            textFieldDogage.setText(String.valueOf(age));
+        if(dogRadioButton.isSelected() == true){
+            ageTextField.setText(String.valueOf(age));
             generateCode();
             generateRace();
-            comboBox1.setSelectedIndex(countries);
+            procedenceComboBox.setSelectedIndex(countries + 1);
+            ColorComboBox.setSelectedIndex(colors + 1);
 
-        }else if(gatoRadioButton.isSelected() == true){
-            catColor.setText(generateColor.randomgenerateColor().toString());
-            catAge.setText(String.valueOf(age));
-            catEyesColor.setText(generateEyesColor.randomgenerateEyesColor().toString());
+        }else if(catRadioButton.isSelected() == true){
+            procedenceComboBox.setSelectedIndex(countries + 1);
+            ColorComboBox.setSelectedIndex(colors + 1);
+            ageTextField.setText(String.valueOf(age));
+            EyesColorComboBox.setSelectedIndex(eyesColor + 1);
             generateCode();
             generateRace();
-            comboBox2.setSelectedIndex(countries);
-
         }
     }
     public void countryList(){
         String listado[] = {"Seleccione un país", "Afganistán","Albania","Alemania","Andorra","Angola","Antigua y Barbuda","Arabia Saudita","Argelia","Argentina","Armenia","Australia","Austria","Azerbaiyán","Bahamas","Bangladés","Barbados","Baréin","Bélgica","Belice","Benín","Bielorrusia","Birmania","Bolivia","Bosnia y Herzegovina","Botsuana","Brasil","Brunéi","Bulgaria","Burkina Faso","Burundi","Bután","Cabo Verde","Camboya","Camerún","Canadá","Catar","Chad","Chile","China","Chipre","Ciudad del Vaticano","Colombia","Comoras","Corea del Norte","Corea del Sur","Costa de Marfil","Costa Rica","Croacia","Cuba","Dinamarca","Dominica","Ecuador","Egipto","El Salvador","Emiratos Árabes Unidos","Eritrea","Eslovaquia","Eslovenia","España","Estados Unidos","Estonia","Etiopía","Filipinas","Finlandia","Fiyi","Francia","Gabón","Gambia","Georgia","Ghana","Granada","Grecia","Guatemala","Guyana","Guinea","Guinea ecuatorial","Guinea-Bisáu","Haití","Honduras","Hungría","India","Indonesia","Irak","Irán","Irlanda","Islandia","Islas Marshall","Islas Salomón","Israel","Italia","Jamaica","Japón","Jordania","Kazajistán","Kenia","Kirguistán","Kiribati","Kuwait","Laos","Lesoto","Letonia","Líbano","Liberia","Libia","Liechtenstein","Lituania","Luxemburgo","Madagascar","Malasia","Malaui","Maldivas","Malí","Malta","Marruecos","Mauricio","Mauritania","México","Micronesia","Moldavia","Mónaco","Mongolia","Montenegro","Mozambique","Namibia","Nauru","Nepal","Nicaragua","Níger","Nigeria","Noruega","Nueva Zelanda","Omán","Países Bajos","Pakistán","Palaos","Palestina","Panamá","Papúa Nueva Guinea","Paraguay","Perú","Polonia","Portugal","Reino Unido","República Centroafricana","República Checa","República de Macedonia","República del Congo","República Democrática del Congo","República Dominicana","República Sudafricana","Ruanda","Rumanía","Rusia","Samoa","San Cristóbal y Nieves","San Marino","San Vicente y las Granadinas","Santa Lucía","Santo Tomé y Príncipe","Senegal","Serbia","Seychelles","Sierra Leona","Singapur","Siria","Somalia","Sri Lanka","Suazilandia","Sudán","Sudán del Sur","Suecia","Suiza","Surinam","Tailandia","Tanzania","Tayikistán","Timor Oriental","Togo","Tonga","Trinidad y Tobago","Túnez","Turkmenistán","Turquía","Tuvalu","Ucrania","Uganda","Uruguay","Uzbekistán","Vanuatu","Venezuela","Vietnam","Yemen","Yibuti","Zambia","Zimbabue"};
-        comboBox1.setModel(new DefaultComboBoxModel(listado));
-       comboBox2.setModel(new DefaultComboBoxModel(listado));
+        String EyesColor[] = {"Seleccione un color", "Verde", "Negro", "Amarillo", "Marron", "Gris", "Oro", "Bicolor"};
+        String Color[] = {"Seleccione un color", "Blanco", "Negro", "Amarillo","Marron", "Gris", "Oro"};
+        procedenceComboBox.setModel(new DefaultComboBoxModel(listado));
+        ColorComboBox.setModel(new DefaultComboBoxModel(Color));
+        EyesColorComboBox.setModel(new DefaultComboBoxModel(EyesColor));
     }
 }

@@ -31,6 +31,7 @@ public class Cat extends Pet {
                 "\nCode: " + getCode() +
                 "\nEdad: " + getAgeinMonth() + " meses " +
                 "\nProcedencia: " + getProcedence() +
+                "\nColor: "+getColor() +
                 "\nColor de Ojos:" + getEyesColor() +
                 "\nSexo: " + getSex() +
                 "\nPerdigree: " + isPerdigree() +
