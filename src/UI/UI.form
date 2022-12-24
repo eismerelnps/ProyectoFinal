@@ -30,6 +30,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13611010"/>
               <text value="Inicio"/>
@@ -46,6 +47,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13610244"/>
               <text value="Vender"/>
@@ -57,6 +59,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13611010"/>
               <hideActionText value="false"/>
@@ -69,6 +72,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13611010"/>
               <text value="Buscar por pais"/>
@@ -79,6 +83,7 @@
               <grid row="9" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <focusable value="false"/>
               <text value="Button"/>
             </properties>
           </component>
@@ -88,6 +93,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13611010"/>
               <text value="Buscar Mayor"/>
@@ -99,6 +105,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13611010"/>
               <text value="Color menos predominante"/>
@@ -110,6 +117,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13611010"/>
               <text value="Listado Alfabético"/>
@@ -136,6 +144,7 @@
               <grid row="10" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <focusable value="false"/>
               <text value="Button"/>
             </properties>
           </component>
@@ -145,6 +154,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13611010"/>
               <text value="Agregar"/>
@@ -156,6 +166,7 @@
             </constraints>
             <properties>
               <background color="-657931"/>
+              <focusable value="false"/>
               <font name="Times New Roman" size="17" style="3"/>
               <foreground color="-13611010"/>
               <text value="Mostrar Arreglo"/>
@@ -242,6 +253,7 @@
                   <grid row="2" column="3" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <text value="Siguiente"/>
                 </properties>
@@ -422,6 +434,7 @@
                   <autoscrolls value="true"/>
                   <background color="-657931"/>
                   <focusCycleRoot value="true"/>
+                  <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13611010"/>
                   <text value="Generar"/>
@@ -459,6 +472,7 @@
                 </constraints>
                 <properties>
                   <background color="-657931"/>
+                  <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-12566530"/>
                   <text value="Agregar"/>
@@ -513,6 +527,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <focusable value="false"/>
                   <font name="Consolas" size="14" style="1"/>
                   <text value="Vender"/>
                 </properties>
@@ -576,6 +591,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <focusable value="false"/>
                   <font name="Consolas" size="14" style="1"/>
                   <text value="Buscar"/>
                 </properties>
@@ -607,6 +623,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <focusable value="false"/>
                   <font name="Consolas" size="14" style="1"/>
                   <text value="Buscar"/>
                 </properties>
