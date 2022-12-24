@@ -6,8 +6,8 @@ public class Cat extends Pet {
     private boolean Perdigree;
 
 
-    public Cat(int Ageinmonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, float Price, String Code) {
-        super(Ageinmonth, Procedence, Color, Price, Code);
+    public Cat(String Name, int Ageinmonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, float Price, String Code) {
+        super(Name,Ageinmonth, Procedence, Color, Price, Code);
         this.EyesColor = EyesColor;
         this.Sex = Sex;
         this.Perdigree = Perdigree;
@@ -28,6 +28,7 @@ public class Cat extends Pet {
     @Override
     public String toString() {
         return "\nGato: " +
+                "\nNombre:" +getName() +
                 "\nCode: " + getCode() +
                 "\nEdad: " + getAgeinMonth() + " meses " +
                 "\nProcedencia: " + getProcedence() +

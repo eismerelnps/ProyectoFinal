@@ -1,7 +1,6 @@
 package UI;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -84,7 +83,8 @@ public class UI {
     private JLabel text3;
     private JLabel text4;
     private JList list1;
-    private JTextField textField1;
+    private JTextField nameTextField;
+    private JLabel nameText;
     private JTextField textField2;
     private JTextField textField3;
     private JButton button4;
@@ -107,7 +107,8 @@ public class UI {
         venderJPanel.setVisible(false);
         countrySearchJPanel.setVisible(false);
         searchPriceJPanel.setVisible(false);
-        readTXT();
+        readTXT("C:\\PetShop\\saldo.txt");
+        //readTXT("C:\\PetShop\\MODE.txt");
         countryList();
 
 
@@ -117,9 +118,6 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 KindOfPet.setVisible(true);
-                UIManager UI=new UIManager();
-                UI.put("OptionPane.background",new Color(60,63,65));
-                UI.put("Panel.background",new Color(60,63,65));
                 JOptionPane.showOptionDialog(null,
                         KindOfPet,
                         "",
@@ -216,6 +214,7 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (catRadioButton.isSelected() == true){
+                    String Name = null;
                     int AgeinMonth = 0;
                     String Code = null;
                     String Procedence = null;
@@ -224,8 +223,15 @@ public class UI {
                     String EyesColor = null;
                     String Sex =  null;
                     boolean Perdigree = false;
+
                     try {
-                        if (codeTextField.getText().isEmpty()){
+                        if (nameText.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca el nombre primero",
+                                    "Alerta",
+                                    1);
+                            pass = false;
+                        }else if (codeTextField.getText().isEmpty()){
                             JOptionPane.showMessageDialog(null,
                                     "Por favor introduzca el código primero",
                                     "Alerta",
@@ -269,6 +275,7 @@ public class UI {
 
 
                         if(pass == true){
+                            Name = nameTextField.getText();
                             Code = codeTextField.getText();
                             AgeinMonth = Integer.parseInt(ageTextField.getText());
                             if (AgeinMonth == 0){
@@ -278,21 +285,23 @@ public class UI {
                             Color = String.valueOf(ColorComboBox.getItemAt(procedenceComboBox.getSelectedIndex()));
                             EyesColor = String.valueOf(EyesColorComboBox.getItemAt(EyesColorComboBox.getSelectedIndex()));
 
-                            petShop.fillCat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
+                            petShop.fillCat(Name, AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
                         }
 
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                     }
-                    readTXT();
+                    readTXT("C:\\PetShop\\saldo.txt");
                 }
                 if (dogRadioButton.isSelected() == true){
+                    String Name = null;
                     String Color = null;
                     String Race = null;
                     String Code = null;
                     String Procedence = null;
                     int AgeinMonth = 0;
                     boolean pass = true;
+
                     if (bulldogRadioButton.isSelected() == true) {
                         Race = bulldogRadioButton.getText();
                         pass = true;
@@ -311,7 +320,13 @@ public class UI {
                     }
 
                     try {
-                        if (codeTextField.getText().isEmpty()){
+                        if (nameTextField.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca el nombre primero",
+                                    "",
+                                    1);
+                            pass = false;
+                        }else if (codeTextField.getText().isEmpty()){
                             JOptionPane.showMessageDialog(null,
                                     "Por favor introduzca el codigo primero",
                                     "",
@@ -337,6 +352,7 @@ public class UI {
                                     1);
                             pass = false;
                         } else {
+                            Name = nameTextField.getText();
                             Code = codeTextField.getText();
                             AgeinMonth = Integer.parseInt(ageTextField.getText());
                             Procedence = String.valueOf(procedenceComboBox.getItemAt(procedenceComboBox.getSelectedIndex()));
@@ -348,14 +364,14 @@ public class UI {
 
                         if (pass == true){
                             float Price = 0;
-                            petShop.fillDog(AgeinMonth, Procedence, Color, Race, Code);
+                            petShop.fillDog(Name, AgeinMonth, Procedence, Color, Race, Code);
                         }
 
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                     }
                     System.out.println(pass+Code+AgeinMonth+Procedence+Color+Race);
-                    readTXT();
+                    readTXT("C:\\PetShop\\saldo.txt");
                 }
 
             }
@@ -454,7 +470,7 @@ public class UI {
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                petShop.createTXT();
+                petShop.createTXT("C:\\PetShop\\saldo.txt", Saldo);
 
             }
         });
@@ -496,6 +512,7 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 claroRadioButton.setSelected(false);
+                //petShop.createTXT("C:\\PetShop\\MODE.txt", "DARK");
                 Mode("DARK");
             }
         });
@@ -503,6 +520,7 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 oscuroRadioButton.setSelected(false);
+               // petShop.createTXT("C:\\PetShop\\MODE.txt", "LIGHT");
                 Mode("LIGHT");
             }
         });
@@ -519,12 +537,7 @@ public class UI {
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                readTXT();
-                UIManager UI=new UIManager();
-                UI.put("OptionPane.background",new Color(255,0,0));
-                UI.put("Panel.background",new Color(255,0,0));
-                JOptionPane.showMessageDialog(null,"Text","SetColor",JOptionPane.INFORMATION_MESSAGE);
-
+                readTXT("C:\\PetShop\\Saldo.txt");
             }
         });
 
@@ -573,7 +586,7 @@ public class UI {
         JFrame window = new JFrame("Control.PetShop");
         window.setContentPane(new UI().MainPanel);
         window.pack();
-        window.setBounds(0, 0, 1000, 450);
+        window.setBounds(0, 0, 1000, 515);
         window.setVisible(true);
         window.setMinimumSize(new Dimension(250, 250));
         window.setBackground(Color.darkGray);
@@ -605,6 +618,17 @@ public class UI {
         private static final generateEyesColor[] directions = values();
 
         public static generateEyesColor randomgenerateEyesColor() {
+            return directions[PRNG.nextInt(directions.length)];
+        }
+    }
+    public enum generateName {//para generar un nombre random
+        Max, Buddy, Molly, Bailey, Maggie, Daisy, Lucy, Sadie, Bella, Charlie, Princesa, Lucky, Rocky, Coco, Oso, Jake,
+        Sombra, Jack, Toby, Ángel, Chloe, Harley, Abby, Sophie, Ginger, Dama, Sam, Gizmo, Buster, Baby, Pepper, Missy,
+        Roxy, Sammy, Zoe, Sasha, Cody, Duke, Gracie, Riley, Sassy, Shaggy, Oreo, Preciosos, Bandit, Casey, Smokey, Rusty, Teddy, Oscar, Lola;
+        private static final Random PRNG = new Random();
+        private static final generateName[] directions = values();
+
+        public static generateName randomgenerateName() {
             return directions[PRNG.nextInt(directions.length)];
         }
     }
@@ -654,9 +678,19 @@ public class UI {
         Color pBlue = new Color(48,79,254);
         Color dark = new Color(60,63,65);
         Color lightBlack = new Color(39,42,44);
-        Color white = new Color(255, 255, 255);
+        Color white = new Color(254, 254, 254);
+        Color gray = new Color(250, 250, 250);
+
+
 
         if(Mode == "DARK"){
+            UIManager UI=new UIManager();
+            UI.put("OptionPane.background", dark);
+            UI.put("Panel.background", dark);
+            UI.put("OptionPane.messageForeground", white);
+            UI.put("Button.background",lightBlack);
+            UI.put("Button.foreground", white );
+
             MainPanel.setBackground(dark);
             leftPanel.setBackground(dark);
             addPet.setBackground(dark);
@@ -696,6 +730,7 @@ public class UI {
             siguienteButton.setBackground(lightBlack);
             generarButton.setBackground(lightBlack);
             addPetButton.setBackground(lightBlack);
+            nameTextField.setBackground(lightBlack);
             codeTextField.setBackground(lightBlack);
             procedenceComboBox.setBackground(lightBlack);
             ageTextField.setBackground(lightBlack);
@@ -729,6 +764,7 @@ public class UI {
             text2.setForeground(white);
             text3.setForeground(white);
             text4.setForeground(white);
+            nameText.setForeground(white);
             codeText.setForeground(white);
             ageText.setForeground(white);
             countryText.setForeground(white);
@@ -754,6 +790,7 @@ public class UI {
             oscuroRadioButton.setForeground(white);
             claroRadioButton.setForeground(white);
 
+            nameTextField.setForeground(white);
             sellCode.setForeground(white);
             searchPriceText.setForeground(white);
             countrySearchTextField.setForeground(white);
@@ -765,9 +802,70 @@ public class UI {
 
 
         }
-        if (Mode == "LIGHT"){
-            LineBorder lineBorder1 = new LineBorder(Color.BLUE, 1, true );
 
+        if (Mode == "LIGHT"){
+            UIManager UI=new UIManager();
+            UI.put("OptionPane.background", white);
+            UI.put("Panel.background", white);
+            UI.put("OptionPane.messageForeground", pBlue);
+            UI.put("Button.background", gray);
+            UI.put("Button.foreground", pBlue );
+
+            MainPanel.setBackground(white);
+            leftPanel.setBackground(white);
+            addPet.setBackground(white);
+            addDog.setBackground(white);
+            addCat.setBackground(white);
+            raceJPanel.setBackground(white);
+            hembraRadioButton.setBackground(white);
+            machoRadioButton.setBackground(white);
+            chowChowRadioButton.setBackground(white);
+            dalmataRadioButton.setBackground(white);
+            bulldogRadioButton.setBackground(white);
+            oscuroRadioButton.setBackground(white);
+            claroRadioButton.setBackground(white);
+            KindOfPet.setBackground(white);
+            venderJPanel.setBackground(white);
+            searchPriceJPanel.setBackground(white);
+            countrySearchJPanel.setBackground(white);
+            dogRadioButton.setBackground(white);
+            catRadioButton.setBackground(white);
+
+
+            //all backgrounds
+            inicioButton.setBackground(gray);
+            agregarButton.setBackground(gray);
+            venderButton.setBackground(gray);
+            priceSearchButton.setBackground(gray);
+            countrySearchbutton.setBackground(gray);
+            buscarMayorButton.setBackground(gray);
+            showArraybutton.setBackground(gray);
+            colorMenosPredominanteButton.setBackground(gray);
+            listadoAlfabeticoButton.setBackground(gray);
+            sellButton.setBackground(gray);
+            searchPriceButton.setBackground(gray);
+            searchCountryButton.setBackground(gray);
+
+
+            siguienteButton.setBackground(white);
+            generarButton.setBackground(white);
+            addPetButton.setBackground(white);
+            nameTextField.setBackground(white);
+            codeTextField.setBackground(white);
+            procedenceComboBox.setBackground(white);
+            ageTextField.setBackground(white);
+            ColorComboBox.setBackground(white);
+            EyesColorComboBox.setBackground(white);
+            noCheckBox.setBackground(white);
+            sellCode.setBackground(white);
+            searchPriceText.setBackground(white);
+            countrySearchTextField.setBackground(white);
+
+
+
+
+
+            //all buttons
             inicioButton.setForeground(pBlue);
             agregarButton.setForeground(pBlue);
             venderButton.setForeground(pBlue);
@@ -777,33 +875,58 @@ public class UI {
             showArraybutton.setForeground(pBlue);
             colorMenosPredominanteButton.setForeground(pBlue);
             listadoAlfabeticoButton.setForeground(pBlue);
+            generarButton.setForeground(pBlue);
+            addPetButton.setForeground(pBlue);
+            saldoText.setForeground(pBlue);
+            Saldotext.setForeground(pBlue);
+            USD.setForeground(pBlue);
+            text1.setForeground(pBlue);
+            text2.setForeground(pBlue);
+            text3.setForeground(pBlue);
+            text4.setForeground(pBlue);
+            nameText.setForeground(pBlue);
+            codeText.setForeground(pBlue);
+            ageText.setForeground(pBlue);
+            countryText.setForeground(pBlue);
+            colorText.setForeground(pBlue);
+            raceText.setForeground(pBlue);
+            eyescolorText.setForeground(pBlue);
+            perdigreeText.setForeground(pBlue);
+            sexText.setForeground(pBlue);
+            dogRadioButton.setForeground(pBlue);
+            catRadioButton.setForeground(pBlue);
+            siguienteButton.setForeground(pBlue);
+            hembraRadioButton.setForeground(pBlue);
+            machoRadioButton.setForeground(pBlue);
+            chowChowRadioButton.setForeground(pBlue);
+            dalmataRadioButton.setForeground(pBlue);
+            bulldogRadioButton.setForeground(pBlue);
+            codeTextField.setForeground(pBlue);
+            ageTextField.setForeground(pBlue);
+            procedenceComboBox.setForeground(pBlue);
+            ColorComboBox.setForeground(pBlue);
+            EyesColorComboBox.setForeground(pBlue);
+            noCheckBox.setForeground(pBlue);
+            oscuroRadioButton.setForeground(pBlue);
+            claroRadioButton.setForeground(pBlue);
 
-            MainPanel.setBackground(Color.LIGHT_GRAY);
-            leftPanel.setBackground(Color.WHITE);
-            addPet.setBackground(Color.WHITE);
-            addDog.setBackground(Color.WHITE);
-            addCat.setBackground(Color.WHITE);
-            inicioButton.setForeground(Color.getHSBColor(230, 81, 99));
-            inicioButton.setBorder(lineBorder1);
-            agregarButton.setBackground(Color.getHSBColor(230, 81, 99));
-            agregarButton.setBorderPainted(true);
-            agregarButton.setBorder(lineBorder1);
-            venderButton.setBackground(Color.getHSBColor(230, 81, 99));
-            venderButton.setBorderPainted(true);
-            venderButton.setBorder(lineBorder1);
-            priceSearchButton.setBackground(Color.getHSBColor(230, 81, 99));
-            countrySearchbutton.setBackground(Color.getHSBColor(230, 81, 99));
-            showArraybutton.setOpaque(true);
-            showArraybutton.setBackground(Color.getHSBColor(230,81,99));
+            nameTextField.setForeground(pBlue);
+            sellCode.setForeground(pBlue);
+            searchPriceText.setForeground(pBlue);
+            countrySearchTextField.setForeground(pBlue);
+            sellButton.setForeground(pBlue);
+            searchPriceButton.setForeground(pBlue);
+            searchCountryButton.setForeground(pBlue);
+
         }
     }
-    public void readTXT(){
+    public String readTXT(String PATH){
         BufferedReader bufferedReader = null;
         File file = null;
         String linea = null;
         Scanner scanner;
         try {
-            file = new File("C:\\PetShop\\saldo.txt");
+            file = new File(PATH);
             //se pasa el flujo al objeto scanner
             scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
@@ -815,13 +938,17 @@ public class UI {
                 //parte la cadena recibida cada vez que encuentre una coma
                 delimitar.useDelimiter("\\s*,\\s*");
                 Saldotext.setText(delimitar.next());
-            }
+                System.out.println(linea);
+
+                }
             //se cierra el ojeto scanner
             scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return linea;
     }
+
 
     public void randomgenerate() {
         int age = (int) (Math.random() * 13);
@@ -831,6 +958,7 @@ public class UI {
         if (age == 0){
             age = 1;
         }
+        nameTextField.setText(generateName.randomgenerateName().name());
         if(dogRadioButton.isSelected() == true){
             ageTextField.setText(String.valueOf(age));
             generateCode();

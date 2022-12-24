@@ -1,25 +1,23 @@
 package Control;
 
-import java.awt.*;
-import java.io.*;
-import java.nio.charset.CoderMalfunctionError;
-import java.util.ArrayList;
-
 import Pets.Cat;
 import Pets.Dog;
 import Pets.Pet;
-import UI.UI;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.swing.*;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.*;
 
 @Getter
 @Setter
@@ -85,7 +83,7 @@ public class PetShop {
     }
 
 
-    public void fillCat(int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, String Code) {
+    public void fillCat(String Name, int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, String Code) {
         boolean pass = true;
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Code)) {
@@ -102,14 +100,8 @@ public class PetShop {
             Price *= 2;
         }
         if (pass == true) {
-            Cat cat = new Cat(AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
+            Cat cat = new Cat(Name, AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
             pets.add(cat);
-            UIManager UI=new UIManager();
-            UI.put("OptionPane.background",new Color(60,63,65));
-            UI.put("Panel.background",new Color(60,63,65));
-            UI.put("OptionPane.messageForeground", new Color(255,255,255));
-            UI.put("Button.background", new Color(39,42,44));
-            UI.put("Button.foreground", new Color(255,255,255));
             JOptionPane.showMessageDialog(null,
                     "Agregado con éxito",
                     "",
@@ -120,10 +112,10 @@ public class PetShop {
                     "",
                     2);
         }
-        createTXT();
+        createTXT("C:\\PetShop\\saldo.txt", Price);
     }
 
-    public void fillDog(int AgeinMonth, String Procedence, String Color, String Race, String Coder) {
+    public void fillDog(String Name, int AgeinMonth, String Procedence, String Color, String Race, String Coder) {
         boolean pass = true;
         float Price = 0;
         for (int i = 0; i < pets.size(); i++) {
@@ -132,6 +124,7 @@ public class PetShop {
             }
         }
         if (pass == true) {
+
             if (AgeinMonth == 0) {
                 AgeinMonth = 1;
             }
@@ -145,7 +138,7 @@ public class PetShop {
             } else if (Race == "Dalmata") {
                 Price += 50;
             }
-            Dog dog = new Dog(AgeinMonth, Procedence, Color, Price, Race, Coder);
+            Dog dog = new Dog(Name, AgeinMonth, Procedence, Color, Price, Race, Coder);
             pets.add(dog);
 
             JOptionPane.showMessageDialog(null,
@@ -158,7 +151,7 @@ public class PetShop {
                     "Alerta",
                     2);
         }
-        createTXT();
+        createTXT("C:\\PetShop\\saldo.txt", Price);
     }
 
 
@@ -385,17 +378,18 @@ public class PetShop {
                     2);
         }
     }
-    public  void createTXT(){
+    public  void createTXT(String PATH, float MODE){
         FileWriter fileWriter = null;
         float saldo = 0;
         for (int i = 0; i < pets.size(); i++) {
             saldo += pets.get(i).getPrice();
         }
+        saldo += MODE;
         FileWriter flwriter = null;
         try {//además de la ruta del archivo recibe un parámetro de tipo boolean, que le indican que se va añadir más registros
-            flwriter = new FileWriter("C:\\PetShop\\saldo.txt", false);
+            flwriter = new FileWriter(PATH, false);
             BufferedWriter bfwriter = new BufferedWriter(flwriter);
-                bfwriter.write(String.valueOf(saldo));
+                bfwriter.write((int) saldo);
             bfwriter.close();
             System.out.println("Saldo modificado");
 

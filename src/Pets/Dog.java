@@ -4,8 +4,8 @@ public class Dog extends Pet {
     private String Race;
 
 
-    public Dog(int AgeinMonth, String Procedence, String Color, float Price, String Race, String Code) {
-        super(AgeinMonth, Procedence, Color, Price, Code);
+    public Dog(String Name, int AgeinMonth, String Procedence, String Color, float Price, String Race, String Code) {
+        super(Name, AgeinMonth, Procedence, Color, Price, Code);
         this.Race = Race;
     }
 
@@ -16,6 +16,7 @@ public class Dog extends Pet {
    @Override
     public String toString() {
         return "\nPerro " +
+                "\nNombre:" +getName() +
                 "\nCode: " + getCode() + " " +
                 "\nEdad: " + getAgeinMonth() + " meses " +
                 "\nProcedencia: " + getProcedence() + " " +
