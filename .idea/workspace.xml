@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="working on dark/light themes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Control/PetShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Control/PetShop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pets/Cat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pets/Cat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pets/Dog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pets/Dog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pets/Pet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pets/Pet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
     </list>
@@ -198,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671493751187</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="working on dark/light themes">
+      <created>1671925805391</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1671925805391</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +231,8 @@
     <MESSAGE value="Fixed:&#10;working on light/dark theme&#10;writing and reading txt" />
     <MESSAGE value="Fixed:&#10;working on light/dark theme&#10;writing and reading txt&#10;edited option of setting the procedence now it can only be set with a combobox" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;src/Control/PetShop.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;src/Control/PetShop.java" />
+    <MESSAGE value="working on dark/light themes" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on dark/light themes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Proyecto_Final$C__Users_Eismer_IdeaProjects_Proyecto_Final.ic" NAME="$PROJECT_DIR$/../Proyecto Final Coverage Results" MODIFIED="1671813775417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

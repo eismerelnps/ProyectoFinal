@@ -1,16 +1,15 @@
 package UI;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
 import Control.*;
+import Pets.Cat;
 
 public class UI {
     private JPanel MainPanel;
@@ -28,7 +27,7 @@ public class UI {
     private JRadioButton chowChowRadioButton;
     private JButton addPetButton;
     private JPanel SelectPet;
-    JPanel addDog;
+    JPanel addPetChildren;
     private JButton siguienteButton;
     private JTextField catEyesColor;
     private JRadioButton hembraRadioButton;
@@ -53,7 +52,7 @@ public class UI {
     private JButton searchCountryButton;
     private JButton generarButton;
     private JButton showArraybutton;
-    private JButton button2;
+    private JButton testButton1;
     private JButton searchPriceButton;
     private JTextField searchPriceText;
     private JPanel searchPriceJPanel;
@@ -62,7 +61,7 @@ public class UI {
     private JButton listadoAlfabeticoButton;
     private JRadioButton oscuroRadioButton;
     private JRadioButton claroRadioButton;
-    private JButton button3;
+    private JButton testButton2;
     private JComboBox procedenceComboBox;
     private JComboBox comboBox2;
     private JComboBox ColorComboBox;
@@ -85,6 +84,7 @@ public class UI {
     private JList list1;
     private JTextField nameTextField;
     private JLabel nameText;
+    private JTable table1;
     private JTextField textField2;
     private JTextField textField3;
     private JButton button4;
@@ -103,7 +103,7 @@ public class UI {
 
         KindOfPet.setVisible(false);
         addCat.setVisible(false);
-        addDog.setVisible(false);
+        addPetChildren.setVisible(false);
         venderJPanel.setVisible(false);
         countrySearchJPanel.setVisible(false);
         searchPriceJPanel.setVisible(false);
@@ -189,14 +189,14 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (dogRadioButton.isSelected() == true) {
-                    addDog.setVisible(true);
+                    addPetChildren.setVisible(true);
                     raceJPanel.setVisible(true);
                     addCat.setVisible(false);
                     JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(KindOfPet));
                     dialog.dispose();
 
                 } else if (catRadioButton.isSelected() == true) {
-                    addDog.setVisible(true);
+                    addPetChildren.setVisible(true);
                     addCat.setVisible(true);
                     raceJPanel.setVisible(false);
                     JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(KindOfPet));
@@ -456,7 +456,9 @@ public class UI {
         inicioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                petShop.showPets();
+                if (addPetChildren.isVisible() == true){
+                    addPetChildren.setVisible(false);
+                }
             }
         });
         showArraybutton.addActionListener(new ActionListener() {
@@ -467,11 +469,10 @@ public class UI {
 
             }
         });
-        button2.addActionListener(new ActionListener() {
+        testButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 petShop.createTXT("C:\\PetShop\\saldo.txt", Saldo);
-
             }
         });
         searchPriceButton.addActionListener(new ActionListener() {
@@ -534,7 +535,7 @@ public class UI {
                 }
             }
         });
-        button3.addActionListener(new ActionListener() {
+        testButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 readTXT("C:\\PetShop\\Saldo.txt");
@@ -561,7 +562,7 @@ public class UI {
                 }
             }
         });
-        addDog.addKeyListener(new KeyAdapter() {
+        addPetChildren.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
@@ -580,6 +581,8 @@ public class UI {
                     randomgenerate();
                 }
             }
+        });
+        table1.addComponentListener(new ComponentAdapter() {
         });
     }
     public void StartInterface() {
@@ -694,7 +697,7 @@ public class UI {
             MainPanel.setBackground(dark);
             leftPanel.setBackground(dark);
             addPet.setBackground(dark);
-            addDog.setBackground(dark);
+            addPetChildren.setBackground(dark);
             addCat.setBackground(dark);
             raceJPanel.setBackground(dark);
             hembraRadioButton.setBackground(dark);
@@ -719,12 +722,15 @@ public class UI {
             priceSearchButton.setBackground(lightBlack);
             countrySearchbutton.setBackground(lightBlack);
             buscarMayorButton.setBackground(lightBlack);
-            showArraybutton.setBackground(lightBlack);
             colorMenosPredominanteButton.setBackground(lightBlack);
             listadoAlfabeticoButton.setBackground(lightBlack);
             sellButton.setBackground(lightBlack);
             searchPriceButton.setBackground(lightBlack);
             searchCountryButton.setBackground(lightBlack);
+
+            showArraybutton.setBackground(lightBlack);
+            testButton1.setBackground(lightBlack);
+            testButton2.setBackground(lightBlack);
 
 
             siguienteButton.setBackground(lightBlack);
@@ -752,7 +758,6 @@ public class UI {
             priceSearchButton.setForeground(white);
             countrySearchbutton.setForeground(white);
             buscarMayorButton.setForeground(white);
-            showArraybutton.setForeground(white);
             colorMenosPredominanteButton.setForeground(white);
             listadoAlfabeticoButton.setForeground(white);
             generarButton.setForeground(white);
@@ -790,6 +795,10 @@ public class UI {
             oscuroRadioButton.setForeground(white);
             claroRadioButton.setForeground(white);
 
+            showArraybutton.setForeground(Color.RED);
+            testButton1.setForeground(Color.RED);
+            testButton2.setForeground(Color.RED);
+
             nameTextField.setForeground(white);
             sellCode.setForeground(white);
             searchPriceText.setForeground(white);
@@ -814,7 +823,7 @@ public class UI {
             MainPanel.setBackground(white);
             leftPanel.setBackground(white);
             addPet.setBackground(white);
-            addDog.setBackground(white);
+            addPetChildren.setBackground(white);
             addCat.setBackground(white);
             raceJPanel.setBackground(white);
             hembraRadioButton.setBackground(white);
@@ -839,12 +848,15 @@ public class UI {
             priceSearchButton.setBackground(gray);
             countrySearchbutton.setBackground(gray);
             buscarMayorButton.setBackground(gray);
-            showArraybutton.setBackground(gray);
             colorMenosPredominanteButton.setBackground(gray);
             listadoAlfabeticoButton.setBackground(gray);
             sellButton.setBackground(gray);
             searchPriceButton.setBackground(gray);
             searchCountryButton.setBackground(gray);
+
+            showArraybutton.setBackground(gray);
+            testButton1.setBackground(gray);
+            testButton2.setBackground(gray);
 
 
             siguienteButton.setBackground(white);
@@ -872,7 +884,6 @@ public class UI {
             priceSearchButton.setForeground(pBlue);
             countrySearchbutton.setForeground(pBlue);
             buscarMayorButton.setForeground(pBlue);
-            showArraybutton.setForeground(pBlue);
             colorMenosPredominanteButton.setForeground(pBlue);
             listadoAlfabeticoButton.setForeground(pBlue);
             generarButton.setForeground(pBlue);
@@ -909,6 +920,10 @@ public class UI {
             noCheckBox.setForeground(pBlue);
             oscuroRadioButton.setForeground(pBlue);
             claroRadioButton.setForeground(pBlue);
+
+            showArraybutton.setForeground(Color.RED);
+            testButton1.setForeground(Color.RED);
+            testButton2.setForeground(Color.RED);
 
             nameTextField.setForeground(pBlue);
             sellCode.setForeground(pBlue);
