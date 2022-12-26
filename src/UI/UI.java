@@ -1,9 +1,6 @@
 package UI;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -11,7 +8,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Control.*;
-import Pets.Cat;
 
 
 public class UI {
@@ -87,6 +83,12 @@ public class UI {
     private JList list1;
     private JTextField nameTextField;
     private JLabel nameText;
+    private JTextField userTextField;
+    private JPasswordField passwordField;
+    private JButton LOGINButton;
+    private JPanel devOptions;
+    private javax.swing.JScrollPane JScrollPane;
+    private JPanel loginPanel;
     private JSpinner spinner1;
     private JTable table1;
     private JTextField textField2;
@@ -105,6 +107,8 @@ public class UI {
 
     public UI() {
 
+        addPet.setVisible(false);
+        JScrollPane.setVisible(false);
         KindOfPet.setVisible(false);
         addCat.setVisible(false);
         addPetChildren.setVisible(false);
@@ -610,6 +614,22 @@ public class UI {
             }
         });
 
+        LOGINButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (userTextField.getText() == "admin" || passwordField.getText() == "admin"){
+                    addPet.setVisible(true);
+                    JScrollPane.setVisible(true);
+                    devOptions.setVisible(true);
+                    loginPanel.setVisible(false);
+                }else {
+                    addPet.setVisible(true);
+                    JScrollPane.setVisible(true);
+                    devOptions.setVisible(false);
+                    loginPanel.setVisible(false);
+                }
+            }
+        });
     }
     public void StartInterface() {
         JFrame window = new JFrame("Control.PetShop");
@@ -739,6 +759,7 @@ public class UI {
             countrySearchJPanel.setBackground(dark);
             dogRadioButton.setBackground(dark);
             catRadioButton.setBackground(dark);
+            JScrollPane.setBackground(dark);
 
 
             //all backgrounds
@@ -865,6 +886,8 @@ public class UI {
             countrySearchJPanel.setBackground(white);
             dogRadioButton.setBackground(white);
             catRadioButton.setBackground(white);
+            JScrollPane.setBackground(white);
+
 
 
             //all backgrounds
