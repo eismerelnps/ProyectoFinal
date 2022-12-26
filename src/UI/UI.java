@@ -2,6 +2,8 @@ package UI;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
+import javax.swing.text.Element;
+import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 
 import Control.*;
 import Pets.Cat;
+
 
 public class UI {
     private JPanel MainPanel;
@@ -84,6 +87,7 @@ public class UI {
     private JList list1;
     private JTextField nameTextField;
     private JLabel nameText;
+    private JSpinner spinner1;
     private JTable table1;
     private JTextField textField2;
     private JTextField textField3;
@@ -110,7 +114,16 @@ public class UI {
         readTXT("C:\\PetShop\\saldo.txt");
         //readTXT("C:\\PetShop\\MODE.txt");
         countryList();
-
+        ImageIcon doneIcon = new ImageIcon("src/icons8-checkmark-64.png");
+        ImageIcon sellIcon = new ImageIcon("src/icons8-huge-sale-64.png");
+        ImageIcon errorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
+        ImageIcon noFoundIcon = new ImageIcon("src/icons8-nothing-found-80.png");
+        ImageIcon cancelIcon = new ImageIcon("src/icons8-unavailable-80.png");
+        ImageIcon priceSearchIcon = new ImageIcon("src/icons8-discount-finder-64.png");
+        ImageIcon countryIcon = new ImageIcon("src/icons8-around-the-globe-64.png");
+        ImageIcon paleteColorIcon = new ImageIcon("src/icons8-paint-palette-64.png");
+        ImageIcon chashIcon = new ImageIcon("src/icons8-cash-80.png");
+        ImageIcon petIcon = new ImageIcon("src/icons8-pets-80.png");
 
         Saldotext.setText(String.valueOf(Saldo));
 
@@ -385,7 +398,7 @@ public class UI {
                         "Saber precio",
                         -1,
                         3,
-                        null, new Object[]{},
+                        priceSearchIcon, new Object[]{},
                         3);
             }
 
@@ -399,7 +412,7 @@ public class UI {
                         "Cantidad por país",
                         -1,
                         3,
-                        null, new Object[]{},
+                        countryIcon, new Object[]{},
                         3);
 
 
@@ -412,11 +425,11 @@ public class UI {
                 JOptionPane.showOptionDialog(null,
                         venderJPanel,
                         "Vender Mascota",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null, new Object[]{},
+                        0,
+                        0,
+                        sellIcon,
+                        new Object[]{},
                         null);
-
             }
         });
         sellButton.addActionListener(new ActionListener() {
@@ -427,7 +440,7 @@ public class UI {
                             "Por favor introduzca un código primero",
                             "",
                             0,
-                            null);
+                            errorIcon);
                 }else{
                     String Code = sellCode.getText();
                     petShop.sellPet(Code);
@@ -465,6 +478,10 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 petShop.showPets();
+                oscuroRadioButton.setLayout(null);
+                claroRadioButton.setLayout(null);
+                oscuroRadioButton.setSize(25,25);
+                claroRadioButton.setSize(25,25);
 
 
             }
@@ -472,18 +489,22 @@ public class UI {
         testButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                petShop.createTXT("C:\\PetShop\\saldo.txt", Saldo);
+                oscuroRadioButton.setLayout(null);
+                claroRadioButton.setLayout(null);
+                oscuroRadioButton.setSize(100,100);
+                claroRadioButton.setSize(100,100);
+
             }
         });
         searchPriceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (sellCode.getText().isEmpty() == true) {
+                if (searchPriceText.getText().isEmpty() == true) {
                     JOptionPane.showMessageDialog(null,
                             "Por favor introduzca un código primero",
                             "",
                             0,
-                            null);
+                            errorIcon);
                 } else {
                     petShop.priceSearch(searchPriceText.getText());
                     JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(searchPriceJPanel));
@@ -513,6 +534,8 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 claroRadioButton.setSelected(false);
+                oscuroRadioButton.setVisible(false);
+                claroRadioButton.setVisible(true);
                 //petShop.createTXT("C:\\PetShop\\MODE.txt", "DARK");
                 Mode("DARK");
             }
@@ -521,6 +544,8 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 oscuroRadioButton.setSelected(false);
+                claroRadioButton.setVisible(false);
+                oscuroRadioButton.setVisible(true);
                // petShop.createTXT("C:\\PetShop\\MODE.txt", "LIGHT");
                 Mode("LIGHT");
             }
@@ -539,6 +564,8 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 readTXT("C:\\PetShop\\Saldo.txt");
+
+
             }
         });
 
@@ -582,8 +609,7 @@ public class UI {
                 }
             }
         });
-        table1.addComponentListener(new ComponentAdapter() {
-        });
+
     }
     public void StartInterface() {
         JFrame window = new JFrame("Control.PetShop");

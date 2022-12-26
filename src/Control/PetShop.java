@@ -23,6 +23,17 @@ import java.util.Map;
 @Setter
 
 public class PetShop {
+    ImageIcon errorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
+    static ImageIcon sterrorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
+    ImageIcon doneIcon = new ImageIcon("src/icons8-checkmark-64.png");
+    ImageIcon noFoundIcon = new ImageIcon("src/icons8-nothing-found-80.png");
+    ImageIcon cancelIcon = new ImageIcon("src/icons8-unavailable-80.png");
+    ImageIcon priceSearchIcon = new ImageIcon("src/icons8-discount-finder-64.png");
+    ImageIcon countryIcon = new ImageIcon("src/icons8-around-the-globe-64.png");
+    ImageIcon paleteColorIcon = new ImageIcon("src/icons8-paint-palette-64.png");
+    ImageIcon chashIcon = new ImageIcon("src/icons8-cash-80.png");
+    ImageIcon petIcon = new ImageIcon("src/icons8-pets-80.png");
+
 
     public static ArrayList<Pet> pets = new ArrayList<Pet>();
 
@@ -42,7 +53,7 @@ public class PetShop {
                     "",
                     0,
                     1,
-                    null);
+                    errorIcon);
         }
         if (option == 0) {
             System.out.println("Add pet");
@@ -62,9 +73,15 @@ public class PetShop {
                     "Vender mascota",
                     0,
                     1,
-                    null);
+                    errorIcon);
         } else {
-            JOptionPane.showMessageDialog(null, "No se ha encontrado una mascota con este código");
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No se ha encontrado una mascota con este código",
+                    "",
+                    1,
+                    noFoundIcon
+                    );
         }
         if (option1 == 0) {
             float selling = pets.get(index).getPrice();
@@ -72,12 +89,15 @@ public class PetShop {
             JOptionPane.showMessageDialog(null,
                     "Se ha vendido la mascota por un precio de: " + selling,
                     "Vendido",
-                    1);
+                    1,
+                    doneIcon);
+
         } else if (option1 == 1) {//I put the else if cause with de only else: if the condition option == 0 wasnt true then else will execute
             JOptionPane.showMessageDialog(null,
                     "Se ha cancelado la venta",
                     "Cancelado",
-                    1);
+                    1,
+                    cancelIcon);
         }
 
     }
@@ -105,12 +125,14 @@ public class PetShop {
             JOptionPane.showMessageDialog(null,
                     "Agregado con éxito",
                     "",
-                    2);
+                    2,
+                    doneIcon);
         } else {
             JOptionPane.showMessageDialog(null,
                     "Ya existe una mascota con el código: " + Code + ", cambielo",
                     "",
-                    2);
+                    2,
+                    errorIcon);
         }
         createTXT("C:\\PetShop\\saldo.txt", Price);
     }
@@ -143,13 +165,15 @@ public class PetShop {
 
             JOptionPane.showMessageDialog(null,
                     "Agregado con exito",
-                    "Alerta",
-                    2);
+                    "",
+                    2,
+                    doneIcon);
         } else {
             JOptionPane.showMessageDialog(null,
                     "Ya existe una mascota con el código: " + Coder + ", cambielo",
                     "Alerta",
-                    2);
+                    2,
+                    errorIcon);
         }
         createTXT("C:\\PetShop\\saldo.txt", Price);
     }
@@ -165,13 +189,15 @@ public class PetShop {
         if (count == 0) {
             JOptionPane.showMessageDialog(null,
                     "No hay mascotas procedentes de " + Country,
-                    "Informacion",
-                    1);
+                    "",
+                    1,
+                    errorIcon);
         } else
             JOptionPane.showMessageDialog(null,
                     "Hay " + count + " mascotas procedentes de " + Country,
-                    "Informacion",
-                    1);
+                    "",
+                    1,
+                    countryIcon);
     }
 
     public void priceSearch(String sCode) {
@@ -186,13 +212,15 @@ public class PetShop {
         if (index > 0) {
             JOptionPane.showMessageDialog(null,
                     "La mascota tiene un precio de: " + pets.get(index).getPrice() + "$",
-                    "Alerta",
-                    2);
+                    "",
+                    2,
+                    chashIcon);
         } else {
             JOptionPane.showMessageDialog(null,
                     "No se ha encotrado una mascota con el codigo: " + sCode,
-                    "Alerta",
-                    2);
+                    "",
+                    2,
+                    noFoundIcon);
         }
     }
 
@@ -207,12 +235,14 @@ public class PetShop {
             JOptionPane.showMessageDialog(null,
                     "Agregado con exito",
                     "Alerta",
-                    2);
+                    2,
+                    doneIcon);
         } else {
             JOptionPane.showMessageDialog(null,
                     "Ya existe una mascota con el código: " + sCode + ", cambielo",
                     "Alerta",
-                    2);
+                    2,
+                    errorIcon);
         }
 
 
@@ -226,7 +256,8 @@ public class PetShop {
             JOptionPane.showMessageDialog(null,
                     "No hay ninguna mascota aún",
                     "",
-                    1);
+                    1,
+                    errorIcon);
         }
         if (pets.size() > 0) {
             for (int i = 0; i < pets.size(); i++) {
@@ -238,7 +269,8 @@ public class PetShop {
             JOptionPane.showMessageDialog(null,
                     pets.get(index).toString(),
                     "Mascota de mayor edad",
-                    1);
+                    1,
+                    petIcon);
         }
 
 
@@ -251,10 +283,12 @@ public class PetShop {
         } else
             pass = true;
         if (pass == false) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(
+                    null,
                     "No hay ninguna mascota aún",
                     "",
-                    1);
+                    1,
+                    errorIcon);
         } else {
             int count = 0;
             String[] array = new String[pets.size()];
@@ -309,12 +343,13 @@ public class PetShop {
                     coloresLimpio[i] = colores[i];
                 }
             }
-            int option = JOptionPane.showOptionDialog(null,
+            int option = JOptionPane.showOptionDialog(
+                    null,
                     "El color menos repetido es: ",
-                    "Color menos repetido",
+                    "",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
-                    null,
+                    paleteColorIcon,
                     coloresLimpio,
                     coloresLimpio[0]);
         }
@@ -367,15 +402,18 @@ public class PetShop {
         }
         String[] sortedArr = stringArraySort(arrToSort);
         if (sortedArr.length == 0){
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(
+                    null,
                     "Por favor añada una nueva mascota",
                     "No hay ningún país aún",
-                    1);
+                    1,
+                    sterrorIcon);
+
         } else{
             JOptionPane.showMessageDialog(null,
                     sortedArr,
                     "Listado alfabético: ",
-                    2);
+                    1);
         }
     }
     public  void createTXT(String PATH, float MODE){
