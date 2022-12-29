@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -8,6 +9,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Control.*;
+import jdk.swing.interop.SwingInterOpUtils;
+import netscape.javascript.JSException;
+import netscape.javascript.JSObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 
 public class UI {
@@ -89,6 +97,7 @@ public class UI {
     private JPanel devOptions;
     private javax.swing.JScrollPane JScrollPane;
     private JPanel loginPanel;
+    private JPanel saldoJPanel;
     private JSpinner spinner1;
     private JTable table1;
     private JTextField textField2;
@@ -106,7 +115,7 @@ public class UI {
     }
 
     public UI() {
-
+        saldoJPanel.setVisible(false);
         addPet.setVisible(false);
         JScrollPane.setVisible(false);
         KindOfPet.setVisible(false);
@@ -116,8 +125,10 @@ public class UI {
         countrySearchJPanel.setVisible(false);
         searchPriceJPanel.setVisible(false);
         readTXT("C:\\PetShop\\saldo.txt");
-        //readTXT("C:\\PetShop\\MODE.txt");
         countryList();
+        Theme();//define the theme of the app can be dark or light according to what user choose previously
+
+        //ImageIcon mainIcon = new ImageIcon("src/icons8-browser-homepage-64.png");
         ImageIcon doneIcon = new ImageIcon("src/icons8-checkmark-64.png");
         ImageIcon sellIcon = new ImageIcon("src/icons8-huge-sale-64.png");
         ImageIcon errorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
@@ -128,6 +139,15 @@ public class UI {
         ImageIcon paleteColorIcon = new ImageIcon("src/icons8-paint-palette-64.png");
         ImageIcon chashIcon = new ImageIcon("src/icons8-cash-80.png");
         ImageIcon petIcon = new ImageIcon("src/icons8-pets-80.png");
+        ImageIcon money = new ImageIcon("src/money_finance_business_coin_dollar_icon_175930 (1).ico");
+        TrayIcon trayIcon;
+        Image image = Toolkit.getDefaultToolkit().getImage("src/money_finance_business_coin_dollar_icon_175930 (1).ico");
+
+        JSONObject[] jsonObject = new JSONObject[7];
+        JSONArray jsonArray = new JSONArray();
+        JSONParser jsonParser = new JSONParser();
+
+
 
         Saldotext.setText(String.valueOf(Saldo));
 
@@ -221,8 +241,9 @@ public class UI {
                 } else if (dogRadioButton.isSelected() == false || catRadioButton.isSelected() == false) {
                     JOptionPane.showMessageDialog(null,
                             "Por favor selecciona el tipo de mascota primero",
-                            "Alerta",
-                            2);
+                            "",
+                            2,
+                            errorIcon);
                 }
 
             }
@@ -236,52 +257,62 @@ public class UI {
                     String Code = null;
                     String Procedence = null;
                     String Color = null;
-                    boolean pass = false;
                     String EyesColor = null;
                     String Sex =  null;
                     boolean Perdigree = false;
-
+                    boolean pass = false;
                     try {
                         if (nameText.getText().isEmpty()) {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Por favor introduzca el nombre primero",
-                                    "Alerta",
-                                    1);
+                                    "",
+                                    1,
+                                    errorIcon);
                             pass = false;
                         }else if (codeTextField.getText().isEmpty()){
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Por favor introduzca el código primero",
-                                    "Alerta",
-                                    1);
+                                    "",
+                                    1,
+                                    errorIcon);
                             pass = false;
                         }else if (ageTextField.getText().isEmpty()) {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Por favor introduzca la edad primero",
-                                    "Alerta",
-                                    1);
+                                    "",
+                                    1,
+                                    errorIcon);
                             pass = false;
                         } else if (procedenceComboBox.getSelectedIndex() == 0 ) {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Por favor seleccione un país",
                                     "",
-                                    1);
+                                    1,
+                                    errorIcon);
                             pass = false;
                         } else if (ColorComboBox.getSelectedIndex() == 0) {
                             JOptionPane.showMessageDialog(null,
                                     "Por favor seleccione un color",
                                     "",
-                                    1);
+                                    1,
+                                    errorIcon);
                             pass = false;
                         } else if (EyesColorComboBox.getSelectedIndex() == 0) {
                             JOptionPane.showMessageDialog(null,
                                     "Por favor seleccione color de ojos",
                                     "",
-                                    1);
+                                    1,
+                                    errorIcon);
                         }else if (hembraRadioButton.isSelected() == false && machoRadioButton.isSelected() == false){
                             JOptionPane.showMessageDialog(null,
                                     "Por favor selecciona el sexo del gato",
-                                    "Alerta",
-                                    1);
+                                    "",
+                                    1,
+                                    errorIcon);
                         }else {
                             if (hembraRadioButton.isSelected() == true) {
                                 Sex = "Hembra";
@@ -481,22 +512,15 @@ public class UI {
         showArraybutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                petShop.showPets();
-                oscuroRadioButton.setLayout(null);
-                claroRadioButton.setLayout(null);
-                oscuroRadioButton.setSize(25,25);
-                claroRadioButton.setSize(25,25);
-
-
+            Theme();
             }
+
+
         });
         testButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                oscuroRadioButton.setLayout(null);
-                claroRadioButton.setLayout(null);
-                oscuroRadioButton.setSize(100,100);
-                claroRadioButton.setSize(100,100);
+
 
             }
         });
@@ -540,7 +564,7 @@ public class UI {
                 claroRadioButton.setSelected(false);
                 oscuroRadioButton.setVisible(false);
                 claroRadioButton.setVisible(true);
-                //petShop.createTXT("C:\\PetShop\\MODE.txt", "DARK");
+                petShop.createTXT("C:\\PetShop\\MODE.txt\\",  "DARK", false);
                 Mode("DARK");
             }
         });
@@ -550,7 +574,7 @@ public class UI {
                 oscuroRadioButton.setSelected(false);
                 claroRadioButton.setVisible(false);
                 oscuroRadioButton.setVisible(true);
-               // petShop.createTXT("C:\\PetShop\\MODE.txt", "LIGHT");
+                petShop.createTXT("C:\\PetShop\\MODE.txt\\",  "LIGHT", false);
                 Mode("LIGHT");
             }
         });
@@ -567,8 +591,6 @@ public class UI {
         testButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                readTXT("C:\\PetShop\\Saldo.txt");
-
 
             }
         });
@@ -617,17 +639,12 @@ public class UI {
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (userTextField.getText() == "admin" || passwordField.getText() == "admin"){
                     addPet.setVisible(true);
                     JScrollPane.setVisible(true);
                     devOptions.setVisible(true);
                     loginPanel.setVisible(false);
-                }else {
-                    addPet.setVisible(true);
-                    JScrollPane.setVisible(true);
-                    devOptions.setVisible(false);
-                    loginPanel.setVisible(false);
-                }
+                    saldoJPanel.setVisible(true);
+
             }
         });
     }
@@ -641,35 +658,6 @@ public class UI {
         window.setBackground(Color.darkGray);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
-    public enum generCountry {//para generar un pais random
-        Cuba, Venezuela, China, Alemania, Polonia, USA, Canada, Inglaterra, Brazil, Panama, Australia;
-        private static final Random PRNG = new Random();
-        private static final generCountry[] directions = values();
-
-        public static generCountry randomgenerCountry() {
-            return directions[PRNG.nextInt(directions.length)];
-        }
-    }//generar paises random
-
-    public enum generateColor {//para generar un pais random
-        Blanco, Negro, Amarillo, Marron, Gris, Oro;
-        private static final Random PRNG = new Random();
-        private static final generateColor[] directions = values();
-
-        public static generateColor randomgenerateColor() {
-            return directions[PRNG.nextInt(directions.length)];
-        }
-    }
-    public enum generateEyesColor{//para generar un color de ojos random
-        Verde, Negro, Amarillo, Marron, Gris, Oro, Bicolor;
-        private static final Random PRNG = new Random();
-        private static final generateEyesColor[] directions = values();
-
-        public static generateEyesColor randomgenerateEyesColor() {
-            return directions[PRNG.nextInt(directions.length)];
-        }
-    }
     public enum generateName {//para generar un nombre random
         Max, Buddy, Molly, Bailey, Maggie, Daisy, Lucy, Sadie, Bella, Charlie, Princesa, Lucky, Rocky, Coco, Oso, Jake,
         Sombra, Jack, Toby, Ángel, Chloe, Harley, Abby, Sophie, Ginger, Dama, Sam, Gizmo, Buster, Baby, Pepper, Missy,
@@ -682,13 +670,13 @@ public class UI {
         }
     }
 
-    public void generateCode() {
+    public void generateCode() {//generar un codigo random
         String n = "";
         for (int i = 0; i < 6; i++) {
             n = n.concat(String.valueOf((int) (Math.random() * 12)));
         }
         codeTextField.setText(n);
-    }//generar un codigo random
+    }
     public void generateRace(){
         int Option;
        Option = (int) (Math.random() * 3);
@@ -760,6 +748,11 @@ public class UI {
             dogRadioButton.setBackground(dark);
             catRadioButton.setBackground(dark);
             JScrollPane.setBackground(dark);
+            saldoJPanel.setBackground(dark);
+            loginPanel.setBackground(dark);
+            userTextField.setBackground(dark);
+            passwordField.setBackground(dark);
+
 
 
             //all backgrounds
@@ -774,6 +767,7 @@ public class UI {
             sellButton.setBackground(lightBlack);
             searchPriceButton.setBackground(lightBlack);
             searchCountryButton.setBackground(lightBlack);
+            LOGINButton.setBackground(lightBlack);
 
             showArraybutton.setBackground(lightBlack);
             testButton1.setBackground(lightBlack);
@@ -841,6 +835,10 @@ public class UI {
             noCheckBox.setForeground(white);
             oscuroRadioButton.setForeground(white);
             claroRadioButton.setForeground(white);
+            userTextField.setForeground(white);
+            passwordField.setForeground(white);
+            LOGINButton.setForeground(white);
+
 
             showArraybutton.setForeground(Color.RED);
             testButton1.setForeground(Color.RED);
@@ -887,6 +885,10 @@ public class UI {
             dogRadioButton.setBackground(white);
             catRadioButton.setBackground(white);
             JScrollPane.setBackground(white);
+            saldoJPanel.setBackground(white);
+            loginPanel.setBackground(white);
+            userTextField.setBackground(white);
+            passwordField.setBackground(white);
 
 
 
@@ -902,6 +904,7 @@ public class UI {
             sellButton.setBackground(gray);
             searchPriceButton.setBackground(gray);
             searchCountryButton.setBackground(gray);
+            LOGINButton.setBackground(gray);
 
             showArraybutton.setBackground(gray);
             testButton1.setBackground(gray);
@@ -969,6 +972,10 @@ public class UI {
             noCheckBox.setForeground(pBlue);
             oscuroRadioButton.setForeground(pBlue);
             claroRadioButton.setForeground(pBlue);
+            userTextField.setForeground(Color.BLACK);
+            passwordField.setForeground(Color.BLACK);
+            LOGINButton.setForeground(pBlue);
+
 
             showArraybutton.setForeground(Color.RED);
             testButton1.setForeground(Color.RED);
@@ -985,32 +992,22 @@ public class UI {
         }
     }
     public String readTXT(String PATH){
-        BufferedReader bufferedReader = null;
-        File file = null;
-        String linea = null;
+        File file = new File("C:\\PetShop\\MODE.txt");
+        String line;
         Scanner scanner;
-        try {
-            file = new File(PATH);
-            //se pasa el flujo al objeto scanner
-            scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                // el objeto scanner lee linea a linea desde el archivo
-                linea = scanner.nextLine();
-                Scanner delimitar = new Scanner(linea);
-                //se usa una expresión regular
-                //que valida que antes o despues de una coma (,) exista cualquier cosa
-                //parte la cadena recibida cada vez que encuentre una coma
-                delimitar.useDelimiter("\\s*,\\s*");
-                Saldotext.setText(delimitar.next());
-                System.out.println(linea);
-
-                }
-            //se cierra el ojeto scanner
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if (!file.exists()){
+            line = "LIGHT";
+        }else {
+            try {
+                scanner = new Scanner(file);
+                line= scanner.nextLine();
+                System.out.println(line );
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }
-        return linea;
+
+     return line;
     }
 
 
@@ -1046,5 +1043,28 @@ public class UI {
         procedenceComboBox.setModel(new DefaultComboBoxModel(listado));
         ColorComboBox.setModel(new DefaultComboBoxModel(Color));
         EyesColorComboBox.setModel(new DefaultComboBoxModel(EyesColor));
+    }
+
+    public void Theme(){
+        String line = readTXT("C:\\PetShop\\MODE.txt\\");
+        if (line.equals("DARK")){
+            Mode("DARK");
+            claroRadioButton.setSelected(false);
+            oscuroRadioButton.setVisible(false);
+            claroRadioButton.setVisible(true);
+        }else if(line.equals("LIGHT")){
+            Mode("LIGHT");
+            claroRadioButton.setSelected(true);
+            oscuroRadioButton.setVisible(true);
+            claroRadioButton.setVisible(false);
+        }else {
+            petShop.createTXT("C:\\PetShop\\MODE.txt\\", "LIGHT", false);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Por favor añada una nueva mascota",
+                    "No hay ningún país aún",
+                    1,
+                    petShop.getDoneIcon());
+        }
     }
 }

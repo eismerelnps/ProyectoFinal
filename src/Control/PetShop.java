@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,7 +19,7 @@ import java.util.Map;
 @Getter
 @Setter
 
-public class PetShop {
+public  class PetShop {
     ImageIcon errorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
     static ImageIcon sterrorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
     ImageIcon doneIcon = new ImageIcon("src/icons8-checkmark-64.png");
@@ -33,7 +30,6 @@ public class PetShop {
     ImageIcon paleteColorIcon = new ImageIcon("src/icons8-paint-palette-64.png");
     ImageIcon chashIcon = new ImageIcon("src/icons8-cash-80.png");
     ImageIcon petIcon = new ImageIcon("src/icons8-pets-80.png");
-
 
     public static ArrayList<Pet> pets = new ArrayList<Pet>();
 
@@ -134,7 +130,7 @@ public class PetShop {
                     2,
                     errorIcon);
         }
-        createTXT("C:\\PetShop\\saldo.txt", Price);
+        createTXT("C:\\PetShop\\saldo.txt", String.valueOf(Price), false);
     }
 
     public void fillDog(String Name, int AgeinMonth, String Procedence, String Color, String Race, String Coder) {
@@ -175,7 +171,7 @@ public class PetShop {
                     2,
                     errorIcon);
         }
-        createTXT("C:\\PetShop\\saldo.txt", Price);
+        createTXT("C:\\PetShop\\saldo.txt", String.valueOf(Price), false);
     }
 
 
@@ -416,35 +412,20 @@ public class PetShop {
                     1);
         }
     }
-    public  void createTXT(String PATH, float MODE){
-        FileWriter fileWriter = null;
-        float saldo = 0;
-        for (int i = 0; i < pets.size(); i++) {
-            saldo += pets.get(i).getPrice();
-        }
-        saldo += MODE;
-        FileWriter flwriter = null;
-        try {//además de la ruta del archivo recibe un parámetro de tipo boolean, que le indican que se va añadir más registros
-            flwriter = new FileWriter(PATH, false);
-            BufferedWriter bfwriter = new BufferedWriter(flwriter);
-                bfwriter.write((int) saldo);
-            bfwriter.close();
-            System.out.println("Saldo modificado");
-
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (flwriter != null) {
-                try {
-                    flwriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    public  void createTXT(String PATH, String MODE, boolean APPEND  ){
+        File file;
+        FileWriter fileWriter;
+        try {
+             file = new File(PATH);
+            if (!file.exists()) {// Check if the file already exists
+                file.createNewFile();// Create the file if it doesn't exist
             }
+            fileWriter = new FileWriter(PATH, APPEND );
+            fileWriter.write(MODE);
+            fileWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("Saldo "+ saldo);
     }
 
     public void CreateDataBase() {
@@ -483,6 +464,9 @@ public class PetShop {
         connection = DriverManager.getConnection(sURL, "root", "passworld");
         Statement statement = null;
         statement = connection.prepareStatement("INSERT INTO pets VALUES (?,?,?,?,?,?)");
+
+    }
+    public void OpenIcon(){
 
     }
 }
