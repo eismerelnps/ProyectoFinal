@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="working on icons">
+    <list default="true" id="daa86097-a9f1-443f-9018-6228ee4b5071" name="Changes" comment="working on backend and json">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto Final.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto Final.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Control/PetShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Control/PetShop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/UI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pets/Pet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pets/Pet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/UI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -125,7 +124,9 @@
       <workItem from="1672112865630" duration="11996000" />
       <workItem from="1672172581767" duration="1365000" />
       <workItem from="1672298131316" duration="7137000" />
-      <workItem from="1672345249729" duration="327000" />
+      <workItem from="1672345249729" duration="9858000" />
+      <workItem from="1672380270322" duration="233000" />
+      <workItem from="1672380868348" duration="12868000" />
     </task>
     <task id="LOCAL-00001" summary="3">
       <created>1670045988627</created>
@@ -260,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672035710464</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="working on backend and json">
+      <created>1672345630794</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1672345630794</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +300,8 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;src/Control/PetShop.java" />
     <MESSAGE value="working on dark/light themes" />
     <MESSAGE value="working on icons" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on icons" />
+    <MESSAGE value="working on backend and json" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on backend and json" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Proyecto_Final$C__Users_Eismer_IdeaProjects_Proyecto_Final.ic" NAME="$PROJECT_DIR$/../Proyecto Final Coverage Results" MODIFIED="1671813775417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

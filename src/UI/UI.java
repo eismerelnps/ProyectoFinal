@@ -1,7 +1,6 @@
 package UI;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -9,9 +8,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Control.*;
-import jdk.swing.interop.SwingInterOpUtils;
-import netscape.javascript.JSException;
-import netscape.javascript.JSObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -103,14 +99,12 @@ public class UI {
     private JTextField textField2;
     private JTextField textField3;
     private JButton button4;
-    private float Saldo = 0;
-    float h = 0;
-    float s = 0;
-    float b = 0;
+    private float Saldo;
 
     PetShop petShop = new PetShop();
 
     public UI(float Saldo) {
+        this.Saldo = Float.parseFloat(petShop.readTXT("C:\\PetShop\\saldo.txt", "0", false));
         this.Saldo = Saldo;
     }
 
@@ -124,31 +118,19 @@ public class UI {
         venderJPanel.setVisible(false);
         countrySearchJPanel.setVisible(false);
         searchPriceJPanel.setVisible(false);
-        readTXT("C:\\PetShop\\saldo.txt");
         countryList();
+        setSaldo();//set the saldo text on grafic interface
         Theme();//define the theme of the app can be dark or light according to what user choose previously
 
-        //ImageIcon mainIcon = new ImageIcon("src/icons8-browser-homepage-64.png");
-        ImageIcon doneIcon = new ImageIcon("src/icons8-checkmark-64.png");
-        ImageIcon sellIcon = new ImageIcon("src/icons8-huge-sale-64.png");
-        ImageIcon errorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
-        ImageIcon noFoundIcon = new ImageIcon("src/icons8-nothing-found-80.png");
-        ImageIcon cancelIcon = new ImageIcon("src/icons8-unavailable-80.png");
-        ImageIcon priceSearchIcon = new ImageIcon("src/icons8-discount-finder-64.png");
-        ImageIcon countryIcon = new ImageIcon("src/icons8-around-the-globe-64.png");
-        ImageIcon paleteColorIcon = new ImageIcon("src/icons8-paint-palette-64.png");
-        ImageIcon chashIcon = new ImageIcon("src/icons8-cash-80.png");
-        ImageIcon petIcon = new ImageIcon("src/icons8-pets-80.png");
-        ImageIcon money = new ImageIcon("src/money_finance_business_coin_dollar_icon_175930 (1).ico");
-        TrayIcon trayIcon;
-        Image image = Toolkit.getDefaultToolkit().getImage("src/money_finance_business_coin_dollar_icon_175930 (1).ico");
 
-        JSONObject[] jsonObject = new JSONObject[7];
+
+        JSONObject petDetail = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         JSONParser jsonParser = new JSONParser();
 
 
-
+        Saldo = Float.parseFloat(petShop.readTXT("C:\\PetShop\\saldo.txt", "0", false));
         Saldotext.setText(String.valueOf(Saldo));
 
         agregarButton.addActionListener(new ActionListener() {
@@ -243,7 +225,7 @@ public class UI {
                             "Por favor selecciona el tipo de mascota primero",
                             "",
                             2,
-                            errorIcon);
+                            petShop.getErrorIcon());
                 }
 
             }
@@ -261,14 +243,18 @@ public class UI {
                     String Sex =  null;
                     boolean Perdigree = false;
                     boolean pass = false;
+                    float Price = 0;
+
+
+
                     try {
-                        if (nameText.getText().isEmpty()) {
+                        if (nameTextField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(
                                     null,
-                                    "Por favor introduzca el nombre primero",
+                                    "Por favor introduzca el nombre",
                                     "",
                                     1,
-                                    errorIcon);
+                                    petShop.getErrorIcon());
                             pass = false;
                         }else if (codeTextField.getText().isEmpty()){
                             JOptionPane.showMessageDialog(
@@ -276,7 +262,7 @@ public class UI {
                                     "Por favor introduzca el código primero",
                                     "",
                                     1,
-                                    errorIcon);
+                                    petShop.getErrorIcon());
                             pass = false;
                         }else if (ageTextField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(
@@ -284,40 +270,50 @@ public class UI {
                                     "Por favor introduzca la edad primero",
                                     "",
                                     1,
-                                    errorIcon);
+                                    petShop.getErrorIcon());
                             pass = false;
-                        } else if (procedenceComboBox.getSelectedIndex() == 0 ) {
+                        }else if (procedenceComboBox.getSelectedIndex() == 0 ) {
                             JOptionPane.showMessageDialog(
                                     null,
                                     "Por favor seleccione un país",
                                     "",
                                     1,
-                                    errorIcon);
+                                    petShop.getErrorIcon());
                             pass = false;
                         } else if (ColorComboBox.getSelectedIndex() == 0) {
                             JOptionPane.showMessageDialog(null,
                                     "Por favor seleccione un color",
                                     "",
                                     1,
-                                    errorIcon);
+                                    petShop.getErrorIcon());
                             pass = false;
                         } else if (EyesColorComboBox.getSelectedIndex() == 0) {
                             JOptionPane.showMessageDialog(null,
-                                    "Por favor seleccione color de ojos",
+                                    "Por favor seleccione un color de ojos",
                                     "",
                                     1,
-                                    errorIcon);
+                                    petShop.getErrorIcon());
+                            pass = false;
                         }else if (hembraRadioButton.isSelected() == false && machoRadioButton.isSelected() == false){
                             JOptionPane.showMessageDialog(null,
-                                    "Por favor selecciona el sexo del gato",
+                                    "Por favor defina el sexo del gato",
                                     "",
                                     1,
-                                    errorIcon);
-                        }else {
+                                    petShop.getErrorIcon());
+                            pass = false;
+                        } else if (Integer.parseInt(ageTextField.getText()) < 0) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca una edad válida",
+                                    "",
+                                    1,
+                                    petShop.getErrorIcon());
+                            pass = false;
+                        } else {
                             if (hembraRadioButton.isSelected() == true) {
                                 Sex = "Hembra";
-                            } else Sex = "Macho";
+                            } else {Sex = "Macho";
                             Perdigree = noCheckBox.isSelected();
+                            }
                             pass = true;
                         }
 
@@ -326,20 +322,52 @@ public class UI {
                             Name = nameTextField.getText();
                             Code = codeTextField.getText();
                             AgeinMonth = Integer.parseInt(ageTextField.getText());
-                            if (AgeinMonth == 0){
+                            if (AgeinMonth == 0 || AgeinMonth < 0){
+                                ageTextField.setText("1");
                                 AgeinMonth = 1;
                             }
+
+                            if (AgeinMonth <= 24) {
+                                Price = 1000 / AgeinMonth;
+                            } else if (AgeinMonth >= 25) {
+                                Price = 35;
+                            }
+                            if (Perdigree == true) {
+                                Price *= 2;
+                            }
                             Procedence = String.valueOf(procedenceComboBox.getItemAt(procedenceComboBox.getSelectedIndex()));
-                            Color = String.valueOf(ColorComboBox.getItemAt(procedenceComboBox.getSelectedIndex()));
+                            Color = String.valueOf(ColorComboBox.getItemAt(ColorComboBox.getSelectedIndex()));
                             EyesColor = String.valueOf(EyesColorComboBox.getItemAt(EyesColorComboBox.getSelectedIndex()));
 
-                            petShop.fillCat(Name, AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code);
+                            petShop.fillCat(Name, AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Code, Price);
+                            petDetail.put("PET", "CAT");
+                            petDetail.put("Name", Name);
+                            petDetail.put("Code", Code);
+                            petDetail.put("AgeinMonth", AgeinMonth);
+                            petDetail.put("Procedence", Procedence);
+                            petDetail.put("Color", Color);
+                            petDetail.put("EyesColor", EyesColor);
+                            petDetail.put("Sex", Sex);
+                            petDetail.put("Perdigree", Perdigree);
+                            jsonObject.put("petdetail",petDetail);
+                            jsonArray.put(jsonObject);
+
+                            Saldo = Saldo + Price;
+                            Saldotext.setText(String.valueOf(Saldo));
+                            petShop.createTXT("C:\\PetShop\\saldo.txt", String.valueOf(Saldo), false);
+                            petShop.createTXT("C:\\PetShop\\DB.json\\", jsonArray.toString(),true);
+
                         }
 
                     } catch (NumberFormatException exception) {
-                        JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Ingrese la edad solo en números",
+                                "",
+                                0,
+                                petShop.getErrorIcon());
                     }
-                    readTXT("C:\\PetShop\\saldo.txt");
+
                 }
                 if (dogRadioButton.isSelected() == true){
                     String Name = null;
@@ -348,78 +376,121 @@ public class UI {
                     String Code = null;
                     String Procedence = null;
                     int AgeinMonth = 0;
-                    boolean pass = true;
+                    boolean pass = false;
+                    float Price = 0;
 
-                    if (bulldogRadioButton.isSelected() == true) {
-                        Race = bulldogRadioButton.getText();
-                        pass = true;
-                    } else if (dalmataRadioButton.isSelected() == true) {
-                        Race = "Dalmata";
-                        pass = true;
-                    } else if (chowChowRadioButton.isSelected() == true) {
-                        Race = "Chow-Chow";
-                        pass = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                                "Por favor selecciona la raza primero",
-                                "",
-                                1);
-                        pass = false;
-                    }
+
 
                     try {
+
                         if (nameTextField.getText().isEmpty()) {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Por favor introduzca el nombre primero",
                                     "",
-                                    1);
+                                    1,
+                                    petShop.getErrorIcon());
                             pass = false;
                         }else if (codeTextField.getText().isEmpty()){
                             JOptionPane.showMessageDialog(null,
-                                    "Por favor introduzca el codigo primero",
+                                    "Por favor introduzca el código primero",
                                     "",
-                                    1);
+                                    1,
+                                    petShop.getErrorIcon());
                             pass = false;
                         }else if (ageTextField.getText().isEmpty()){
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Por favor introduzca la edad primero",
                                     "",
-                                    1);
+                                    1,
+                                    petShop.getErrorIcon());
                             pass = false;
                             //appling regular expresions to determinate if string contains numbers or any symbol different that characters
                         }else if (ColorComboBox.getSelectedIndex() == 0) {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Por favor seleccione un color",
                                     "",
-                                    1);
+                                    1,
+                                    petShop.getErrorIcon());
                             pass = false;
                         } else if (procedenceComboBox.getSelectedIndex() == 0 ) {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Por favor seleccione un país",
                                     "",
-                                    1);
+                                    1,
+                                    petShop.getErrorIcon());
                             pass = false;
-                        } else {
+                        } else if (Integer.parseInt(ageTextField.getText()) < 0 || Integer.parseInt(ageTextField.getText()) > 180) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor introduzca una edad válida",
+                                    "",
+                                    1,
+                                    petShop.getErrorIcon());
+                            pass = false;
+                        }else if (bulldogRadioButton.isSelected() == true) {
+                            Race = bulldogRadioButton.getText();
+                            pass = true;
+                        } else if (dalmataRadioButton.isSelected() == true) {
+                            Race = "Dalmata";
+                            pass = true;
+                        } else if (chowChowRadioButton.isSelected() == true) {
+                            Race = "Chow-Chow";
+                            pass = true;
+                        } else if (!bulldogRadioButton.isSelected() && !dalmataRadioButton.isSelected() && !chowChowRadioButton.isSelected()){
+                            JOptionPane.showMessageDialog(null,
+                                    "Por favor selecciona la raza primero",
+                                    "",
+                                    1,
+                                    petShop.getErrorIcon());
+                            pass = false;
+                        }
+                        else {
+                            pass = true;
+                        }
+
+
+                        if (pass == true){
                             Name = nameTextField.getText();
                             Code = codeTextField.getText();
                             AgeinMonth = Integer.parseInt(ageTextField.getText());
                             Procedence = String.valueOf(procedenceComboBox.getItemAt(procedenceComboBox.getSelectedIndex()));
                             Color = String.valueOf(ColorComboBox.getItemAt(ColorComboBox.getSelectedIndex()));
-                            pass = true;
-                        }
+                            if (AgeinMonth == 0) {
+                                AgeinMonth = 1;
+                            }
+                            if (AgeinMonth <= 24) {
+                                Price = 1000 / AgeinMonth;
+                            } else if (AgeinMonth >= 25) {
+                                Price = 35;
+                            }
+                            if (Race == "Chow-Chow") {
+                                Price += 30;
+                            } else if (Race == "Dalmata") {
+                                Price += 50;
+                            }
 
+                            petShop.fillDog(Name, AgeinMonth, Procedence, Color, Race, Code, Price);
+                            jsonObject.put("PET", "DOG");
+                            jsonObject.put("Name", Name);
+                            jsonObject.put("Code", Code);
+                            jsonObject.put("AgeinMonth", AgeinMonth);
+                            jsonObject.put("Procedence", Procedence);
+                            jsonObject.put("Color", Color);
+                            jsonObject.put("Race", Race);
 
+                            Saldo += Price;
+                            Saldotext.setText(String.valueOf(Saldo));
+                            petShop.createTXT("C:\\PetShop\\saldo.txt", String.valueOf(Saldo), false);
+                            petShop.createTXT("C:\\PetShop\\DB.json\\", String.valueOf(jsonObject),true);
 
-                        if (pass == true){
-                            float Price = 0;
-                            petShop.fillDog(Name, AgeinMonth, Procedence, Color, Race, Code);
                         }
 
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Ingrese la edad solo en números", "Error", 0);
                     }
-                    System.out.println(pass+Code+AgeinMonth+Procedence+Color+Race);
-                    readTXT("C:\\PetShop\\saldo.txt");
                 }
 
             }
@@ -433,7 +504,7 @@ public class UI {
                         "Saber precio",
                         -1,
                         3,
-                        priceSearchIcon, new Object[]{},
+                        petShop.getPriceSearchIcon(), new Object[]{},
                         3);
             }
 
@@ -447,7 +518,7 @@ public class UI {
                         "Cantidad por país",
                         -1,
                         3,
-                        countryIcon, new Object[]{},
+                        petShop.getCountryIcon(), new Object[]{},
                         3);
 
 
@@ -462,7 +533,7 @@ public class UI {
                         "Vender Mascota",
                         0,
                         0,
-                        sellIcon,
+                        petShop.getSellIcon(),
                         new Object[]{},
                         null);
             }
@@ -475,7 +546,7 @@ public class UI {
                             "Por favor introduzca un código primero",
                             "",
                             0,
-                            errorIcon);
+                            petShop.getErrorIcon());
                 }else{
                     String Code = sellCode.getText();
                     petShop.sellPet(Code);
@@ -512,15 +583,48 @@ public class UI {
         showArraybutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            Theme();
+
+                JSONParser jsonParser = new JSONParser();
+
+                try (FileReader reader = new FileReader("C:\\PetShop\\DB.json"))
+                {
+                    //Read JSON file
+                    Object obj = jsonParser.parse(reader);
+
+                    JSONArray employeeList = (JSONArray) obj;
+                    System.out.println(employeeList);
+
+                    //Iterate over employee array
+                   // employeeList.forEach( emp -> parseEmployeeObject( (JSONObject) emp ) );
+
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
             }
+
+
 
 
         });
         testButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
 
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("PetShop.ser"));
+                    objectOutputStream.writeObject(nameTextField.getText());
+                    objectOutputStream.writeObject("test1");
+                    objectOutputStream.writeObject("test2");
+                    objectOutputStream.writeObject("test3");
+
+                    testButton1.setVisible(false);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
 
             }
         });
@@ -532,7 +636,7 @@ public class UI {
                             "Por favor introduzca un código primero",
                             "",
                             0,
-                            errorIcon);
+                            petShop.getErrorIcon());
                 } else {
                     petShop.priceSearch(searchPriceText.getText());
                     JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor(SwingUtilities.getRootPane(searchPriceJPanel));
@@ -591,7 +695,37 @@ public class UI {
         testButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JSONObject employeeDetails = new JSONObject();
+                employeeDetails.put("firstName", "Lokesh");
+                employeeDetails.put("lastName", "Gupta");
+                employeeDetails.put("website", "howtodoinjava.com");
 
+                JSONObject employeeObject = new JSONObject();
+                employeeObject.put("employee", employeeDetails);
+
+                //Second Employee
+                JSONObject employeeDetails2 = new JSONObject();
+                employeeDetails2.put("firstName", "Brian");
+                employeeDetails2.put("lastName", "Schultz");
+                employeeDetails2.put("website", "example.com");
+
+                JSONObject employeeObject2 = new JSONObject();
+                employeeObject2.put("employee", employeeDetails2);
+
+                //Add employees to list
+                JSONArray employeeList = new JSONArray();
+                employeeList.put(employeeObject);
+                employeeList.put(employeeObject2);
+
+                //Write JSON file
+                try (FileWriter file = new FileWriter("C:\\PetShop\\employees.json")) {
+                    //We can write any JSONArray or JSONObject instance to the file
+                    file.write(employeeList.toString());
+                    file.flush();
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -991,24 +1125,7 @@ public class UI {
 
         }
     }
-    public String readTXT(String PATH){
-        File file = new File("C:\\PetShop\\MODE.txt");
-        String line;
-        Scanner scanner;
-        if (!file.exists()){
-            line = "LIGHT";
-        }else {
-            try {
-                scanner = new Scanner(file);
-                line= scanner.nextLine();
-                System.out.println(line );
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
 
-     return line;
-    }
 
 
     public void randomgenerate() {
@@ -1046,25 +1163,29 @@ public class UI {
     }
 
     public void Theme(){
-        String line = readTXT("C:\\PetShop\\MODE.txt\\");
-        if (line.equals("DARK")){
-            Mode("DARK");
-            claroRadioButton.setSelected(false);
-            oscuroRadioButton.setVisible(false);
-            claroRadioButton.setVisible(true);
-        }else if(line.equals("LIGHT")){
+        String line = "LIGHT";
+        line = petShop.readTXT("C:\\PetShop\\MODE.txt\\", "LIGHT", false);
+        if(line.equals("LIGHT")){
             Mode("LIGHT");
             claroRadioButton.setSelected(true);
             oscuroRadioButton.setVisible(true);
             claroRadioButton.setVisible(false);
+        }else if (line.equals("DARK")){
+        Mode("DARK");
+        claroRadioButton.setSelected(false);
+        oscuroRadioButton.setVisible(false);
+        claroRadioButton.setVisible(true);
         }else {
             petShop.createTXT("C:\\PetShop\\MODE.txt\\", "LIGHT", false);
             JOptionPane.showMessageDialog(
                     null,
-                    "Por favor añada una nueva mascota",
-                    "No hay ningún país aún",
+                    "Se ha restablecido el tema por defecto",
+                    "",
                     1,
                     petShop.getDoneIcon());
         }
+    }
+    public void setSaldo(){
+        Saldotext.setText(petShop.readTXT("C:\\PetShop\\saldo.txt", "0", false));
     }
 }

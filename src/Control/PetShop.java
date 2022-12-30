@@ -3,8 +3,10 @@ package Control;
 import Pets.Cat;
 import Pets.Dog;
 import Pets.Pet;
+import UI.UI;
 import lombok.Getter;
 import lombok.Setter;
+import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.io.*;
@@ -15,11 +17,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 @Getter
 @Setter
 
 public  class PetShop {
+    String Saldo = (readTXT("C:\\PetShop\\saldo.txt", "0", false));
+
+
+
     ImageIcon errorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
     static ImageIcon sterrorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
     ImageIcon doneIcon = new ImageIcon("src/icons8-checkmark-64.png");
@@ -30,13 +37,20 @@ public  class PetShop {
     ImageIcon paleteColorIcon = new ImageIcon("src/icons8-paint-palette-64.png");
     ImageIcon chashIcon = new ImageIcon("src/icons8-cash-80.png");
     ImageIcon petIcon = new ImageIcon("src/icons8-pets-80.png");
+    //ImageIcon mainIcon = new ImageIcon("src/icons8-browser-homepage-64.png");
+
+    ImageIcon sellIcon = new ImageIcon("src/icons8-huge-sale-64.png");
+
+    ImageIcon money = new ImageIcon("src/money_finance_business_coin_dollar_icon_175930 (1).ico");
+
+
 
     public static ArrayList<Pet> pets = new ArrayList<Pet>();
 
     public void showPets() {
         for (Pet show : pets) {
             System.out.println(show.toString());
-
+            System.out.println(Saldo);
         }
     }
 
@@ -99,22 +113,14 @@ public  class PetShop {
     }
 
 
-    public void fillCat(String Name, int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, String Code) {
+    public void fillCat(String Name, int AgeinMonth, String Procedence, String Color, String EyesColor, String Sex, boolean Perdigree, String Code, float Price) {
         boolean pass = true;
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Code)) {
                 pass = false;
             }
         }
-        float Price = 0;
-        if (AgeinMonth <= 24) {
-            Price = 1000 / AgeinMonth;
-        } else if (AgeinMonth >= 25) {
-            Price = 35;
-        }
-        if (Perdigree == true) {
-            Price *= 2;
-        }
+
         if (pass == true) {
             Cat cat = new Cat(Name, AgeinMonth, Procedence, Color, EyesColor, Sex, Perdigree, Price, Code);
             pets.add(cat);
@@ -123,6 +129,7 @@ public  class PetShop {
                     "",
                     2,
                     doneIcon);
+
         } else {
             JOptionPane.showMessageDialog(null,
                     "Ya existe una mascota con el código: " + Code + ", cambielo",
@@ -130,12 +137,10 @@ public  class PetShop {
                     2,
                     errorIcon);
         }
-        createTXT("C:\\PetShop\\saldo.txt", String.valueOf(Price), false);
     }
 
-    public void fillDog(String Name, int AgeinMonth, String Procedence, String Color, String Race, String Coder) {
+    public void fillDog(String Name, int AgeinMonth, String Procedence, String Color, String Race, String Coder, float Price) {
         boolean pass = true;
-        float Price = 0;
         for (int i = 0; i < pets.size(); i++) {
             if (pets.get(i).getCode().equals(Coder)) {
                 pass = false;
@@ -143,19 +148,7 @@ public  class PetShop {
         }
         if (pass == true) {
 
-            if (AgeinMonth == 0) {
-                AgeinMonth = 1;
-            }
-            if (AgeinMonth <= 24) {
-                Price = 1000 / AgeinMonth;
-            } else if (AgeinMonth >= 25) {
-                Price = 35;
-            }
-            if (Race == "Chow-Chow") {
-                Price += 30;
-            } else if (Race == "Dalmata") {
-                Price += 50;
-            }
+
             Dog dog = new Dog(Name, AgeinMonth, Procedence, Color, Price, Race, Coder);
             pets.add(dog);
 
@@ -171,7 +164,6 @@ public  class PetShop {
                     2,
                     errorIcon);
         }
-        createTXT("C:\\PetShop\\saldo.txt", String.valueOf(Price), false);
     }
 
 
@@ -412,7 +404,7 @@ public  class PetShop {
                     1);
         }
     }
-    public  void createTXT(String PATH, String MODE, boolean APPEND  ){
+    public  void createTXT(String PATH, String MODE, boolean APPEND){
         File file;
         FileWriter fileWriter;
         try {
@@ -469,4 +461,23 @@ public  class PetShop {
     public void OpenIcon(){
 
     }
+    public String readTXT(String PATH, String SET, boolean APPEND){
+        File file = new File(PATH);
+        String line = null;
+        Scanner scanner;
+        if (!file.exists()){
+            createTXT(PATH, SET, APPEND);
+        }else {
+            try {
+                scanner = new Scanner(file);
+                line= scanner.nextLine();
+                System.out.println(line );
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
+        return line;
+    }
+
 }
