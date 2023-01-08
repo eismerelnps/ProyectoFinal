@@ -37,11 +37,12 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13611010"/>
                   <horizontalAlignment value="2"/>
-                  <icon value="icons8-browser-homepage-64.png"/>
+                  <icon value="icons/icons8-home-sf-black-filled-70.png"/>
                   <text value="Inicio"/>
                 </properties>
               </component>
@@ -56,11 +57,12 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13610244"/>
                   <horizontalAlignment value="2"/>
-                  <icon value="icons8-huge-sale-64.png"/>
+                  <icon value="icons/icons8-get-cash-70.png"/>
                   <text value="Vender"/>
                 </properties>
               </component>
@@ -70,13 +72,14 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13611010"/>
                   <hideActionText value="false"/>
                   <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="4"/>
-                  <icon value="icons8-discount-finder-64.png"/>
+                  <icon value="icons/icons8-search-70.png"/>
                   <text value="Buscar por precio"/>
                 </properties>
               </component>
@@ -86,11 +89,12 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13611010"/>
                   <horizontalAlignment value="2"/>
-                  <icon value="icons8-around-the-globe-64.png"/>
+                  <icon value="icons/icons8-country-70.png"/>
                   <text value="Buscar por pais"/>
                 </properties>
               </component>
@@ -100,11 +104,12 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13611010"/>
                   <horizontalAlignment value="2"/>
-                  <icon value="icons8-search-64.png"/>
+                  <icon value="icons/icons8-search-70 (1).png"/>
                   <text value="Buscar Mayor"/>
                 </properties>
               </component>
@@ -114,12 +119,13 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13611010"/>
                   <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="4"/>
-                  <icon value="icons8-paint-palette-64.png"/>
+                  <icon value="icons/icons8-paint-palette-70.png"/>
                   <text value="Color menos predominante"/>
                 </properties>
               </component>
@@ -129,11 +135,12 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13611010"/>
                   <horizontalAlignment value="2"/>
-                  <icon value="icons8-alphabetical-sorting-64.png"/>
+                  <icon value="icons/icons8-alphabetical-sorting-70.png"/>
                   <text value="Listado Alfabético"/>
                 </properties>
               </component>
@@ -143,11 +150,12 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-13611010"/>
                   <horizontalAlignment value="2"/>
-                  <icon value="icons8-add-to-collection-64.png"/>
+                  <icon value="icons/icons8-add-new-70.png"/>
                   <text value="Agregar"/>
                 </properties>
               </component>
@@ -159,7 +167,7 @@
                   <background color="-1"/>
                   <horizontalAlignment value="0"/>
                   <horizontalTextPosition value="0"/>
-                  <icon value="icons8-crescent-64.png"/>
+                  <icon value="icons/icons8-moon-and-stars-70.png"/>
                   <text value=""/>
                 </properties>
               </component>
@@ -218,7 +226,7 @@
                   <background color="-1"/>
                   <horizontalAlignment value="0"/>
                   <horizontalTextPosition value="0"/>
-                  <icon value="icons8-sun-64.png"/>
+                  <icon value="icons/icons8-summer-70.png"/>
                   <text value=""/>
                 </properties>
               </component>
@@ -449,6 +457,7 @@
                 <properties>
                   <autoscrolls value="true"/>
                   <background color="-657931"/>
+                  <contentAreaFilled value="false"/>
                   <focusCycleRoot value="true"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
@@ -490,6 +499,7 @@
                 </constraints>
                 <properties>
                   <background color="-657931"/>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <foreground color="-12566530"/>
@@ -536,6 +546,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Consolas" size="14" style="1"/>
                   <text value="Vender"/>
@@ -576,6 +587,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Consolas" size="14" style="1"/>
                   <text value="Buscar"/>
@@ -608,6 +620,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Consolas" size="14" style="1"/>
                   <text value="Buscar"/>
@@ -677,6 +690,7 @@
                   <grid row="3" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <contentAreaFilled value="false"/>
                   <focusable value="false"/>
                   <font name="Times New Roman" size="17" style="3"/>
                   <text value="Siguiente"/>
@@ -688,7 +702,7 @@
                 </constraints>
                 <properties>
                   <focusable value="false"/>
-                  <icon value="icons8-dog-64.png"/>
+                  <icon value="icons/icons8-dog-70.png"/>
                   <iconTextGap value="4"/>
                   <inheritsPopupMenu value="true"/>
                   <requestFocusEnabled value="false"/>
@@ -700,7 +714,7 @@
                   <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <icon value="icons8-cat-64 (1).png"/>
+                  <icon value="icons/icons8-pet-commands-train-70.png"/>
                   <iconTextGap value="4"/>
                   <text value=""/>
                 </properties>
@@ -772,6 +786,7 @@
             </constraints>
             <properties>
               <background color="-1"/>
+              <contentAreaFilled value="false"/>
               <focusable value="false"/>
               <font name="Consolas" size="16" style="1"/>
               <foreground color="-13611010"/>

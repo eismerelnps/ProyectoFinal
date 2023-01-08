@@ -27,25 +27,29 @@ public  class PetShop {
 
 
 
-    ImageIcon errorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
-    static ImageIcon sterrorIcon = new ImageIcon("src/icons8-warning-shield-50.png");
-    ImageIcon doneIcon = new ImageIcon("src/icons8-checkmark-64.png");
-    ImageIcon noFoundIcon = new ImageIcon("src/icons8-nothing-found-80.png");
-    ImageIcon cancelIcon = new ImageIcon("src/icons8-unavailable-80.png");
-    ImageIcon priceSearchIcon = new ImageIcon("src/icons8-discount-finder-64.png");
-    ImageIcon countryIcon = new ImageIcon("src/icons8-around-the-globe-64.png");
-    ImageIcon paleteColorIcon = new ImageIcon("src/icons8-paint-palette-64.png");
-    ImageIcon chashIcon = new ImageIcon("src/icons8-cash-80.png");
-    ImageIcon petIcon = new ImageIcon("src/icons8-pets-80.png");
-    //ImageIcon mainIcon = new ImageIcon("src/icons8-browser-homepage-64.png");
+    ImageIcon errorIcon = new ImageIcon("src/icons/icons8-unavailable-70.png");
+    static ImageIcon sterrorIcon = new ImageIcon("src/icons/icons8-unavailable-70.png");
+    ImageIcon doneIcon = new ImageIcon("src/icons/icons8-checkmark-70.png");
+    ImageIcon noFoundIcon = new ImageIcon("src/icons/icons8-nothing-found-70.png");
+    ImageIcon cancelIcon = new ImageIcon("src/icons/icons8-unavailable-70.png");
+    ImageIcon priceSearchIcon = new ImageIcon("src/icons/icons8-search-70.png");
+    ImageIcon countryIcon = new ImageIcon("src/icons/icons8-country-70.png");
+    ImageIcon paleteColorIcon = new ImageIcon("src/icons/icons8-paint-palette-70.png");
+    ImageIcon chashIcon = new ImageIcon("src/icons/icons8-cash-70.png");
+    ImageIcon petIcon = new ImageIcon("src/icons/icons8-pets-70.png");
 
-    ImageIcon sellIcon = new ImageIcon("src/icons8-huge-sale-64.png");
+    ImageIcon sellIcon = new ImageIcon("src/icons/icons8-get-cash-70.png");
+    static ImageIcon alphaIcon = new ImageIcon("src/icons/icons8-alphabetical-sorting-70.png");
 
-    ImageIcon money = new ImageIcon("src/money_finance_business_coin_dollar_icon_175930 (1).ico");
+    ImageIcon money = new ImageIcon("src/icons/icons8-cash-70.png");
 
 
 
     public static ArrayList<Pet> pets = new ArrayList<Pet>();
+    public void checkFiles(){
+        readTXT("C:\\PetShop\\MODE.txt\\", "LIGHT", false);
+        readTXT("C:\\PetShop\\saldo.txt", "0", false);
+    }
 
     public void showPets() {
         for (Pet show : pets) {
@@ -55,61 +59,67 @@ public  class PetShop {
     }
 
     public void sellPet(String Code) {
-        int option = 0;
         if (pets.size() == 0) {
-            option = JOptionPane.showConfirmDialog(null,
+            JOptionPane.showMessageDialog(
+                    null,
                     "No hay ninguna mascota aún." +
-                            "¿Desea agregar una nueva?",
+                            "Agrege una nueva",
                     "",
-                    0,
-                    1,
-                    errorIcon);
-        }
-        if (option == 0) {
-            System.out.println("Add pet");
-        }
-        boolean pass = false;
-        int index = 0;
-        int option1 = 2;// I started var option at 2 cause when I started it ar 0 the if of the sellin\canceling toke some value and got executed
-        for (int i = 0; i < pets.size(); i++) {
-            if (pets.get(i).getCode().equals(Code)) {
-                pass = true;
-                index = pets.indexOf(pets.get(i));
-            }
-        }
-        if (pass == true) {
-            option1 = JOptionPane.showConfirmDialog(null,
-                    "¿Está seguro que decea vender la mascota?",
-                    "Vender mascota",
-                    0,
                     1,
                     errorIcon);
         } else {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "No se ha encontrado una mascota con este código",
-                    "",
-                    1,
-                    noFoundIcon
-                    );
-        }
-        if (option1 == 0) {
-            float selling = pets.get(index).getPrice();
-            pets.remove(pets.get(index));
-            JOptionPane.showMessageDialog(null,
-                    "Se ha vendido la mascota por un precio de: " + selling,
-                    "Vendido",
-                    1,
-                    doneIcon);
+            boolean pass = false;
+            int index = 0;
+            int option1 = 2;// I started var option at 2 cause when I started it ar 0 the if of the sellin\canceling toke some value and got executed
+            for (int i = 0; i < pets.size(); i++) {
+                if (pets.get(i).getCode().equals(Code)) {
+                    pass = true;
+                    index = pets.indexOf(pets.get(i));
+                }
+            }
+            if (pass == true) {
+                option1 = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Está seguro que decea vender la mascota?",
+                        "",
+                        0,
+                        1,
+                        errorIcon);
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "No se ha encontrado una mascota con este código",
+                        "",
+                        1,
+                        noFoundIcon
+                );
+            }
+            if (option1 == 0) {
+                float selling = pets.get(index).getPrice();
+                pets.remove(pets.get(index));
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Se ha vendido la mascota por un precio de: " + selling,
+                        "Vendido",
+                        1,
+                        doneIcon);
+                //here we gonna edit the txt wich contain the total amount of the shop ,, to this amount we'll rest the price of the sold pet, so a new amount will be set
+                float Saldo = Float.parseFloat(readTXT("C:\\PetShop\\saldo.txt", "0", false));
+                float newSaldo = Saldo -= selling;
+                createTXT("C:\\PetShop\\saldo.txt", String.valueOf(newSaldo), false);
+                UI ui = new UI();
+                ui.setSaldo();
 
-        } else if (option1 == 1) {//I put the else if cause with de only else: if the condition option == 0 wasnt true then else will execute
-            JOptionPane.showMessageDialog(null,
-                    "Se ha cancelado la venta",
-                    "Cancelado",
-                    1,
-                    cancelIcon);
-        }
+            } else if (option1 == 1) {//I put the else if cause with de only else: if the condition option == 0 wasnt true then else will execute
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Se ha cancelado la venta",
+                        "Cancelado",
+                        1,
+                        cancelIcon);
+            }
 
+        }
     }
 
 
@@ -392,16 +402,19 @@ public  class PetShop {
         if (sortedArr.length == 0){
             JOptionPane.showMessageDialog(
                     null,
-                    "Por favor añada una nueva mascota",
-                    "No hay ningún país aún",
+                    "No hay ninguna mascota aún",
+                    "",
                     1,
                     sterrorIcon);
 
         } else{
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(
+                    null,
                     sortedArr,
-                    "Listado alfabético: ",
-                    1);
+                    "Listado alfabético:",
+                    1,
+                    alphaIcon
+            );
         }
     }
     public  void createTXT(String PATH, String MODE, boolean APPEND){
@@ -465,7 +478,8 @@ public  class PetShop {
         File file = new File(PATH);
         String line = null;
         Scanner scanner;
-        if (!file.exists()){
+
+        if (!file.exists()){//if file doesn't exist it will auctomactly create a file with predeterminates values
             createTXT(PATH, SET, APPEND);
         }else {
             try {
